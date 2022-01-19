@@ -14,5 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('layouts.main');
+    return view('layouuts.container');
+});
+Route::get('/apar', function () {
+    return view('apar.index');
+});
+Route::get('/aparcreate', function () {
+    return view('apar.create');
 });

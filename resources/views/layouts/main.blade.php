@@ -26,8 +26,8 @@
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="{{ asset ('template/images/logo.png') }}"  class="mr-2" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{{ asset ('template/images/logo.png') }}" alt="logo"/></a>
+        <a class="navbar-brand brand-logo mr-5" href="/"><img src="{{ asset ('template/images/logo.png') }}"  class="mr-2" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="/"><img src="{{ asset ('template/images/logo.png') }}" alt="logo"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -296,7 +296,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="/">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
@@ -309,9 +309,9 @@
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Report Apar</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Form Apar</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Inspeksi Apar</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/apar">Report Apar</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/aparcreate">Form Apar</a></li>
+                <li class="nav-item"> <a class="nav-link" href="">Inspeksi Apar</a></li>
               </ul>
             </div>
           </li>
@@ -334,59 +334,9 @@
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-          <div class="row">
-            <div class="col-md-12 grid-margin">
-              <div class="row">
-                <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h3 class="font-weight-bold text-justify">Selamat Datang Fauzi </h3>
-                  <h6 class="font-weight-normal mb-0 text-justify"> Berikut adalah Informasi terkait Inpeski APAR dan P23K</h6>
-                </div>
-                <div class="col-12 col-xl-4">
-                 <div class="justify-content-end d-flex">
-                  <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
-                    <button class="btn btn-sm btn-light bg-white dropdown-toggle" type="button" id="dropdownMenuDate2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                     <i class="mdi mdi-calendar"></i> Today (10 Jan 2021)
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate2">
-                      <a class="dropdown-item" href="#">January - March</a>
-                      <a class="dropdown-item" href="#">March - June</a>
-                      <a class="dropdown-item" href="#">June - August</a>
-                      <a class="dropdown-item" href="#">August - November</a>
-                    </div>
-                  </div>
-                 </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                   <div class="d-flex justify-content-between">
-                    <p class="card-title"> Apar Report</p>
-                    <a href="#" class="text-info">View all</a>
-                   </div>
-                    <p class="font-weight-500">The total number of sessions within the date range. It is the period time a user is actively engaged with your website, page or app, etc</p>
-                    <div id="sales-legend" class="chartjs-legend mt-4 mb-2"></div>
-                    <canvas id="sales-chart"></canvas>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                   <div class="d-flex justify-content-between">
-                    <p class="card-title">P23K Report</p>
-                    <a href="#" class="text-info">View all</a>
-                   </div>
-                    <p class="font-weight-500">The total number of sessions within the date range. It is the period time a user is actively engaged with your website, page or app, etc</p>
-                    <div id="sales-legend" class="chartjs-legend mt-4 mb-2"></div>
-                    <canvas id="myChart"></canvas>
-                  </div>
-                </div>
-              </div>
-          </div>
+          <div class="container">
+            @yield("content")
+        </div>    
         <footer class="footer">
             <center >COPYRIGHT © 2022 PT LEN INDUSTRI  </center>
         </footer>
@@ -395,8 +345,6 @@
   </div>
   <script src="{{ asset ('template/vendors/js/vendor.bundle.base.js') }}"></script>
   <script src="{{ asset ('template/vendors/chart.js/Chart.min.js')}}"></script>
-  <script src="{{ asset ('template/vendors/datatables.net/jquery.dataTables.js')}}"></script>
-  <script src="{{ asset ('template/vendors/datatables.net-bs4/dataTables.bootstrap4.js')}}"></script>
   <script src="{{ asset ('template/js/dataTables.select.min.js') }}"></script>
   <script src="{{ asset ('template/js/off-canvas.js') }}"></script>
   <script src="{{ asset ('template/js/hoverable-collapse.js') }} "></script>
