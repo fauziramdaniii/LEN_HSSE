@@ -5,7 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Apar extends Model
+class DataApar extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'tipe', 'berat', 'zona', 'gedung', 'lantai', 'titik'
+    ];
 }

@@ -1,6 +1,6 @@
-@extends('layoouts.main')
+{{-- @extends('layouts.main')
 
-@section('contenx')
+@section('content')
     <div class="col-md-8 offset-md-2">
         <h3> Tambah Data </h3>
         @if ($errors->any())
@@ -108,4 +108,4 @@
             <button type="submit" class="btn btn-primary"> Simpan </button>
         </form>
     </div>
-@endsection
+@endsection --}}

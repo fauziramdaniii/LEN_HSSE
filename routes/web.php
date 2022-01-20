@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DataAparController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,12 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('layouuts.container');
+Route::resource('/dataapar', DataAparController::class);
+Route::get('/login', function () {
+    return view('login');
 });
-Route::get('/apar', function () {
-    return view('apar.index');
-});
-Route::get('/aparcreate', function () {
-    return view('apar.create');
-});
+// Route::get('/', function () {
+//     return view('dashboard');
+// });
+// Route::get('/apar', function () {
+//     return view('apar.index');
+// });
+// Route::get('/aparcreate', function () {
+//     return view('apar.create');
+// });
+// Route::get('/dataapar', function () {
+//     return view('dataapar.create');
+// });
