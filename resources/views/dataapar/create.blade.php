@@ -20,6 +20,10 @@
                 <input type="text" class="form-control" name="tipe" required>
             </div>
             <div class="form-group">
+                <label for="jenis"> Jenis Apar </label>
+                <input type="text" class="form-control" name="jenis" required>
+            </div>
+            <div class="form-group">
                 <label for="berat"> Berat Apar </label>
                 <input type="berat" class="form-control" name="berat" required>
             </div>
@@ -28,16 +32,16 @@
                 <input type="text" class="form-control" name="zona" required>
             </div>
             <div class="form-group">
-                <label for="gedung"> Gedung </label>
-                <input type="text" class="form-control" name="gedung" required>
+                <label for="lokasi"> Lokasi </label>
+                <input type="text" class="form-control" name="lokasi" required>
             </div>
             <div class="form-group">
-                <label for="lantai"> Lantai </label>
-                <input type="text" class="form-control" name="lantai" required>
+                <label for="kedaluarsa"> Kedaluarsa </label>
+                <input type="date" class="form-control" name="kedaluarsa" required>
             </div>
             <div class="form-group">
-                <label for="titik"> Titik Apar </label>
-                <input type="text" class="form-control" name="titik" required>
+                <label for="keterangan"> Keterangan </label>
+                <input type="text" class="form-control" name="keterangan" required>
             </div>
             <button type="submit" class="btn btn-primary"> Simpan </button>
         </form>

@@ -18,11 +18,12 @@
         <tr>
             <th> Kode Apar </th>
             <th> Tipe Apar </th>
+            <th> Jenis Apar </th>
             <th> Berat Apar </th>
             <th> Zona Apar</th>
-            <th> Gedung </th>
-            <th> Lantai </th>
-            <th> Titik Apar </th>
+            <th> Lokasi </th>
+            <th> Kedaluarsa </th>
+            <th> Keterangan </th>
         </tr>
     </thead>
     <tbody>
@@ -30,11 +31,12 @@
         <tr>
             <td> {{ $no++ }} </td>
             <td> {{ $dataapar->tipe }} </td>
+            <td> {{ $dataapar->jenis }} </td>
             <td> {{ $dataapar->berat }} </td>
             <td> {{ $dataapar->zona }} </td>
-            <td> {{ $dataapar->gedung }} </td>
-            <td> {{ $dataapar->lantai }} </td>
-            <td> {{ $dataapar->titik}}
+            <td> {{ $dataapar->lokasi }} </td>
+            <td> {{ $dataapar->kedaluarsa }} </td>
+            <td> {{ $dataapar->keterangan}}
                 <td>
                   
                     <a href="/dataapar/{{ $dataapar->id }}/edit/" class="btn btn-success"> Edit</a>

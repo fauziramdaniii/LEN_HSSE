@@ -19,6 +19,10 @@
             <input type="text" class="form-control" name="tipe" required value="{{ $dataapar->tipe }}">
         </div>
         <div class="form-group">
+            <label for="jenis"> Jenis Apar </label>
+            <input type="text" class="form-control" name="jenis" required value="{{ $dataapar->jenis }}">
+        </div>
+        <div class="form-group">
             <label for="berat"> Berat Apar </label>
             <input type="text" class="form-control" name="berat" required value="{{ $dataapar->berat }}">
         </div>
@@ -27,16 +31,16 @@
             <input type="text" class="form-control" name="zona" required value="{{ $dataapar->zona }}">
         </div>
         <div class="form-group">
-            <label for="gedung"> Gedung </label>
-            <input type="text" class="form-control" name="gedung" required value="{{ $dataapar->gedung }}">
+            <label for="lokasi"> Lokasi </label>
+            <input type="text" class="form-control" name="lokasi" required value="{{ $dataapar->lokasi }}">
         </div>
         <div class="form-group">
-            <label for="lantai"> Lantai </label>
-            <input type="text" class="form-control" name="lantai" required value="{{ $dataapar->lantai }}">
+            <label for="kedaluarsa"> Kedaluarsa </label>
+            <input type="date" class="form-control" name="kedaluarsa" required value="{{ $dataapar->kedaluarsa }}">
         </div>
         <div class="form-group">
-            <label for="titik"> Titik Apar </label>
-            <input type="text" class="form-control" name="titik" required value="{{ $dataapar->titik }}">
+            <label for="keterangan"> Keterangan Apar </label>
+            <input type="text" class="form-control" name="keterangan" required value="{{ $dataapar->keterangan }}">
         </div>
         <button type="submit" class="btn btn-primary"> Simpan </button>
     </form>

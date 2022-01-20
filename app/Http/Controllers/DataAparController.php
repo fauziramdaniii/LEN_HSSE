@@ -38,11 +38,12 @@ class DataAparController extends Controller
     {
         $request->validate([
             'tipe' => 'required',
+            'jenis' => 'required',
             'berat' => 'required',
             'zona' => 'required',
-            'gedung' => 'required',
-            'lantai' => 'required',
-            'titik' => 'required',
+            'lokasi' => 'required',
+            'kedaluarsa' => 'required',
+            'keterangan' => 'required',
         ]);
         DataApar::create($request->all());
         return redirect('/dataapar')->with('success', 'dataapar saved!');
@@ -81,11 +82,12 @@ class DataAparController extends Controller
     {
         $request->validate([
             'tipe' => 'required',
+            'jenis' => 'required',
             'berat' => 'required',
             'zona' => 'required',
-            'gedung' => 'required',
-            'lantai' => 'required',
-            'titik' => 'required',
+            'lokasi' => 'required',
+            'kedaluarsa' => 'required',
+            'keterangan' => 'required',
         ]);
 
         $dataapar->update($request->all());

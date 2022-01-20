@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDataAparsTable extends Migration
+class CreateAparsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,8 @@ class CreateDataAparsTable extends Migration
      */
     public function up()
     {
-        Schema::create('data_apars', function (Blueprint $table) {
+        Schema::create('apars', function (Blueprint $table) {
             $table->id();
-            $table->string('tipe');
-            $table->string('jenis');
-            $table->string('berat');
-            $table->string('zona');
-            $table->string('lokasi');
-            $table->date('kedaluarsa');
-            $table->string('keterangan');
             $table->timestamps();
         });
     }
@@ -33,6 +26,6 @@ class CreateDataAparsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('data_apars');
+        Schema::dropIfExists('apars');
     }
 }
