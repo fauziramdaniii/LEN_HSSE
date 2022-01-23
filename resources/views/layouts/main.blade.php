@@ -151,9 +151,9 @@
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">APAR Report</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">APAR Form</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">APAR Inspeksi</a></li>
+                <li class="nav-item"> <a class="nav-link" href="">APAR Report</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/aparcreate">APAR Form</a></li>
+                <li class="nav-item"> <a class="nav-link" href="">APAR Inspeksi</a></li>
               </ul>
             </div>
           </li>
@@ -173,7 +173,7 @@
           </li>
         </ul>
       </nav> 
-      <div class="container">
+      <div class="main-panel">
         @yield("content")
       </div>
   </div>

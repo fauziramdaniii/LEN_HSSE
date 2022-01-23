@@ -1,4 +1,4 @@
-@extends('layouts.main')
+{{-- @extends('layouts.main')
 <?php $no=1 ?>
 @section ("content")
 <br>
@@ -46,4 +46,4 @@
     <tbody>
     </tbody>
 </table>
-@endsection
+@endsection --}}

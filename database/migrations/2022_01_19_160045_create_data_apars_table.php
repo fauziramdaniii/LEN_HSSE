@@ -20,6 +20,11 @@ class CreateDataAparsTable extends Migration
             $table->string('berat');
             $table->string('zona');
             $table->string('lokasi');
+            $table->string('provinsi');
+            $table->string('kota');
+            $table->string('gedung');
+            $table->string('lantai');
+            $table->string('titik');
             $table->date('kedaluarsa');
             $table->string('keterangan');
             $table->timestamps();

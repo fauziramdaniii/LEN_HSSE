@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class DataApar extends Model
 {
     protected $fillable = [
-        'tipe', 'jenis', 'berat', 'zona', 'lokasi', 'kedaluarsa', 'keterangan'
+        'tipe', 'jenis', 'berat', 'zona', 'lokasi', 'provinsi', 'kota', 'gedung', 'lantai', 'titik', 'kedaluarsa', 'keterangan'
     ];
 }

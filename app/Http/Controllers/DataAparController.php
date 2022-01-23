@@ -42,6 +42,11 @@ class DataAparController extends Controller
             'berat' => 'required',
             'zona' => 'required',
             'lokasi' => 'required',
+            'provinsi' => 'required',
+            'kota' => 'required',
+            'gedung' => 'required',
+            'lantai' => 'required',
+            'titik' => 'required',
             'kedaluarsa' => 'required',
             'keterangan' => 'required',
         ]);
@@ -86,6 +91,11 @@ class DataAparController extends Controller
             'berat' => 'required',
             'zona' => 'required',
             'lokasi' => 'required',
+            'provinsi' => 'required',
+            'kota' => 'required',
+            'gedung' => 'required',
+            'lantai' => 'required',
+            'titik' => 'required',
             'kedaluarsa' => 'required',
             'keterangan' => 'required',
         ]);

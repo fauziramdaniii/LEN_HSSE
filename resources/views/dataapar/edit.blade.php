@@ -35,6 +35,26 @@
             <input type="text" class="form-control" name="lokasi" required value="{{ $dataapar->lokasi }}">
         </div>
         <div class="form-group">
+            <label for="provinsi"> Provinsi </label>
+            <input type="text" class="form-control" name="provinsi" required value="{{ $dataapar->provinsi }}">
+        </div>
+        <div class="form-group">
+            <label for="kota"> Kota </label>
+            <input type="text" class="form-control" name="kota" required value="{{ $dataapar->kota }}">
+        </div>
+        <div class="form-group">
+            <label for="gedung"> Gedung </label>
+            <input type="text" class="form-control" name="gedung" required value="{{ $dataapar->gedung }}">
+        </div>
+        <div class="form-group">
+            <label for="lantai"> Lantai </label>
+            <input type="text" class="form-control" name="lokasi" required value="{{ $dataapar->lantai }}">
+        </div>
+        <div class="form-group">
+            <label for="titik"> Titik </label>
+            <input type="text" class="form-control" name="titik" required value="{{ $dataapar->titik }}">
+        </div>
+        <div class="form-group">
             <label for="kedaluarsa"> Kedaluarsa </label>
             <input type="date" class="form-control" name="kedaluarsa" required value="{{ $dataapar->kedaluarsa }}">
         </div>

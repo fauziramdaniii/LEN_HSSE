@@ -1,8 +1,8 @@
-{{-- @extends('layouts.main')
+@extends('layouts.main')
 
 @section('content')
-    <div class="col-md-8 offset-md-2">
-        <h3> Tambah Data </h3>
+    <div class="col-md-8 offset-md-2"><br>
+    <h3> Inpeksi Apar </h3>
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -12,100 +12,31 @@
                 </ul>
             </div> <br />
         @endif
-        <form method="post" action="/apar">
+        <form method="post" action="/dataapar">
             @csrf
-            <select class="form-select" aria-label="Default select example">
-                <option selected>No Apar</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-            </div>
-            <div>
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Pilih Tipe Apar</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-            </div>
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Berat Apar</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-            </div>
-            <div>
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Pilih Provinsi</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-            </div>
-            <div>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Pilih Kota</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-                </div>
-                <div>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Pilih Zona</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                      </select>
-                    </div>
-                    <div>
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>Pilih Gedung</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                          </select>
-                        </div>
-                        <div>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Pilih Lantai</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                                <option value="4">Four</option>
-                              </select>
-                            </div>
             <div class="form-group">
-                <label for="day"> Titik Apar </label>
-                <input type="text" class="form-control" name="day" required>
+                <label for="tipe"> Kode Apar </label>
+                <input type="text" class="form-control" name="tipe" required>
             </div>
             <div class="form-group">
-                <label for="description"> Expired Apar </label>
-                <input type="date" class="form-control" name="description" required>
+                <label for="tipe"> Tipe Apar </label>
+                <input type="text" class="form-control" name="tipe" required>
             </div>
             <div class="form-group">
-                <label for="description"> Tanggal Inpeksi Apar </label>
-                <input type="date" class="form-control" name="description" required>
+                <label for="gedung"> Gedung </label>
+                <input type="text" class="form-control" name="gedung" required>
             </div>
             <div class="form-group">
-                <label for="description"> Keterangan </label>
-                <input type="text" class="form-control" name="description" required>
+                <label for="lantai"> Lantai </label>
+                <input type="text" class="form-control" name="lantai" required>
             </div>
             <div class="form-group">
-                <label for="description"> Keterangan </label>
-                <input type="text" class="form-control" name="description" required>
+                <label for="titik"> Titik </label>
+                <input type="text" class="form-control" name="titik" required>
             </div>
-            <div class="form-group">
-                <label for="description"> Keterangan </label>
-                <input type="text" class="form-control" name="description" required>
-            </div>
-            <div class="form-group">
-                <label for="description"> Keterangan </label>
-                <input type="text" class="form-control" name="description" required>
-            </div>
-            <button type="submit" class="btn btn-primary"> Simpan </button>
+            <center>
+            <button type="submit" class="btn btn-info"> Inpeksi </button>
+            </center>
         </form>
     </div>
-@endsection --}}
+@endsection

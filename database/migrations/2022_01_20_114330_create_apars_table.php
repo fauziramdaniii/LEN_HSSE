@@ -15,6 +15,7 @@ class CreateAparsTable extends Migration
     {
         Schema::create('apars', function (Blueprint $table) {
             $table->id();
+
             $table->timestamps();
         });
     }

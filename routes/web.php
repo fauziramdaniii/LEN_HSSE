@@ -13,20 +13,20 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// Route Data Apar
 Route::resource('/dataapar', DataAparController::class);
+// Route Login
 Route::get('/login', function () {
     return view('login');
 });
-// Route::get('/', function () {
-//     return view('dashboard');
-// });
-// Route::get('/apar', function () {
-//     return view('apar.index');
-// });
-// Route::get('/aparcreate', function () {
-//     return view('apar.create');
-// });
-// Route::get('/dataapar', function () {
-//     return view('dataapar.create');
-// });
+// Route Dashboard
+Route::get('/', function () {
+    return view('dashboard');
+});
+// Route Inspeksi Apar
+Route::get('/apar', function () {
+    return view('apar.index');
+});
+Route::get('/aparcreate', function () {
+    return view('apar.create');
+});
