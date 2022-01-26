@@ -18,22 +18,27 @@
                 <label for="tipe"> Kode Apar </label>
                 <input type="text" class="form-control" name="tipe" required>
             </div>
-            <div class="form-group">
-                <label for="tipe"> Tipe Apar </label>
-                <input type="text" class="form-control" name="tipe" required>
-            </div>
-            <div class="form-group">
-                <label for="gedung"> Gedung </label>
-                <input type="text" class="form-control" name="gedung" required>
-            </div>
-            <div class="form-group">
-                <label for="lantai"> Lantai </label>
-                <input type="text" class="form-control" name="lantai" required>
-            </div>
-            <div class="form-group">
-                <label for="titik"> Titik </label>
-                <input type="text" class="form-control" name="titik" required>
-            </div>
+            <div class="form-label">
+                <label for="tipe" class="form-label">Pilih Tipe Apar</label>
+                  <select name="tipe" class="form-control">
+                          <option value="DCP" >DCP</option>
+                          <option value="CO2" >CO2</option>
+                          <option value="AIR" >AIR</option>
+                          <option value="FOAM" >FOAM</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                    <label for="gedung"> Gedung </label>
+                    <input type="text" class="form-control" name="gedung" required>
+                </div>
+                <div class="form-group">
+                    <label for="lantai"> Lantai </label>
+                    <input type="text" class="form-control" name="lantai" required>
+                </div>
+                <div class="form-group">
+                    <label for="titik"> Titik </label>
+                    <input type="text" class="form-control" name="titik" required>
+                </div>
             <center>
             <button type="submit" class="btn btn-info"> Inpeksi </button>
             </center>
