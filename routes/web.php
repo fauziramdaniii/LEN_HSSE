@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\DataAparController;
+use App\Http\Controllers\AparInspeksiController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AparController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,19 +17,35 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // Route Data Apar
-Route::resource('/dataapar', DataAparController::class);
-// Route Login
-Route::get('/login', function () {
-    return view('login');
-});
-// Route Dashboard
+Route::resource('dataapar', DataAparController::class);
+Route::resource('aparinspeksi', AparInspeksiController::class);
+// Route::post('/login', [LoginController::class, 'authenticate']);
+// // Route Dashboard
 Route::get('/', function () {
-    return view('dashboard');
+    return view('layouts.login');
 });
 // Route Inspeksi Apar
-Route::get('/apar', function () {
-    return view('apar.index');
+Route::get('/dashboardapar', function () {
+    return view('petugasapar.index');
 });
-Route::get('/aparcreate', function () {
-    return view('apar.create');
+// Route::get('/aparcreate', function () {
+//     return view('apar.create');
+// });
+Route::get('/pilih', function () {
+    return view('layouts.pilih');
 });
+// Route::group([
+//     'prefix' => config('admin.prefix'),
+//     'namespace' => 'App\\Http\\Controllers',
+// ], function () {
+
+//     Route::get('login', 'LoginAdminController@formLogin')->name('login');
+//     Route::post('login', 'LoginAdminController@login');
+
+//     Route::middleware(['auth:admin'])->group(function () {
+//         Route::post('logout', 'LoginAdminController@logout')->name('admin.logout');
+//         Route::view('/', 'dashboard')->name('dashboard');
+//         Route::view('/post', 'data-post')->name('post')->middleware('can:role,"admin","editor"');
+//         Route::view('/admin', 'data-admin')->name('admin')->middleware('can:role,"admin"');
+//     });
+// });

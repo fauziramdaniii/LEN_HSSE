@@ -19,6 +19,9 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next, ...$guards)
     {
+        if (Auth::guard('supervisor')->check()) {
+            return redirect()->route('dataapar.index');
+        }
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {

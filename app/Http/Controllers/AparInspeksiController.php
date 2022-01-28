@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DataApar;
+use App\Models\AparInspeksi;
 use Illuminate\Http\Request;
 
-class DataAparController extends Controller
+class AparInspeksiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class DataAparController extends Controller
      */
     public function index()
     {
-        $dataapar = DataApar::all();
-        return view('supervisor.dataapar.index', compact('dataapar'));
+        $aparinspeksi = aparinspeksi::all();
+        return view('petugasapar.index', compact('aparinspeksi'));
     }
 
     /**
@@ -25,7 +25,7 @@ class DataAparController extends Controller
      */
     public function create()
     {
-        return view('supervisor.dataapar.create');
+        return view('petugasapar.create');
     }
 
     /**
@@ -38,81 +38,69 @@ class DataAparController extends Controller
     {
         $request->validate([
             'tipe' => 'required',
-            'jenis' => 'required',
             'berat' => 'required',
             'zona' => 'required',
             'lokasi' => 'required',
-            'provinsi' => 'required',
-            'kota' => 'required',
-            'gedung' => 'required',
-            'lantai' => 'required',
-            'titik' => 'required',
             'kedaluarsa' => 'required',
             'keterangan' => 'required',
         ]);
-        DataApar::create($request->all());
-        return redirect('dataapar')->with('success', 'dataapar saved!');
+        aparinspeksi::create($request->all());
+        return redirect('aparinspeksi')->with('success', 'aparinspeksi saved!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\DataApar  $dataApar
+     * @param  \App\Models\aparinspeksi  $aparinspeksi
      * @return \Illuminate\Http\Response
      */
-    public function show(DataApar $dataApar)
+    public function show(aparinspeksi $aparinspeksi)
     {
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\DataApar  $dataApar
+     * @param  \App\Models\aparinspeksi  $aparinspeksi
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $dataapar = DataApar::find($id);
-        return view('supervisor.dataapar.edit', ['dataapar' => $dataapar]);
+        $aparinspeksi = aparinspeksi::find($id);
+        return view('petugasapar.edit', ['aparinspeksi' => $aparinspeksi]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\DataApar  $dataApar
+     * @param  \App\Models\aparinspeksi  $aparinspeksi
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DataApar $dataapar)
+    public function update(Request $request, aparinspeksi $aparinspeksi)
     {
         $request->validate([
             'tipe' => 'required',
-            'jenis' => 'required',
             'berat' => 'required',
             'zona' => 'required',
             'lokasi' => 'required',
-            'provinsi' => 'required',
-            'kota' => 'required',
-            'gedung' => 'required',
-            'lantai' => 'required',
-            'titik' => 'required',
             'kedaluarsa' => 'required',
             'keterangan' => 'required',
         ]);
 
-        $dataapar->update($request->all());
-        return redirect('dataapar')->with('success', 'Data Updated!');
+        $aparinspeksi->update($request->all());
+        return redirect('aparinspeksi')->with('success', 'Data Updated!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\DataApar  $dataApar
+     * @param  \App\Models\aparinspeksi  $aparinspeksi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DataApar $dataapar)
+    public function destroy(aparinspeksi $aparinspeksi)
     {
-        $dataapar->delete();
-        return redirect('dataapar')->with('success', 'Data Apar Deleted');
+        $aparinspeksi->delete();
+        return redirect('aparinspeksi')->with('success', 'Data Apar Deleted');
     }
 }

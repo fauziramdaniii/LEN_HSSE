@@ -18,6 +18,7 @@
 <table class="display expandable-table ">
     <thead>
         <tr>
+            <th> No </th>
             <th> Kode Apar </th>
             <th> Tipe Apar </th>
             <th> Jenis Apar </th>
@@ -38,6 +39,7 @@
         @foreach ($dataapar as $dataapar)
         <tr>
             <td> {{ $no++ }} </td>
+            <td> {{ $dataapar->id }} </td>
             <td> {{ $dataapar->tipe }} </td>
             <td> {{ $dataapar->jenis }} </td>
             <td> {{ $dataapar->berat }} </td>
@@ -52,7 +54,7 @@
             <td> {{ $dataapar->keterangan}}
                 <td>
                   
-                    <a href="/dataapar/{{ $dataapar->id }}/edit/" class="btn btn-success"> Edit</a>
+                    <a href="/dataapar/{{ $dataapar->id }}/edit/" class="btn btn-dark"> Edit</a>
                 </td>
                 <td>
                     <form action="/dataapar/{{ $dataapar->id }}" method="post">

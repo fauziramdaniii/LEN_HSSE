@@ -123,36 +123,7 @@
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
       <!-- partial:partials/_settings-panel.html -->
-      <nav class="sidebar sidebar-offcanvas" id="sidebar">
-        <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link" href="/dashboardapar">
-              <i class="icon-grid menu-icon"></i>
-              <span class="menu-title">Dashboard</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/dataapar">
-              <i class="icon-bar-graph menu-icon"></i>
-              <span class="menu-title">Data APAR</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-              <i class="icon-layout menu-icon"></i>
-              <span class="menu-title">Inspeksi APAR</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="ui-basic">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="">APAR Report</a></li>
-                <li class="nav-item"> <a class="nav-link" href="/aparinspeksi">APAR Form</a></li>
-                <li class="nav-item"> <a class="nav-link" href="">APAR Inspeksi</a></li>
-              </ul>
-            </div>
-          </li>
-        </ul>
-      </nav> 
+      
       <div class="main-panel">
         @yield("content")
       </div>
@@ -162,7 +133,7 @@
         <center>COPYRIGHT © 2022 PT LEN INDUSTRI  </center>
     </footer>
   </div> 
-  @yield("modal")
+
   <script src="{{ asset ('template/vendors/js/vendor.bundle.base.js') }}"></script>
   <script src="{{ asset ('template/vendors/chart.js/Chart.min.js')}}"></script>
   <script src="{{ asset ('template/js/dataTables.select.min.js') }}"></script>

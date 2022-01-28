@@ -132,12 +132,6 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/dataapar">
-              <i class="icon-bar-graph menu-icon"></i>
-              <span class="menu-title">Data APAR</span>
-            </a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <i class="icon-layout menu-icon"></i>
               <span class="menu-title">Inspeksi APAR</span>
@@ -162,7 +156,7 @@
         <center>COPYRIGHT © 2022 PT LEN INDUSTRI  </center>
     </footer>
   </div> 
-  @yield("modal")
+  
   <script src="{{ asset ('template/vendors/js/vendor.bundle.base.js') }}"></script>
   <script src="{{ asset ('template/vendors/chart.js/Chart.min.js')}}"></script>
   <script src="{{ asset ('template/js/dataTables.select.min.js') }}"></script>
