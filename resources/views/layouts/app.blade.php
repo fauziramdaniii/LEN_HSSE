@@ -123,10 +123,7 @@
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
       <!-- partial:partials/_settings-panel.html -->
-      
-      <div class="main-panel">
         @yield("content")
-      </div>
   </div>
   <div class="content-wrapper">  
     <footer class="footer">

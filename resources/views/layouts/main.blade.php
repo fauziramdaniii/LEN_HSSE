@@ -133,21 +133,28 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/dataapar">
-              <i class="icon-bar-graph menu-icon"></i>
-              <span class="menu-title">Data APAR</span>
+              <i class="icon-contract menu-icon"></i>
+              <span class="menu-title">Master APAR</span>
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="/masterinspeksi">
+              <i class="icon-paper menu-icon"></i>
+              <span class="menu-title">Master Inspeksi</span>
+            </a>
+          </li>
+         
+          <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-              <i class="icon-layout menu-icon"></i>
+              <i class="icon-head menu-icon"></i>
               <span class="menu-title">Inspeksi APAR</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="">APAR Report</a></li>
-                <li class="nav-item"> <a class="nav-link" href="/aparinspeksi">APAR Form</a></li>
-                <li class="nav-item"> <a class="nav-link" href="">APAR Inspeksi</a></li>
+                <li class="nav-item"> <a class="nav-link" href=""> Report APAR</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/statusapar">Status Apar</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/aparinspeksi"> Inspeksi APAR  </a></li>
               </ul>
             </div>
           </li>

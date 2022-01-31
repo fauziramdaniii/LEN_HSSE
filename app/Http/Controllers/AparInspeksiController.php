@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AparInspeksi;
+use App\Models\DataApar;
 use Illuminate\Http\Request;
 
 class AparInspeksiController extends Controller
@@ -14,7 +15,7 @@ class AparInspeksiController extends Controller
      */
     public function index()
     {
-        $aparinspeksi = aparinspeksi::all();
+        $aparinspeksi = DataApar::all();
         return view('petugasapar.index', compact('aparinspeksi'));
     }
 
@@ -37,15 +38,20 @@ class AparInspeksiController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'tipe' => 'required',
-            'berat' => 'required',
-            'zona' => 'required',
-            'lokasi' => 'required',
-            'kedaluarsa' => 'required',
+            'jenis' => 'required',
+            'noozle' => 'required',
+            'selang' => 'required',
+            'tabung' => 'required',
+            'rambu' => 'required',
+            'label' => 'required',
+            'cat' => 'required',
+            'pin' => 'required',
+            'roda' => 'required',
             'keterangan' => 'required',
+            'foto' => 'required',
         ]);
-        aparinspeksi::create($request->all());
-        return redirect('aparinspeksi')->with('success', 'aparinspeksi saved!');
+        DataApar::create($request->all());
+        return redirect('statusapar')->with('success', 'aparinspeksi saved!');
     }
 
     /**
@@ -66,8 +72,6 @@ class AparInspeksiController extends Controller
      */
     public function edit($id)
     {
-        $aparinspeksi = aparinspeksi::find($id);
-        return view('petugasapar.edit', ['aparinspeksi' => $aparinspeksi]);
     }
 
     /**
@@ -80,16 +84,21 @@ class AparInspeksiController extends Controller
     public function update(Request $request, aparinspeksi $aparinspeksi)
     {
         $request->validate([
-            'tipe' => 'required',
-            'berat' => 'required',
-            'zona' => 'required',
-            'lokasi' => 'required',
-            'kedaluarsa' => 'required',
+            'jenis' => 'required',
+            'noozle' => 'required',
+            'selang' => 'required',
+            'tabung' => 'required',
+            'rambu' => 'required',
+            'label' => 'required',
+            'cat' => 'required',
+            'pin' => 'required',
+            'roda' => 'required',
             'keterangan' => 'required',
+            'foto' => 'required',
         ]);
 
         $aparinspeksi->update($request->all());
-        return redirect('aparinspeksi')->with('success', 'Data Updated!');
+        return redirect('statusapar')->with('success', 'Data Updated!');
     }
 
     /**

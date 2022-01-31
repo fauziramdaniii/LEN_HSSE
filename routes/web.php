@@ -5,6 +5,8 @@ use App\Http\Controllers\AparInspeksiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AparController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MasterInspeksiController;
+use App\Models\AparInspeksi;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +20,9 @@ use App\Http\Controllers\LoginController;
 */
 // Route Data Apar
 Route::resource('dataapar', DataAparController::class);
-Route::resource('aparinspeksi', AparInspeksiController::class);
+Route::resource('statusapar', AparInspeksiController::class);
+Route::get('aparinspeksi', [AparInspeksiController::class, 'create']);
+Route::resource('masterinspeksi', MasterInspeksiController::class);
 // Route::post('/login', [LoginController::class, 'authenticate']);
 // // Route Dashboard
 Route::get('/', function () {

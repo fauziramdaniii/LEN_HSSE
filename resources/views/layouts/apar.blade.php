@@ -140,8 +140,8 @@
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="">APAR Report</a></li>
-                <li class="nav-item"> <a class="nav-link" href="/aparinspeksi">APAR Form</a></li>
-                <li class="nav-item"> <a class="nav-link" href="">APAR Inspeksi</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/statusapar">Status Apar</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/aparinspeksi">APAR Inspeksi</a></li>
               </ul>
             </div>
           </li>

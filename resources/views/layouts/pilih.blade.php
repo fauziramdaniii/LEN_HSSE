@@ -2,10 +2,10 @@
 @section ("content")
     <div class="content-wrapper">
         <div class="row">
-            <div class="col-md-12 grid-margin">
+            <div class="col-md-12 grid-margin transparent">
                 <div class="row">
                     <div class="col-md-3"> </div>
-                    <div class="col-md-9">
+                    <div class="col-md-6">
                         <h3 class="font-weight-bold text-center"><center>Selamat Datang Fauzi </h3>
                         <h6 class="font-weight-normal mb-0 text-center"> Berikut adalah Informasi terkait Inpeski APAR
                             dan P23K</h6>
@@ -14,10 +14,10 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-16 grid-margin transparent">
+        <div class="col-md-12 grid-margin transparent">
             <div class="row">
-                <div class="col-md-4"> </div>
-                <div class="col-md-4 mb-5 stretch-card transparent">
+                <div class="col-md-3"> </div>
+                <div class="col-md-3 stretch-card transparent">
                     <div class="card card-tale">
                         <div class="card-body">
                             <center>
@@ -28,7 +28,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-5 stretch-card transparent">
+                <div class="col-md-3 stretch-card transparent">
                     <div class="card card-dark-blue">
                         <div class="card-body">
                             <center>
@@ -43,8 +43,6 @@
 
             </div>
         </div>
-    </div>
-    </div>
     </div>
 
 {{-- <script src="{{ asset ('template/vendors/js/vendor.bundle.base.js') }}"></script>

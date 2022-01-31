@@ -12,64 +12,96 @@
                 </ul>
             </div> <br />
         @endif
-        <form method="post" action="/aparinspeksi">
+        <form method="post" action="/statusapar">
             @csrf
             <div class="form-group">
                 <label for="id"> Kode Apar </label>
                 <input type="text" class="form-control" name="id" required>
             </div>
             <div class="form-label">
-            <label for="tipe" class="form-label">Pilih Tipe Apar</label>
-              <select name="tipe" class="form-control">
-                      <option value="DCP" >DCP</option>
-                      <option value="CO2" >CO2</option>
-                      <option value="AIR" >AIR</option>
-                      <option value="FOAM" >FOAM</option>
-              </select>
-            </div>
-            <div>
-            <label for="jenis" class="form-label">Pilih Jenis Apar</label>
+            <label for="jenis" class="form-label">PRESSURE/CATRIDGE</label>
               <select name="jenis" class="form-control">
-                      <option value="Catridge" >CATRIDGE</option>
-                      <option value="Storage Preasure" >STORAGE PREASURE</option>
+                      <option value="Ok" >Ok</option>
+                      <option value="Not Ok" >Not Ok</option>
+                      <option value="n/a" >n/a</option>
               </select>
             </div>
             <div class="form-label">
-                <label for="berat" class="form-label">Pilih berat Apar</label>
-                  <select name="berat" class="form-control">
-                          <option value="1KG" >1 KG</option>
-                          <option value="2KG" >2 KG</option>
-                          <option value="4KG" >4 KG</option>
-                          <option value="6kg" >6 KG</option>
-                          <option value="9kg" >9 KG</option>
+                <label for="noozle" class="form-label">NOOZLE APAR</label>
+                  <select name="noozle" class="form-control">
+                          <option value="Ok" >Ok</option>
+                          <option value="Not Ok" >Not Ok</option>
+                          <option value="n/a" >n/a</option>
                   </select>
                 </div>
                 <div class="form-label">
-                    <label for="zona" class="form-label">Pilih Zona Apar</label>
-                      <select name="zona" class="form-control">
-                              <option value="1" >1</option>
-                              <option value="2" >2</option>
-                              <option value="3" >3</option>
-                              <option value="4" >4</option>
-                              <option value="5" >5</option>
-                              <option value="4" >6</option>
-                              <option value="5" >7</option>
-                              <option value="4" >8</option>
-                              <option value="5" >9</option>
+                    <label for="selang" class="form-label">Selang APAR</label>
+                      <select name="selang" class="form-control">
+                              <option value="Ok" >Ok</option>
+                              <option value="Not Ok" >Not Ok</option>
+                              <option value="n/a" >n/a</option>
                       </select>
                     </div>
-            <div class="form-group">
-                <label for="lokasi"> Lokasi </label>
-                <input type="text" class="form-control" name="lokasi" required>
-            </div>
-            <div class="form-group">
-                <label for="kedaluarsa"> Kedaluarsa </label>
-                <input type="date" class="form-control" name="kedaluarsa" required>
-            </div>
-            <div class="form-group">
-                <label for="keterangan"> Keterangan </label>
-                <input type="text" class="form-control" name="keterangan" required>
-            </div>
+                    <div class="form-label">
+                        <label for="tabung" class="form-label">Tabung APAR</label>
+                          <select name="tabung" class="form-control">
+                                  <option value="Ok" >Ok</option>
+                                  <option value="Not Ok" >Not Ok</option>
+                                  <option value="n/a" >n/a</option>
+                          </select>
+                        </div>
+                        <div class="form-label">
+                            <label for="rambu" class="form-label">Rambu APAR</label>
+                              <select name="rambu" class="form-control">
+                                      <option value="Ok" >Ok</option>
+                                      <option value="Not Ok" >Not Ok</option>
+                                      <option value="n/a" >n/a</option>
+                              </select>
+                            </div>
+                            <div class="form-label">
+                                <label for="label" class="form-label">Label APAR</label>
+                                  <select name="label" class="form-control">
+                                          <option value="Ok" >Ok</option>
+                                          <option value="Not Ok" >Not Ok</option>
+                                          <option value="n/a" >n/a</option>
+                                  </select>
+                                </div>
+                                <div class="form-label">
+                                    <label for="cat" class="form-label">Kondisi Cat APAR</label>
+                                      <select name="cat" class="form-control">
+                                              <option value="Ok" >Ok</option>
+                                              <option value="Not Ok" >Not Ok</option>
+                                              <option value="n/a" >n/a</option>
+                                      </select>
+                                    </div>
+                                    <div class="form-label">
+                                        <label for="pin" class="form-label">Pin APAR</label>
+                                          <select name="pin" class="form-control">
+                                                  <option value="Ok" >Ok</option>
+                                                  <option value="Not Ok" >Not Ok</option>
+                                                  <option value="n/a" >n/a</option>
+                                          </select>
+                                        </div>
+                                        <div class="form-label">
+                                            <label for="roda" class="form-label">Roda APAR</label>
+                                              <select name="roda" class="form-control">
+                                                      <option value="Ok" >Ok</option>
+                                                      <option value="Not Ok" >Not Ok</option>
+                                                      <option value="n/a" >n/a</option>
+                                              </select>
+                                            </div>
+                                            <div class="form-label">
+                                                <label for="keterangan" class="form-label">Jenis APAR</label>
+                                                  <select name="keterangan" class="form-control">
+                                                          <option value="aktiv" > AKTIF</option>
+                                                          <option value="service" >SERVICE</option>
+                                                          <option value="stock" >STOCK</option>
+                                                  </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="foto"> Foto APAR</label>
+                                                    <input type="image" class="form-control" name="foto" required>
+                                                </div>
             <button type="submit" class="btn btn-primary"> Simpan </button>
         </form>
     </div>

@@ -15,12 +15,17 @@ class CreateAparInspeksisTable extends Migration
     {
         Schema::create('apar_inspeksis', function (Blueprint $table) {
             $table->id();
-            $table->string('tipe');
-            $table->string('berat');
-            $table->string('zona');
-            $table->string('lokasi');
-            $table->date('kedaluarsa');
+            $table->string('jenis');
+            $table->string('noozle');
+            $table->string('selang');
+            $table->string('tabung');
+            $table->date('rambu');
+            $table->string('label');
+            $table->string('cat');
+            $table->string('pin');
+            $table->string('roda');
             $table->string('keterangan');
+            $table->string('foto');
             $table->timestamps();
         });
     }

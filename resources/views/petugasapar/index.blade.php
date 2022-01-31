@@ -21,6 +21,7 @@
             <th> Tipe Apar </th>
             <th> Berat Apar </th>
             <th> Zona Apar</th>
+            <th> Lokasi </th>
             <th> Kedaluarsa </th>
             <th> Keterangan </th>
             <th colspan='2'>Aksi</th>
@@ -34,6 +35,7 @@
             <td> {{ $aparinspeksi->tipe }} </td>
             <td> {{ $aparinspeksi->berat }} </td>
             <td> {{ $aparinspeksi->zona }} </td>
+            <td> {{ $aparinspeksi->lokasi }} </td>
             <td> {{ $aparinspeksi->kedaluarsa }} </td>
             <td> {{ $aparinspeksi->keterangan}}
                 <td>
@@ -70,21 +72,26 @@
                         <th> KONDISI CAT </th>
                         <th> SAFETY PIN </th>
                         <th> RODA </th>
-                    </tr>
-                    
+                        <th> KETERANGAN </th>
+                        <th> FOTO </th>
+                    </tr>    
                 </thead>
                 <tbody>
+                    @foreach ($aparinspeksi as $aparinspeksi)
                     <tr class="text-center">
-                        <td> OK</td>
-                        <td> OK </td>
-                        <td> OK </td>
-                        <td> OK </td>
-                        <td> OK </td>
-                        <td> OK </td>
-                        <td> OK </td>
-                        <td> OK  </td>
-                        <td> OK </td>
+                        <td> {{ $aparinspeksi->jenis }}</td>
+                        <td> {{ $aparinspeksi->noozle }} </td>
+                        <td> {{ $aparinspeksi->selang }} </td>
+                        <td> {{ $aparinspeksi->tabung }}</td>
+                        <td> {{ $aparinspeksi->rambu }}</td>
+                        <td> {{ $aparinspeksi->label }} </td>
+                        <td> {{ $aparinspeksi->cat }} </td>
+                        <td> {{ $aparinspeksi->pin }}  </td>
+                        <td> {{ $aparinspeksi->roda }}</td>
+                        <td> {{ $aparinspeksi->keterangan }}</td>
+                        <td> {{ $aparinspeksi->foto }}</td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -94,7 +101,6 @@
       </div>
     </div>
   </div>
-  
 @endsection
 
 @section('modal')
