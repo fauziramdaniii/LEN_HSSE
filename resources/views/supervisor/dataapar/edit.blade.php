@@ -1,15 +1,15 @@
-@extends("layouts.main")
+@extends('supervisor.dataapar.layout')
 @section("content")
 <div class="col-md-8 offset-md-2">
     <h3>Edit Data</h3>
     @if($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach($errors->all() as $error)
-                    <li>{{$error}}</li>
-                @endforeach
-            </ul>
-        </div><br>
+    <div class="alert alert-danger">
+        <ul>
+            @foreach($errors->all() as $error)
+            <li>{{$error}}</li>
+            @endforeach
+        </ul>
+    </div><br>
     @endif
     <form method="post" action="/dataapar/{{$dataapar->id}}">
         @csrf

@@ -51,7 +51,7 @@ class DataAparController extends Controller
             'keterangan' => 'required',
         ]);
         DataApar::create($request->all());
-        return redirect('dataapar')->with('success', 'dataapar saved!');
+        return redirect('/apar/dataapar')->with('success', 'dataapar saved!');
     }
 
     /**

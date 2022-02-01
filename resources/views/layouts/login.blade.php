@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,18 +29,21 @@
               <div class="brand-logo text-center">
                 <img src="{{ asset ('template/images/logo.png')}}" alt="logo">
               </div>
-              <h4><center>Hello! let's get started</h4>
+              <h4>
+                <center>Hello! let's get started
+              </h4>
               <h6 class="font-weight-light text-center">Sign in to continue.</h6>
               <form class="pt-3" action="/login" method="post">
                 @csrf
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-lg {{ $errors->has('email') ? ' is-invalid':'' }}" id="exampleInputEmail1" placeholder="Username">
+                  <input type="email" name="email" class="form-control form-control-lg {{ $errors->has('email') ? ' is-invalid':'' }}" id="exampleInputEmail1" placeholder="Username">
                 </div>
+
                 <div class="form-group">
-                  <input type="password" class="form-control form-control-lg {{ $errors->has('password') ? ' is-invalid':'' }}" id="exampleInputPassword1" placeholder="Password">
+                  <input type="password" name="password" class="form-control form-control-lg {{ $errors->has('password') ? ' is-invalid':'' }}" id="exampleInputPassword1" placeholder="Password">
                 </div>
                 <div class="mt-3">
-                  <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="/pilih">SIGN IN</a>
+                  <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="submit">SIGN IN</button>
                 </div>
                 <div class="my-2 d-flex justify-content-between align-items-center">
                   <div class="form-check">

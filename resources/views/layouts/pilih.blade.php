@@ -1,49 +1,51 @@
 @extends('layouts.app')
 @section ("content")
-    <div class="content-wrapper">
-        <div class="row">
-            <div class="col-md-12 grid-margin transparent">
-                <div class="row">
-                    <div class="col-md-3"> </div>
-                    <div class="col-md-6">
-                        <h3 class="font-weight-bold text-center"><center>Selamat Datang Fauzi </h3>
-                        <h6 class="font-weight-normal mb-0 text-center"> Berikut adalah Informasi terkait Inpeski APAR
-                            dan P23K</h6>
-                    </div>
-                    <div class="col-md-3"> </div>
-                </div>
-            </div>
-        </div>
+<div class="content-wrapper">
+    <div class="row">
         <div class="col-md-12 grid-margin transparent">
             <div class="row">
                 <div class="col-md-3"> </div>
-                <div class="col-md-3 stretch-card transparent">
-                    <div class="card card-tale">
-                        <div class="card-body">
-                            <center>
-                                <p class="mb-4 text-center"> APAR </p>
-                                <p class="fs-30 mb-2 text-center">136</p>
-                                <p class="mb-2 text-center">(30 days)</p>
-                                <a href="/dataapar" class="btn btn-info">Go</a>
-                        </div>
+                <div class="col-md-6">
+                    <h3 class="font-weight-bold text-center">
+                        <center>Selamat Datang Fauzi
+                    </h3>
+                    <h6 class="font-weight-normal mb-0 text-center"> Berikut adalah Informasi terkait Inpeski APAR
+                        dan P23K</h6>
+                </div>
+                <div class="col-md-3"> </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 grid-margin transparent">
+        <div class="row">
+            <div class="col-md-3"> </div>
+            <div class="col-md-3 stretch-card transparent">
+                <div class="card card-tale">
+                    <div class="card-body">
+                        <center>
+                            <p class="mb-4 text-center"> APAR </p>
+                            <p class="fs-30 mb-2 text-center">136</p>
+                            <p class="mb-2 text-center">(30 days)</p>
+                            <a href="/apar/dashboard" class="btn btn-info">Go</a>
                     </div>
                 </div>
-                <div class="col-md-3 stretch-card transparent">
-                    <div class="card card-dark-blue">
-                        <div class="card-body">
-                            <center>
+            </div>
+            <div class="col-md-3 stretch-card transparent">
+                <div class="card card-dark-blue">
+                    <div class="card-body">
+                        <center>
                             <p class="mb-4 text-center">P23K</p>
                             <p class="fs-30 mb-2 text-center">120</p>
                             <p class="mb-2 text-center">(30 days)</p>
                             <a href="/p3k" class="btn btn-primary">Go</a>
-                        </div>
                     </div>
                 </div>
-                <div class="col-md-3"> </div>
-
             </div>
+            <div class="col-md-3"> </div>
+
         </div>
     </div>
+</div>
 
 {{-- <script src="{{ asset ('template/vendors/js/vendor.bundle.base.js') }}"></script>
 <script src="{{ asset ('template/vendors/chart.js/Chart.min.js')}}"></script>

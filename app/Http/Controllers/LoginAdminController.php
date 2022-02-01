@@ -7,14 +7,14 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginAdminController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('guest:admin', ['except' => 'logout']);
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('guest:admin', ['except' => 'logout']);
+    // }
 
     public function formLogin()
     {
-        return view('login');
+        return view('layouts.login');
     }
 
     public function login(Request $request)
@@ -24,9 +24,15 @@ class LoginAdminController extends Controller
             'password' => 'required'
         ]);
 
-        if (Auth::guard('supervisor')->attempt($credentials, $request->remember)) {
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended(config('admin.prefix'));
+
+            $role = Auth::User()->role;
+            if ($role == 'supervisor') {
+                return redirect('/pilih');
+            } else {
+                return redirect('/dashboard');
+            }
         }
 
         return back()->withErrors([
@@ -34,9 +40,14 @@ class LoginAdminController extends Controller
         ]);
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        Auth::guard('supervisor')->logout();
-        return redirect()->route('login');
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DataApar;
+use App\Models\DetailInpeksiApar;
 use App\Models\MasterInspeksi;
 use Illuminate\Http\Request;
 
@@ -15,7 +17,7 @@ class MasterInspeksiController extends Controller
     public function index()
     {
         $periode = MasterInspeksi::all();
-        return view('supervisor.masterinspeksi.index', compact('periode'));
+        return view('supervisor.dataapar.inpeksi', compact('periode'));
     }
 
     /**
@@ -25,7 +27,7 @@ class MasterInspeksiController extends Controller
      */
     public function create()
     {
-        return view('supervisor.masterinspeksi.create');
+        return view('supervisor.dataapar.tambahPeriode');
     }
 
     /**
@@ -36,18 +38,32 @@ class MasterInspeksiController extends Controller
      */
     public function store(Request $request)
     {
+        if (DataApar::count() < 1) {
+            return back()->with('error', 'Isi terlebih dahulu Data Apar');
+        }
+        $check = MasterInspeksi::where('periode',  date('Y-m-d', strtotime($request->periode)))->first();
+        if (!empty($check)) {
+            return back()->with('error', 'Periode sudah ada');
+        }
         $periode = date('Y-m-d', strtotime($request->periode));
         $request->validate([
             'periode' => 'required',
         ]);
-        MasterInspeksi::create([
+        $createPeriode = MasterInspeksi::create([
             'periode' => $periode,
-            'sudah_inspeksi' => '5',
-            'belum_inspeksi' => '5',
             'status' => 'Belum di Inspeksi',
 
         ]);
-        return redirect('masterinspeksi')->with('success', 'Periode saved!');
+
+        if ($createPeriode) {
+            foreach (DataApar::all() as $apart) {
+                DetailInpeksiApar::create([
+                    'periode_id' => $createPeriode->id,
+                    'apart_id' => $apart->id
+                ]);
+            }
+        }
+        return redirect('/apar/masterinspeksi')->with('success', 'Periode saved!');
     }
 
     /**

@@ -21,13 +21,14 @@
   <!-- endinject -->
   <link rel="shortcut icon" href="{{asset ('template/images/favicon.png') }}" />
 </head>
+
 <body>
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="/"><img src="{{ asset ('template/images/logo.png') }}"  class="mr-2" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="/"><img src="{{ asset ('template/images/logo.png') }}" alt="logo"/></a>
+        <a class="navbar-brand brand-logo mr-5" href="/"><img src="{{ asset ('template/images/logo.png') }}" class="mr-2" alt="logo" /></a>
+        <a class="navbar-brand brand-logo-mini" href="/"><img src="{{ asset ('template/images/logo.png') }}" alt="logo" /></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -96,17 +97,20 @@
           </li>
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img src="{{ asset ('template/images/faces/face28.jpg') }}" alt="profile"/>
+              <img src="{{ asset ('template/images/faces/face28.jpg') }}" alt="profile" />
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               <a class="dropdown-item">
                 <i class="ti-settings text-primary"></i>
                 Settings
               </a>
-              <a class="dropdown-item">
-                <i class="ti-power-off text-primary"></i>
-                Logout
-              </a>
+              <form action="/logout" method="post" id="form-id">
+                @csrf
+                <a class="dropdown-item" href="#" onclick="document.getElementById('form-id').submit();">
+                  <i class="ti-power-off text-primary"></i>
+                  Logout
+                </a>
+              </form>
             </div>
           </li>
           <li class="nav-item nav-settings d-none d-lg-flex">
@@ -125,61 +129,30 @@
       <!-- partial:partials/_settings-panel.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link" href="/dashboardapar">
-              <i class="icon-grid menu-icon"></i>
-              <span class="menu-title">Dashboard</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/dataapar">
-              <i class="icon-contract menu-icon"></i>
-              <span class="menu-title">Master APAR</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/masterinspeksi">
-              <i class="icon-paper menu-icon"></i>
-              <span class="menu-title">Master Inspeksi</span>
-            </a>
-          </li>
-         
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-              <i class="icon-head menu-icon"></i>
-              <span class="menu-title">Inspeksi APAR</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="ui-basic">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href=""> Report APAR</a></li>
-                <li class="nav-item"> <a class="nav-link" href="/statusapar">Status Apar</a></li>
-                <li class="nav-item"> <a class="nav-link" href="/aparinspeksi"> Inspeksi APAR  </a></li>
-              </ul>
-            </div>
-          </li>
+          @yield('sidebar')
         </ul>
-      </nav> 
+      </nav>
       <div class="main-panel">
         @yield("content")
       </div>
-  </div>
-  <div class="content-wrapper">  
-    <footer class="footer">
-        <center>COPYRIGHT © 2022 PT LEN INDUSTRI  </center>
-    </footer>
-  </div> 
-  @yield("modal")
-  <script src="{{ asset ('template/vendors/js/vendor.bundle.base.js') }}"></script>
-  <script src="{{ asset ('template/vendors/chart.js/Chart.min.js')}}"></script>
-  <script src="{{ asset ('template/js/dataTables.select.min.js') }}"></script>
-  <script src="{{ asset ('template/js/off-canvas.js') }}"></script>
-  <script src="{{ asset ('template/js/hoverable-collapse.js') }} "></script>
-  <script src="{{ asset ('template/js/template.js') }}"></script>
-  <script src="{{ asset ('template/js/settings.js') }} "></script>
-  <script src="{{ asset ('template/js/todolist.js') }} "></script>
-  <script src="{{ asset ('template/js/dashboard.js') }}"></script>
-  <script src="{{ asset ('template/js/Chart.roundedBarCharts.js') }} "></script>
+    </div>
+    <div class="content-wrapper">
+      <footer class="footer">
+        <center>COPYRIGHT © 2022 PT LEN INDUSTRI </center>
+      </footer>
+    </div>
+    @yield("modal")
+    <script src="{{ asset ('template/vendors/js/vendor.bundle.base.js') }}"></script>
+    <script src="{{ asset ('template/vendors/chart.js/Chart.min.js')}}"></script>
+    <script src="{{ asset ('template/js/dataTables.select.min.js') }}"></script>
+    <script src="{{ asset ('template/js/off-canvas.js') }}"></script>
+    <script src="{{ asset ('template/js/hoverable-collapse.js') }} "></script>
+    <script src="{{ asset ('template/js/template.js') }}"></script>
+    <script src="{{ asset ('template/js/settings.js') }} "></script>
+    <script src="{{ asset ('template/js/todolist.js') }} "></script>
+    <script src="{{ asset ('template/js/dashboard.js') }}"></script>
+    <script src="{{ asset ('template/js/Chart.roundedBarCharts.js') }} "></script>
+    @yield('script')
 </body>
 
 </html>

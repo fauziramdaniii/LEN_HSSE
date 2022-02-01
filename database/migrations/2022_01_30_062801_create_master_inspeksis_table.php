@@ -17,8 +17,8 @@ class CreateMasterInspeksisTable extends Migration
             $table->id();
             $table->date('periode');
             $table->string('status');
-            $table->string('sudah_inspeksi');
-            $table->string('belum_inspeksi');
+            $table->integer('sudah_inspeksi')->default(0);
+            $table->integer('belum_inspeksi')->default(0);
             $table->timestamps();
         });
     }

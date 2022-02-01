@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\AparInspeksi;
 use App\Models\DataApar;
+use App\Models\DetailInpeksiApar;
+use App\Models\MasterInspeksi;
 use Illuminate\Http\Request;
 
 class AparInspeksiController extends Controller
@@ -15,8 +17,19 @@ class AparInspeksiController extends Controller
      */
     public function index()
     {
-        $aparinspeksi = DataApar::all();
-        return view('petugasapar.index', compact('aparinspeksi'));
+        return view('supervisor.dataapar.dashboard');
+    }
+    public function status()
+    {
+        $periode = MasterInspeksi::whereMonth('periode', date('m'))->whereYear('periode', date('Y'))->first();
+
+        if (!empty($periode)) {
+            $aparinspeksi = DetailInpeksiApar::where('periode_id', $periode->id)->with('Apart')->get();
+
+            return view('inpeksiApar.status', compact('aparinspeksi', 'periode'));
+        } else {
+            return view('inpeksiApar.status');
+        }
     }
 
     /**
@@ -26,7 +39,9 @@ class AparInspeksiController extends Controller
      */
     public function create()
     {
-        return view('petugasapar.create');
+        $periode = MasterInspeksi::whereMonth('periode', date('m'))->whereYear('periode', date('Y'))->first();
+        $aparinspeksi = DetailInpeksiApar::where('periode_id', @$periode->id)->whereNull('jenis')->get();
+        return view('inpeksiApar.inpeksi', compact('periode', 'aparinspeksi'));
     }
 
     /**
@@ -38,6 +53,7 @@ class AparInspeksiController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'apart_id' => 'required',
             'jenis' => 'required',
             'noozle' => 'required',
             'selang' => 'required',
@@ -48,10 +64,11 @@ class AparInspeksiController extends Controller
             'pin' => 'required',
             'roda' => 'required',
             'keterangan' => 'required',
-            'foto' => 'required',
+
         ]);
-        DataApar::create($request->all());
-        return redirect('statusapar')->with('success', 'aparinspeksi saved!');
+        $apart = DetailInpeksiApar::where('id', $request->apart_id)->first();
+        $apart->update($request->all());
+        return redirect('/apar/statusapar')->with('success', 'aparinspeksi saved!');
     }
 
     /**
