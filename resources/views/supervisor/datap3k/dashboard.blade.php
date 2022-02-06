@@ -1,10 +1,10 @@
-@extends('petugasp3k.layout')
+@extends('supervisor.datap3k.layout')
 <?php $no = 1 ?>
 @section ("content")
 <div class="content-wrapper">
     <br>
     <h3>
-        <center>Dashboard P3K
+        <center>Dashboard
     </h3>
     <div class="col-sm-12">
         <br>
@@ -14,9 +14,6 @@
         </div>
         @endif
     </div>
+
 </div>
-@endsection
-
-@section('modal')
-
 @endsection

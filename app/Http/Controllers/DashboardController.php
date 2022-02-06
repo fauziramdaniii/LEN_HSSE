@@ -15,4 +15,14 @@ class DashboardController extends Controller
             return view('petugasp3k.index');
         }
     }
+
+    public function apar()
+    {
+        return view('supervisor.dataapar.dashboard');
+    }
+
+    public function p3k()
+    {
+        return view('supervisor.datap3k.dashboard');
+    }
 }

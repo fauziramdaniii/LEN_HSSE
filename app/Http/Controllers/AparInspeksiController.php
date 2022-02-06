@@ -17,7 +17,6 @@ class AparInspeksiController extends Controller
      */
     public function index()
     {
-        return view('supervisor.dataapar.dashboard');
     }
     public function status()
     {

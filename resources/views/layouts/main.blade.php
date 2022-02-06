@@ -27,8 +27,14 @@
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="/"><img src="{{ asset ('template/images/logo.png') }}" class="mr-2" alt="logo" /></a>
-        <a class="navbar-brand brand-logo-mini" href="/"><img src="{{ asset ('template/images/logo.png') }}" alt="logo" /></a>
+        @if(Auth::User()->role=='supervisor')
+        <a class="navbar-brand brand-logo mr-5" href="/pilih"><img src="{{ asset ('template/images/logo.png') }}" class="mr-2" alt="logo" /></a>
+        <a class="navbar-brand brand-logo-mini" href="/pilih"><img src="{{ asset ('template/images/logo.png') }}" alt="logo" /></a>
+        @else
+        <a class="navbar-brand brand-logo mr-5" href="/dashboard"><img src="{{ asset ('template/images/logo.png') }}" class="mr-2" alt="logo" /></a>
+        <a class="navbar-brand brand-logo-mini" href="/dashboard"><img src="{{ asset ('template/images/logo.png') }}" alt="logo" /></a>
+        @endif
+
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">

@@ -37,7 +37,7 @@
                             <p class="mb-4 text-center">P23K</p>
                             <p class="fs-30 mb-2 text-center">120</p>
                             <p class="mb-2 text-center">(30 days)</p>
-                            <a href="/p3k" class="btn btn-primary">Go</a>
+                            <a href="/p3k/dashboard" class="btn btn-primary">Go</a>
                     </div>
                 </div>
             </div>
