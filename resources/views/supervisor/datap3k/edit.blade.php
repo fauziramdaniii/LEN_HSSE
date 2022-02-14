@@ -1,4 +1,4 @@
-@extends("layouts.p3k")
+@extends('supervisor.datap3k.layout')
 @section("content")
 <div class="col-md-8 offset-md-2"><br>
     <center>
@@ -13,7 +13,7 @@
         </ul>
     </div><br>
     @endif
-    <form method="post" action="/datap3k/{{$datap3k->id}}">
+    <form method="post" action="/p3k/datap3k/{{$datap3k->id}}">
         @csrf
         @method('PUT')
         <div class="form-group">

@@ -17,7 +17,7 @@ class MasterInspeksiController extends Controller
     public function index()
     {
         $periode = MasterInspeksi::all();
-        return view('supervisor.dataapar.inpeksi', compact('periode'));
+        return view('supervisor.dataapar.periode', compact('periode'));
     }
 
     /**

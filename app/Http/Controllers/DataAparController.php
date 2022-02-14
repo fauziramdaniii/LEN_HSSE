@@ -2,8 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\DataApar;
+use App\Models\tipeAPAR;
+use App\Models\JenisAPAR;
 use Illuminate\Http\Request;
+use App\Models\MasterInspeksi;
+use App\Models\DetailInpeksiApar;
+use App\Models\JenisAPAR as ModelsJenisAPAR;
+
 
 class DataAparController extends Controller
 {
@@ -25,7 +32,9 @@ class DataAparController extends Controller
      */
     public function create()
     {
-        return view('supervisor.dataapar.create');
+        $tipe = tipeAPAR::all();
+        $jenis = JenisAPAR::all();
+        return view('supervisor.dataapar.create', compact('tipe', 'jenis'));
     }
 
     /**
@@ -50,7 +59,17 @@ class DataAparController extends Controller
             'kedaluarsa' => 'required',
             'keterangan' => 'required',
         ]);
-        DataApar::create($request->all());
+        $apar =  DataApar::create($request->all());
+        $periodeNow = MasterInspeksi::whereDate('periode', '>=', date('Y-m-01'))->get();
+
+        if (!empty($periodeNow)) {
+            foreach ($periodeNow as $periode) {
+                DetailInpeksiApar::create([
+                    'periode_id' => $periode->id,
+                    'apart_id' => $apar->id,
+                ]);
+            }
+        }
         return redirect('/apar/dataapar')->with('success', 'dataapar saved!');
     }
 
@@ -72,8 +91,10 @@ class DataAparController extends Controller
      */
     public function edit($id)
     {
+        $tipe = tipeAPAR::all();
+        $jenis = JenisAPAR::all();
         $dataapar = DataApar::find($id);
-        return view('supervisor.dataapar.edit', ['dataapar' => $dataapar]);
+        return view('supervisor.dataapar.edit', ['dataapar' => $dataapar, 'jenis' => $jenis, 'tipe' => $tipe]);
     }
 
     /**
@@ -101,7 +122,7 @@ class DataAparController extends Controller
         ]);
 
         $dataapar->update($request->all());
-        return redirect('dataapar')->with('success', 'Data Updated!');
+        return redirect('/apar/dataapar')->with('success', 'Data Updated!');
     }
 
     /**
@@ -113,6 +134,6 @@ class DataAparController extends Controller
     public function destroy(DataApar $dataapar)
     {
         $dataapar->delete();
-        return redirect('dataapar')->with('success', 'Data Apar Deleted');
+        return redirect('/apar/dataapar')->with('success', 'Data Apar Deleted');
     }
 }

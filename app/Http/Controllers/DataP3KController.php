@@ -99,7 +99,7 @@ class DataP3KController extends Controller
         ]);
 
         $datap3k->update($request->all());
-        return redirect('datap3k')->with('success', 'Data P3K Updated!');
+        return redirect('/p3k/datap3k')->with('success', 'Data P3K Updated!');
     }
 
     /**
@@ -111,6 +111,6 @@ class DataP3KController extends Controller
     public function destroy(DataP3K $datap3k)
     {
         $datap3k->delete();
-        return redirect('datap3k')->with('success', 'Data P3K Deleted');
+        return redirect('/p3k/datap3k')->with('success', 'Data P3K Deleted');
     }
 }

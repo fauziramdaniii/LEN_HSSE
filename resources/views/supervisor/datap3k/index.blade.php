@@ -118,10 +118,10 @@
                             <td> {{ $datap3k->keterangan}}</td>
                             <td>
 
-                                <a href="datap3k/{{ $datap3k->id }}/edit/" class="btn btn-dark btn-sm"> Edit</a>
+                                <a href="/p3k/datap3k/{{ $datap3k->id }}/edit/" class="btn btn-dark btn-sm"> Edit</a>
                             </td>
                             <td>
-                                <form action="datap3k/{{ $datap3k->id }}" method="post">
+                                <form action="/p3k/datap3k/{{ $datap3k->id }}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger btn-sm" type="submit"> Delete</button>

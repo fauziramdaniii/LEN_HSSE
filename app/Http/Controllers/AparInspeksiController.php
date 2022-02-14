@@ -17,30 +17,40 @@ class AparInspeksiController extends Controller
      */
     public function index()
     {
+        $periode = MasterInspeksi::all();
+        return view('inpeksiApar.inpeksi', compact('periode'));
     }
-    public function status()
+
+    public function detailInspeksi(MasterInspeksi $periode)
     {
-        $periode = MasterInspeksi::whereMonth('periode', date('m'))->whereYear('periode', date('Y'))->first();
-
-        if (!empty($periode)) {
-            $aparinspeksi = DetailInpeksiApar::where('periode_id', $periode->id)->with('Apart')->get();
-
-            return view('inpeksiApar.status', compact('aparinspeksi', 'periode'));
-        } else {
-            return view('inpeksiApar.status');
-        }
+        $aparinspeksi = $periode->load('DetailInspeksi');
+        $sudahInspeksi = $periode->DetailInspeksi->whereNotNull('jenis')->count();
+        $belumInspeksi = $periode->DetailInspeksi->whereNull('jenis')->count();
+        return view('inpeksiApar.status', compact('aparinspeksi', 'sudahInspeksi', 'belumInspeksi'));
     }
+
+    // public function status()
+    // {
+    //     $periode = MasterInspeksi::whereMonth('periode', date('m'))->whereYear('periode', date('Y'))->first();
+
+    //     if (!empty($periode)) {
+    //         $aparinspeksi = DetailInpeksiApar::where('periode_id', $periode->id)->with('Apart')->get();
+
+    //         return view('inpeksiApar.status', compact('aparinspeksi', 'periode'));
+    //     } else {
+    //         return view('inpeksiApar.status');
+    //     }
+    // }
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(MasterInspeksi $periode)
     {
-        $periode = MasterInspeksi::whereMonth('periode', date('m'))->whereYear('periode', date('Y'))->first();
-        $aparinspeksi = DetailInpeksiApar::where('periode_id', @$periode->id)->whereNull('jenis')->get();
-        return view('inpeksiApar.inpeksi', compact('periode', 'aparinspeksi'));
+        $aparinspeksi =  $periode->load(['DetailInspeksi']);
+        return view('inpeksiApar.isiInpeksi', compact('aparinspeksi'));
     }
 
     /**
@@ -52,7 +62,7 @@ class AparInspeksiController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'apart_id' => 'required',
+            'id' => 'required',
             'jenis' => 'required',
             'noozle' => 'required',
             'selang' => 'required',
@@ -65,9 +75,16 @@ class AparInspeksiController extends Controller
             'keterangan' => 'required',
 
         ]);
-        $apart = DetailInpeksiApar::where('id', $request->apart_id)->first();
+        $apart = DetailInpeksiApar::with('periode', 'Apart')->where('id', $request->id)->first();
         $apart->update($request->all());
-        return redirect('/apar/statusapar')->with('success', 'aparinspeksi saved!');
+        if ($request->keterangan == 'Service') {
+            $apart->Apart->update([
+                'keterangan' => 'Service'
+            ]);
+        }
+
+
+        return redirect('/apar/inspeksi/' . $apart->periode->id)->with('success', 'apar inspeksi saved!');
     }
 
     /**
@@ -114,6 +131,7 @@ class AparInspeksiController extends Controller
         ]);
 
         $aparinspeksi->update($request->all());
+
         return redirect('statusapar')->with('success', 'Data Updated!');
     }
 
@@ -127,5 +145,11 @@ class AparInspeksiController extends Controller
     {
         $aparinspeksi->delete();
         return redirect('aparinspeksi')->with('success', 'Data Apar Deleted');
+    }
+
+    public function hasil(DetailInpeksiApar $id)
+    {
+        $apar = $id->load('Apart');
+        return response()->json(['data' => $id, 'apar' => $apar]);
     }
 }

@@ -10,7 +10,7 @@
                         <center>Selamat Datang Fauzi
                     </h3>
                     <h6 class="font-weight-normal mb-0 text-center"> Berikut adalah Informasi terkait Inpeski APAR
-                        dan P23K</h6>
+                        dan P3K</h6>
                 </div>
                 <div class="col-md-3"> </div>
             </div>
@@ -34,7 +34,7 @@
                 <div class="card card-dark-blue">
                     <div class="card-body">
                         <center>
-                            <p class="mb-4 text-center">P23K</p>
+                            <p class="mb-4 text-center">P3K</p>
                             <p class="fs-30 mb-2 text-center">120</p>
                             <p class="mb-2 text-center">(30 days)</p>
                             <a href="/p3k/dashboard" class="btn btn-primary">Go</a>

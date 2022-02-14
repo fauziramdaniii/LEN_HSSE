@@ -11,7 +11,10 @@ use App\Http\Controllers\LoginAdminController;
 use App\Http\Controllers\InspeksiP3KController;
 use App\Http\Controllers\AparInspeksiController;
 use App\Http\Controllers\MasterInspeksiController;
+use App\Http\Controllers\KelolaParameterController;
 use App\Http\Controllers\MasterInspeksiP3KController;
+use App\Http\Controllers\ReportAparController;
+use GuzzleHttp\Middleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,16 +56,28 @@ Route::post('/logout', [LoginAdminController::class, 'logout'])->middleware('aut
 Route::get('/dashboard', [DashboardController::class, 'index']);
 
 // Route Apar
-Route::group(['prefix' => 'apar'], function () {
+Route::group(['prefix' => 'apar', 'middleware' => 'auth'], function () {
     Route::get('/dashboard', [DashboardController::class, 'apar']);
     Route::resource('/dataapar', DataAparController::class);
     Route::resource('/masterinspeksi', MasterInspeksiController::class);
-    Route::get('/statusapar', [AparInspeksiController::class, 'status']);
-    Route::get('/aparinspeksi', [AparInspeksiController::class, 'create']);
+    Route::get('/inspeksi', [AparInspeksiController::class, 'index']);
+    Route::get('/inspeksi/{periode}', [AparInspeksiController::class, 'detailInspeksi']);
+    Route::get('/inspeksi/{periode}/inputInpeksiApar', [AparInspeksiController::class, 'create']);
+    // Route::get('/statusapar', [AparInspeksiController::class, 'status']);
+    Route::get('/inputInpeksiApar', [AparInspeksiController::class, 'create']);
     Route::post('/inputInpeksiApar', [AparInspeksiController::class, 'store']);
+    Route::get('/kelolaParameter', [KelolaParameterController::class, 'index']);
+    Route::post('/tambahTipe', [KelolaParameterController::class, 'tambahTipe']);
+    Route::post('/tambahJenis', [KelolaParameterController::class, 'tambahJenis']);
+    Route::delete('/deleteTipe/{id}', [KelolaParameterController::class, 'deleteTipe']);
+    Route::delete('/deleteJenis/{id}', [KelolaParameterController::class, 'deleteJenis']);
+    Route::put('/editTipe/{id}', [KelolaParameterController::class, 'editTipe']);
+    Route::put('/editJenis/{id}', [KelolaParameterController::class, 'editJenis']);
+    Route::get('/hasilInspeksi/{id}', [AparInspeksiController::class, 'hasil']);
+    // Route::get('/report', [ReportAparController::class, 'index']);
 });
 
-Route::group(['prefix' => 'p3k'], function () {
+Route::group(['prefix' => 'p3k', 'middleware' => 'auth'], function () {
     Route::get('/dashboard', [DashboardController::class, 'p3k']);
     Route::resource('/datap3k', DataP3KController::class);
     Route::resource('/masterinspeksi', MasterInspeksiP3KController::class);
@@ -72,9 +87,10 @@ Route::group(['prefix' => 'p3k'], function () {
     Route::get('/hasilInpeksi/{id}', [InspeksiP3KController::class, 'hasilInpeksi']);
     Route::get('/inspeksi/{periode}', [InspeksiP3KController::class, 'detailInspeksi']);
 
-    Route::get('/statusp3k', [InspeksiP3KController::class, 'status']);
-    Route::get('/p3kinpeksi', [InspeksiP3KController::class, 'create']);
-    Route::post('/inputInpeksiApar', [InspeksiP3KController::class, 'store']);
+
+    // Route::get('/statusp3k', [InspeksiP3KController::class, 'status']);
+    // Route::get('/p3kinpeksi', [InspeksiP3KController::class, 'create']);
+    // Route::post('/inputInpeksiApar', [InspeksiP3KController::class, 'store']);
 });
 
 //     Route::middleware(['auth:admin'])->group(function () {
