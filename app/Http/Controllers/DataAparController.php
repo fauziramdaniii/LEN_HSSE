@@ -6,9 +6,12 @@ use Carbon\Carbon;
 use App\Models\DataApar;
 use App\Models\tipeAPAR;
 use App\Models\JenisAPAR;
+use App\Exports\AparExport;
 use Illuminate\Http\Request;
 use App\Models\MasterInspeksi;
 use App\Models\DetailInpeksiApar;
+use Maatwebsite\Excel\Facades\Excel;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 use App\Models\JenisAPAR as ModelsJenisAPAR;
 
 
@@ -135,5 +138,38 @@ class DataAparController extends Controller
     {
         $dataapar->delete();
         return redirect('/apar/dataapar')->with('success', 'Data Apar Deleted');
+    }
+
+    public function export()
+    {
+        $spreadsheet = IOFactory::load('excelTemplate/LAPORAN DATA APAR.xlsx');
+        $spreadsheet->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
+        $spreadsheet->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
+        $row = 6;
+        $no = 1;
+        foreach (DataApar::all() as $data) {
+            $spreadsheet->setActiveSheetIndex(0)
+                ->setCellValue("A{$row}", "{$no}")
+                ->setCellValue("B{$row}", "{$data->id}")
+                ->setCellValue("C{$row}", "{$data->tipe}")
+                ->setCellValue("D{$row}", "{$data->jenis}")
+                ->setCellValue("E{$row}", "{$data->berat}")
+                ->setCellValue("F{$row}", "{$data->lokasi}")
+                ->setCellValue("G{$row}", "{$data->provinsi}")
+                ->setCellValue("H{$row}", "{$data->kota}")
+                ->setCellValue("I{$row}", "{$data->zona}")
+                ->setCellValue("J{$row}", "{$data->gedung}")
+                ->setCellValue("K{$row}", "{$data->lantai}")
+                ->setCellValue("L{$row}", "{$data->titik}")
+                ->setCellValue("M{$row}", "{$data->kedaluarsa}")
+                ->setCellValue("N{$row}", "{$data->keterangan}");
+            $row++;
+            $no++;
+        }
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        ob_end_clean(); //
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header("Content-Disposition: attachment; filename=DataAPAR_" . date('Ymdhis') . ".xlsx");
+        $writer->save('php://output');
     }
 }

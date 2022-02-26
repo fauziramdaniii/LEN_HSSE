@@ -7,7 +7,7 @@
                 <div class="col-md-3"> </div>
                 <div class="col-md-6">
                     <h3 class="font-weight-bold text-center">
-                        <center>Selamat Datang Fauzi
+                        <center>Selamat Datang {{Auth::User()->name}}
                     </h3>
                     <h6 class="font-weight-normal mb-0 text-center"> Berikut adalah Informasi terkait Inpeski APAR
                         dan P3K</h6>

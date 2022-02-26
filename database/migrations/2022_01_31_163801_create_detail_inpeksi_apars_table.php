@@ -28,6 +28,7 @@ class CreateDetailInpeksiAparsTable extends Migration
             $table->string('roda')->nullable();
             $table->string('keterangan')->nullable();
             $table->string('foto')->nullable();
+            $table->date('tanggal')->nullable();
             $table->timestamps();
         });
     }

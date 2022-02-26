@@ -51,8 +51,6 @@ class MasterInspeksiP3KController extends Controller
                     'p3k_id' => $p3k->id,
                     'status' => 'Belum Inspeksi',
                 ]);
-
-
                 if ($createInspeksi) {
                     switch ($p3k->tipe) {
                         case 'A':

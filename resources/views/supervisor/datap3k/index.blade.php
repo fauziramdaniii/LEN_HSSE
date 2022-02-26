@@ -94,7 +94,6 @@
                             <th> Gedung </th>
                             <th> Lantai </th>
                             <th> Titik </th>
-                            <th> Kedaluwarsa </th>
                             <th> Keterangan </th>
                             <th colspan='2'>
                                 <center>Aksi
@@ -114,7 +113,6 @@
                             <td> {{ $datap3k->gedung }} </td>
                             <td> {{ $datap3k->lantai }} </td>
                             <td> {{ $datap3k->titik }} </td>
-                            <td> {{ $datap3k->kedaluwarsa }} </td>
                             <td> {{ $datap3k->keterangan}}</td>
                             <td>
 

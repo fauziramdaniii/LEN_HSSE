@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class DataP3K extends Model
 {
     protected $fillable = [
-        'id', 'tipe', 'lokasi', 'provinsi', 'kota', 'zona', 'gedung', 'lantai', 'titik', 'kedaluwarsa', 'keterangan'
+        'id', 'tipe', 'lokasi', 'provinsi', 'kota', 'zona', 'gedung', 'lantai', 'titik', 'keterangan'
     ];
 }

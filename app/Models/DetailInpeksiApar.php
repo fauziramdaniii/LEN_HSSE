@@ -10,7 +10,7 @@ class DetailInpeksiApar extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'periode_id', 'apart_id', 'jenis', 'noozle', 'selang', 'tabung', 'rambu', 'label', 'cat', 'pin', 'roda', 'keterangan', 'foto'
+        'periode_id', 'apart_id', 'jenis', 'noozle', 'selang', 'tabung', 'rambu', 'label', 'cat', 'pin', 'roda', 'keterangan', 'foto', 'tanggal'
     ];
 
     public function Apart()

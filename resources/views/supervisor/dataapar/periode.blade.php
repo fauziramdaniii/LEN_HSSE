@@ -25,7 +25,7 @@
                         <tr class="text-center">
                             <th> No </th>
                             <th> Periode </th>
-                            <th> Action </th>
+                            <th colspan="2"> Action </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,6 +34,7 @@
                             <td>{{$loop->iteration}}</td>
                             <td>{{ date('F Y',strtotime ($periode->periode))  }}</td>
                             <td><button type="button" class="btn btn-danger btn-sm">Delete</button></td>
+                            <td><a href="masterinspeksi/{{$periode->id}}/export" class="btn btn-warning btn-sm">Export</a></td>
                         </tr>
                         @endforeach
                     </tbody>

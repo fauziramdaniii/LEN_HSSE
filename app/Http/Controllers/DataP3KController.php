@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\IsiP3K;
 use App\Models\DataP3K;
+use App\Models\InspeksiP3K;
+use App\Models\IsiInspeksi;
 use Illuminate\Http\Request;
+use App\Models\MasterInspeksiP3K;
 
 class DataP3KController extends Controller
 {
@@ -46,10 +50,41 @@ class DataP3KController extends Controller
             'gedung' => 'required',
             'lantai' => 'required',
             'titik' => 'required',
-            'kedaluwarsa' => 'required',
             'keterangan' => 'required',
         ]);
-        DataP3K::create($request->all());
+        $p3k = DataP3K::create($request->all());
+        $periodeNow = MasterInspeksiP3K::whereDate('periode', '>=', date('Y-m-01'))->get();
+        if (!empty($periodeNow)) {
+            foreach ($periodeNow as $periode) {
+                $createInspeksi = InspeksiP3K::create([
+                    'periode_id' => $periode->id,
+                    'p3k_id' => $p3k->id,
+                    'status' => 'Belum Inspeksi',
+                ]);
+                if ($createInspeksi) {
+                    switch ($p3k->tipe) {
+                        case 'A':
+                            $isi = IsiP3K::where('tipe', 'A')->get();
+                            break;
+                        case 'B':
+                            $isi = IsiP3K::where('tipe', 'B')->get();
+                            break;
+                        case 'C':
+                            $isi = IsiP3K::where('tipe', 'C')->get();
+                            break;
+                        default:
+                            break;
+                    }
+
+                    foreach ($isi as $isi) {
+                        IsiInspeksi::create([
+                            'inspeksi_id' => $createInspeksi->id,
+                            'isi_id' => $isi->id,
+                        ]);
+                    }
+                }
+            }
+        }
         return redirect('/p3k/datap3k')->with('success', 'datap3k saved!');
     }
 
@@ -94,7 +129,6 @@ class DataP3KController extends Controller
             'gedung' => 'required',
             'lantai' => 'required',
             'titik' => 'required',
-            'kedaluwarsa' => 'required',
             'keterangan' => 'required',
         ]);
 

@@ -7,7 +7,7 @@
         <center>DATA APAR
     </h3>
     <center><a href="dataapar/create" class="btn btn-info"> Tambah Data </a>
-        <a href="dataapar/create" class="btn btn-warning"> Export Data </a>
+        <a href="{{$dataapar->count() > 0 ? 'dataapar/export' : '#'}}" class="btn btn-warning"> Export Data </a>
         <div class="col-sm-12">
             <br>
             @if (session()->get('success'))
@@ -16,7 +16,7 @@
             </div>
             @endif
         </div>
-        <div class="table-responsive">
+        <div class=" table-responsive">
             <table class="display expandable-table ">
                 <thead>
                     <tr class="text-center">

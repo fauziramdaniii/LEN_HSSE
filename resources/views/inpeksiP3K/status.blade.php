@@ -1,26 +1,26 @@
 @extends('layouts.main')
 @section('sidebar')
 @if(Auth::User()->role == 'supervisor')
-<li class="nav-item">
+<li class="nav-item {{Request::is('p3k/dashboard*') ? 'active' : ''}}">
     <a class="nav-link" href="/p3k/dashboard">
         <i class="icon-grid menu-icon"></i>
         <span class="menu-title">Dashboard</span>
     </a>
 </li>
-<li class="nav-item">
+<li class="nav-item {{Request::is('p3k/datap3k*') ? 'active' : ''}}">
     <a class="nav-link" href="/p3k/datap3k">
         <i class="icon-contract menu-icon"></i>
         <span class="menu-title">Master P3K</span>
     </a>
 </li>
-<li class="nav-item">
+<li class="nav-item {{Request::is('p3k/masterinspeksi*') ? 'active' : ''}}">
     <a class="nav-link" href="/p3k/masterinspeksi">
         <i class="icon-paper menu-icon"></i>
         <span class="menu-title">Master Inspeksi</span>
     </a>
 </li>
 
-<li class="nav-item">
+<li class="nav-item {{Request::is('p3k/inspeksi*') ? 'active' : ''}}">
     <a class="nav-link" href="/p3k/inspeksi">
         <i class="icon-paper menu-icon"></i>
         <span class="menu-title">Inspeksi P3K</span>
@@ -58,7 +58,34 @@
         @endif
     </div>
     <center>
+        <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">{{$periode->DetailInspeksi->where('status','Sudah Inpeksi')->count()}}</h4>
+                        <div class="media">
 
+                            <div class="media-body">
+                                <p class="card-text">P3K yang sudah diisnpeksi</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">{{$periode->DetailInspeksi->where('status','Belum Inspeksi')->count()}}</h4>
+                        <div class="media">
+
+                            <div class="media-body">
+                                <p class="card-text">P3K yang belum diinspeksi</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="table-responsive">
             <table class="display expandable-table col-sm-12">
                 <thead>
@@ -81,9 +108,9 @@
                         <td>{{$detil->dataP3K->tipe}}</td>
                         <td>
                             @if($detil->status =="Belum Inspeksi")
-                            <a href="/p3k/inputInpeksi/{{$detil->id}}" class="btn btn-sm btn-warning">Isi Inspeksi</a>
+                            <a href="/p3k/inspeksi/{{$detil->id}}/inputInpeksi" class="btn btn-sm btn-warning">Isi Inspeksi</a>
                             @else
-                            <a href="/p3k/hasilInpeksi/{{$detil->id}}" class="btn btn-sm btn-success">Lihat Hasil</a>
+                            <a href="/p3k/inspeksi/{{$detil->id}}/hasilInpeksi" class="btn btn-sm btn-success">Lihat Hasil</a>
                             @endif
                         </td>
                     </tr>

@@ -25,7 +25,6 @@ class CreateDataP3KSTable extends Migration
             $table->string('gedung');
             $table->string('lantai');
             $table->string('titik');
-            $table->date('kedaluwarsa');
             $table->string('keterangan');
             $table->timestamps();
         });

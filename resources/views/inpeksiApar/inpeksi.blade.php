@@ -2,25 +2,25 @@
 @section('sidebar')
 @if(Auth::User()->role == 'supervisor')
 <li class="nav-item">
-    <a class="nav-link" href="/apar/dashboard">
+    <a class="nav-link {{Request::is('apar/dashboard*') ? 'active' : ''}} " href="/apar/dashboard">
         <i class="icon-grid menu-icon"></i>
         <span class="menu-title">Dashboard</span>
     </a>
 </li>
-<li class="nav-item">
+<li class="nav-item {{Request::is('apar/dataapar*') ? 'active' : ''}}">
     <a class="nav-link" href="/apar/dataapar">
         <i class="icon-contract menu-icon"></i>
         <span class="menu-title">Master APAR</span>
     </a>
 </li>
-<li class="nav-item">
+<li class="nav-item {{Request::is('apar/masterinspeksi*') ? 'active' : ''}}">
     <a class="nav-link" href="/apar/masterinspeksi">
         <i class="icon-paper menu-icon"></i>
         <span class="menu-title">Master Inspeksi</span>
     </a>
 </li>
 
-<li class="nav-item">
+<li class="nav-item {{Request::is('apar/inspeksi*') ? 'active' : ''}}">
     <a class="nav-link" href="/apar/inspeksi">
         <i class="icon-paper menu-icon"></i>
         <span class="menu-title">Inspeksi APAR</span>

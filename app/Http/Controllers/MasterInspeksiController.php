@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataApar;
-use App\Models\DetailInpeksiApar;
-use App\Models\MasterInspeksi;
 use Illuminate\Http\Request;
+use App\Models\MasterInspeksi;
+use App\Models\DetailInpeksiApar;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class MasterInspeksiController extends Controller
 {
@@ -52,7 +53,6 @@ class MasterInspeksiController extends Controller
         $createPeriode = MasterInspeksi::create([
             'periode' => $periode,
             'status' => 'Belum di Inspeksi',
-
         ]);
 
         if ($createPeriode) {
@@ -109,5 +109,57 @@ class MasterInspeksiController extends Controller
     public function destroy(MasterInspeksi $masterInspeksi)
     {
         //
+    }
+
+    public function export(MasterInspeksi $id)
+    {
+        $id = $id->load('DetailInspeksi', 'DetailInspeksi.Apart');
+        $tanggal_awal = DetailInpeksiApar::where('periode_id', $id->id)->whereNotNull('tanggal')->orderBy('tanggal', 'asc')->first();
+        $tanggal_akhir = DetailInpeksiApar::where('periode_id', $id->id)->whereNotNull('tanggal')->orderBy('tanggal', 'desc')->first();
+        $bulan = date('F-Y', strtotime($id->periode));
+        $spreadsheet = IOFactory::load('excelTemplate/LAPORAN HASIL INSPEKSI.xlsx');
+        $spreadsheet->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
+        $row = 6;
+        $no = 1;
+        if (!empty($tanggal_awal) && !empty($tanggal_akhir)) {
+            if ($tanggal_awal == $tanggal_akhir) {
+                $spreadsheet->setActiveSheetIndex(0)->setCellValue("D3", date('d F', strtotime($tanggal_awal->tanggal)));
+            } else {
+                $spreadsheet->setActiveSheetIndex(0)->setCellValue("D3", date('d', strtotime($tanggal_awal->tanggal)) . " s/d " . date('d F', strtotime($tanggal_akhir->tanggal)));
+            }
+        }
+        foreach ($id->DetailInspeksi as $data) {
+            $spreadsheet->setActiveSheetIndex(0)
+                ->setCellValue("A{$row}", "{$no}")
+                ->setCellValue("B{$row}", "{$data->Apart->id}")
+                ->setCellValue("C{$row}", "{$data->Apart->tipe}")
+                ->setCellValue("D{$row}", "{$data->Apart->jenis}")
+                ->setCellValue("E{$row}", "{$data->Apart->berat}")
+                ->setCellValue("F{$row}", "{$data->Apart->lokasi}")
+                ->setCellValue("G{$row}", "{$data->Apart->provinsi}")
+                ->setCellValue("H{$row}", "{$data->Apart->kota}")
+                ->setCellValue("I{$row}", "{$data->Apart->zona}")
+                ->setCellValue("J{$row}", "{$data->Apart->gedung}")
+                ->setCellValue("K{$row}", "{$data->Apart->lantai}")
+                ->setCellValue("L{$row}", "{$data->Apart->titik}")
+                ->setCellValue("M{$row}", "{$data->Apart->kedaluarsa}")
+                ->setCellValue("N{$row}", "{$data->jenis}")
+                ->setCellValue("O{$row}", "{$data->noozle}")
+                ->setCellValue("P{$row}", "{$data->selang}")
+                ->setCellValue("Q{$row}", "{$data->tabung}")
+                ->setCellValue("R{$row}", "{$data->rambu}")
+                ->setCellValue("S{$row}", "{$data->label}")
+                ->setCellValue("T{$row}", "{$data->cat}")
+                ->setCellValue("U{$row}", "{$data->pin}")
+                ->setCellValue("V{$row}", "{$data->roda}")
+                ->setCellValue("W{$row}", "{$data->keterangan}");
+            $row++;
+            $no++;
+        }
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        ob_end_clean(); //
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header("Content-Disposition: attachment; filename=HasilInspeksi_" . $bulan . "_" . date('Ymdhis') . ".xlsx");
+        $writer->save('php://output');
     }
 }

@@ -57,7 +57,7 @@ class AparInspeksiController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response                                                                                                            
      */
     public function store(Request $request)
     {
@@ -73,7 +73,7 @@ class AparInspeksiController extends Controller
             'pin' => 'required',
             'roda' => 'required',
             'keterangan' => 'required',
-
+            'tanggal' => 'required'
         ]);
         $apart = DetailInpeksiApar::with('periode', 'Apart')->where('id', $request->id)->first();
         $apart->update($request->all());

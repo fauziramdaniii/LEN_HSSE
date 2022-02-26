@@ -2,25 +2,25 @@
 @section('sidebar')
 @if(Auth::User()->role == 'supervisor')
 <li class="nav-item">
-    <a class="nav-link" href="/apar/dashboard">
+    <a class="nav-link {{Request::is('apar/dashboard*') ? 'active' : ''}} " href="/apar/dashboard">
         <i class="icon-grid menu-icon"></i>
         <span class="menu-title">Dashboard</span>
     </a>
 </li>
-<li class="nav-item">
+<li class="nav-item {{Request::is('apar/dataapar*') ? 'active' : ''}}">
     <a class="nav-link" href="/apar/dataapar">
         <i class="icon-contract menu-icon"></i>
         <span class="menu-title">Master APAR</span>
     </a>
 </li>
-<li class="nav-item">
+<li class="nav-item {{Request::is('apar/masterinspeksi*') ? 'active' : ''}}">
     <a class="nav-link" href="/apar/masterinspeksi">
         <i class="icon-paper menu-icon"></i>
         <span class="menu-title">Master Inspeksi</span>
     </a>
 </li>
 
-<li class="nav-item">
+<li class="nav-item {{Request::is('apar/inspeksi*') ? 'active' : ''}}">
     <a class="nav-link" href="/apar/inspeksi">
         <i class="icon-paper menu-icon"></i>
         <span class="menu-title">Inspeksi APAR</span>
@@ -135,6 +135,7 @@
             </div>
             <div class="modal-body">
                 <p class="font-weight-bold">Kode APAR : <span id="kdApar"></span></p>
+                <p class="font-weight-bold">Tanggal Inspeksi : <span id="tanggal"></span></p>
                 <table class=" table table-bordered" style="width: 100%">
                     <tbody>
                         <tr class="">
@@ -209,7 +210,9 @@
             $('#pin').text(data.data.pin);
             $('#roda').text(data.data.roda);
             $('#keterangan').text(data.data.keterangan);
+            $('#tanggal').text(data.data.tanggal);
             $('#kdApar').text(data.apar.id);
+
         });
     });
 </script>

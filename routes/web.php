@@ -58,7 +58,9 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 // Route Apar
 Route::group(['prefix' => 'apar', 'middleware' => 'auth'], function () {
     Route::get('/dashboard', [DashboardController::class, 'apar']);
+    Route::get('/dataapar/export', [DataAparController::class, 'export']);
     Route::resource('/dataapar', DataAparController::class);
+    Route::get('/masterinspeksi/{id}/export', [MasterInspeksiController::class, 'export']);
     Route::resource('/masterinspeksi', MasterInspeksiController::class);
     Route::get('/inspeksi', [AparInspeksiController::class, 'index']);
     Route::get('/inspeksi/{periode}', [AparInspeksiController::class, 'detailInspeksi']);
@@ -74,6 +76,7 @@ Route::group(['prefix' => 'apar', 'middleware' => 'auth'], function () {
     Route::put('/editTipe/{id}', [KelolaParameterController::class, 'editTipe']);
     Route::put('/editJenis/{id}', [KelolaParameterController::class, 'editJenis']);
     Route::get('/hasilInspeksi/{id}', [AparInspeksiController::class, 'hasil']);
+
     // Route::get('/report', [ReportAparController::class, 'index']);
 });
 
@@ -82,9 +85,9 @@ Route::group(['prefix' => 'p3k', 'middleware' => 'auth'], function () {
     Route::resource('/datap3k', DataP3KController::class);
     Route::resource('/masterinspeksi', MasterInspeksiP3KController::class);
     Route::get('/inspeksi', [InspeksiP3KController::class, 'index']);
-    Route::get('/inputInpeksi/{id}', [InspeksiP3KController::class, 'inputInspeksi']);
+    Route::get('/inspeksi/{id}/inputInpeksi', [InspeksiP3KController::class, 'inputInspeksi']);
     Route::put('/inputInpeksi/{id}', [InspeksiP3KController::class, 'storeInpeksi']);
-    Route::get('/hasilInpeksi/{id}', [InspeksiP3KController::class, 'hasilInpeksi']);
+    Route::get('/inspeksi/{id}/hasilInpeksi', [InspeksiP3KController::class, 'hasilInpeksi']);
     Route::get('/inspeksi/{periode}', [InspeksiP3KController::class, 'detailInspeksi']);
 
 
