@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DataApar;
+use App\Models\DataP3K;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,5 +26,12 @@ class DashboardController extends Controller
     public function p3k()
     {
         return view('supervisor.datap3k.dashboard');
+    }
+
+    public function pilih()
+    {
+        $jumlahApar = DataApar::count();
+        $jumlahP3K = DataP3K::count();
+        return view('layouts.pilih', compact('jumlahApar', 'jumlahP3K'));
     }
 }

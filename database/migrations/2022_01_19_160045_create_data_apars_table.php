@@ -28,6 +28,7 @@ class CreateDataAparsTable extends Migration
             $table->date('kedaluarsa');
             $table->string('keterangan');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

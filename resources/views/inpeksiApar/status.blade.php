@@ -43,83 +43,82 @@
 @endsection
 <?php $no = 1 ?>
 @section ("content")
-<div class="content-wrapper">
+@include('sweetalert::alert')
+<br>
+<h3 class="font-weight-bold text-center">
+    Data Inpeksi APAR (Periode {{date('F Y',strtotime($aparinspeksi->periode))}})
+</h3>
+
+<div class="col-sm-12">
     <br>
-    <h3>
-        <center>Data Inpeksi APAR (Periode {{date('F Y',strtotime($aparinspeksi->periode))}})
-    </h3>
-
-    <div class="col-sm-12">
-        <br>
-        @if (session()->get('success'))
-        <div class="alert alert-sucess">
-            {{ session()->get('sucess') }}
-        </div>
-        @endif
+    @if (session()->get('success'))
+    <div class="alert alert-sucess">
+        {{ session()->get('sucess') }}
     </div>
-    <center>
-        <div class="row">
-            <div class="col-md-6 grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">{{$sudahInspeksi}}</h4>
-                        <div class="media">
+    @endif
+</div>
 
-                            <div class="media-body">
-                                <p class="card-text">APAR yang sudah diinpeksi</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">{{$belumInspeksi}}</h4>
-                        <div class="media">
+<div class="row">
+    <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body text-center">
+                <h4 class="card-title">{{$sudahInspeksi}}</h4>
+                <div class="media">
 
-                            <div class="media-body">
-                                <p class="card-text">APAR yang belum diinpeksi</p>
-                            </div>
-                        </div>
+                    <div class="media-body">
+                        <p class="card-text">APAR yang sudah diinpeksi</p>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="table-responsive">
-            <a href="/apar/inspeksi/{{$aparinspeksi->id}}/inputInpeksiApar" class="btn btn-info btn-md my-2" style="float:right">Input Inspeksi</a>
-            <table class="display expandable-table col-sm-12">
-                <thead>
-                    <tr class="text-center">
-                        <th> No </th>
-                        <th> Kode Apar </th>
-                        <th> Tipe Apar </th>
-                        <th> Jenis Apar </th>
-                        <th>
-                            Status
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($aparinspeksi->DetailInspeksi as $dataapar)
-                    <tr class="text-center">
-                        <td> {{ $no++ }} </td>
-                        <td> {{ $dataapar->Apart->id }} </td>
-                        <td> {{ $dataapar->Apart->tipe }} </td>
-                        <td> {{ $dataapar->Apart->jenis }} </td>
-                        <td>
-                            @if($dataapar->jenis==null)
-                            <p class="text-danger">Apar Belum Diinpeksi</p>
-                            @else
-                            <a class="text-success lihatHasil" href="#" data-toggle="modal" data-target="#modalHasil" data-id="{{$dataapar->id}}">Apar Sudah Diinpeksi</a>
-                            @endif
-                        </td>
+    </div>
+    <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body text-center">
+                <h4 class="card-title">{{$belumInspeksi}}</h4>
+                <div class="media">
 
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    <div class="media-body">
+                        <p class="card-text">APAR yang belum diinpeksi</p>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
+</div>
+<div class="table-responsive">
+    <a href="/apar/inspeksi/{{$aparinspeksi->id}}/inputInpeksiApar" class="btn btn-info btn-md my-2" style="float:right">Input Inspeksi</a>
+    <table class="display expandable-table col-sm-12">
+        <thead>
+            <tr class="text-center">
+                <th> No </th>
+                <th> Kode Apar </th>
+                <th> Tipe Apar </th>
+                <th> Jenis Apar </th>
+                <th>
+                    Status
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($aparinspeksi->DetailInspeksi as $dataapar)
+            <tr class="text-center">
+                <td> {{ $no++ }} </td>
+                <td> {{ $dataapar->Apart->id }} </td>
+                <td> {{ $dataapar->Apart->tipe }} </td>
+                <td> {{ $dataapar->Apart->jenis }} </td>
+                <td>
+                    @if($dataapar->jenis==null)
+                    <p class="text-danger">Apar Belum Diinpeksi</p>
+                    @else
+                    <a class="text-success lihatHasil" href="#" data-toggle="modal" data-target="#modalHasil" data-id="{{$dataapar->id}}">Apar Sudah Diinpeksi</a>
+                    @endif
+                </td>
+
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 </div>
 @endsection
 

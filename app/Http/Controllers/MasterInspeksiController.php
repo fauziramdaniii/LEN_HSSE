@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\MasterInspeksi;
 use App\Models\DetailInpeksiApar;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class MasterInspeksiController extends Controller
 {
@@ -42,9 +43,10 @@ class MasterInspeksiController extends Controller
         if (DataApar::count() < 1) {
             return back()->with('error', 'Isi terlebih dahulu Data Apar');
         }
-        $check = MasterInspeksi::where('periode',  date('Y-m-d', strtotime($request->periode)))->first();
+        $check = MasterInspeksi::where('periode',  date('Y-m-d', strtotime($request->periode)))->where('deleted_at', null)->first();
         if (!empty($check)) {
-            return back()->with('error', 'Periode sudah ada');
+            toast('Periode ' . date('F Y', strtotime($request->periode)) . ' sudah tersedia', 'error');
+            return back();
         }
         $periode = date('Y-m-d', strtotime($request->periode));
         $request->validate([
@@ -63,7 +65,8 @@ class MasterInspeksiController extends Controller
                 ]);
             }
         }
-        return redirect('/apar/masterinspeksi')->with('success', 'Periode saved!');
+        toast('Periode Inspeksi berhasil ditambah', 'success');
+        return redirect('/apar/masterinspeksi');
     }
 
     /**
@@ -106,9 +109,12 @@ class MasterInspeksiController extends Controller
      * @param  \App\Models\MasterInspeksi  $masterInspeksi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MasterInspeksi $masterInspeksi)
+    public function destroy(MasterInspeksi $masterinspeksi)
     {
-        //
+        $masterinspeksi->delete();
+
+        toast('Periode berhasil dihapus', 'success');
+        return back();
     }
 
     public function export(MasterInspeksi $id)

@@ -43,53 +43,52 @@
 @endsection
 <?php $no = 1 ?>
 @section ("content")
-<div class="content-wrapper">
+@include('sweetalert::alert')
+<h3 class="font-weight-bold">
+    <center>Data Inpeksi P3K (Periode {{date('F Y',strtotime($periode->periode))}})
+</h3>
+
+<div class="col-sm-12">
     <br>
-    <h3>
-        <center>Data Inpeksi P3K (Periode {{date('F Y',strtotime($periode->periode))}})
-    </h3>
-
-    <div class="col-sm-12">
-        <br>
-        @if (session()->get('success'))
-        <div class="alert alert-sucess">
-            {{ session()->get('sucess') }}
-        </div>
-        @endif
+    @if (session()->get('success'))
+    <div class="alert alert-sucess">
+        {{ session()->get('sucess') }}
     </div>
-    <center>
-        <div class="row">
-            <div class="col-md-6 grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">{{$periode->DetailInspeksi->where('status','Sudah Inpeksi')->count()}}</h4>
-                        <div class="media">
+    @endif
+</div>
+<div class="row">
+    <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body text-center">
+                <h4 class="card-title">{{$periode->DetailInspeksi->where('status','Sudah Inpeksi')->count()}}</h4>
+                <div class="media">
 
-                            <div class="media-body">
-                                <p class="card-text">P3K yang sudah diisnpeksi</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">{{$periode->DetailInspeksi->where('status','Belum Inspeksi')->count()}}</h4>
-                        <div class="media">
-
-                            <div class="media-body">
-                                <p class="card-text">P3K yang belum diinspeksi</p>
-                            </div>
-                        </div>
+                    <div class="media-body">
+                        <p class="card-text">P3K yang sudah diisnpeksi</p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body text-center">
+                <h4 class="card-title">{{$periode->DetailInspeksi->where('status','Belum Inspeksi')->count()}}</h4>
+                <div class="media">
+
+                    <div class="media-body">
+                        <p class="card-text">P3K yang belum diinspeksi</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
         <div class="table-responsive">
             <table class="display expandable-table col-sm-12">
                 <thead>
-
                     <tr class="text-center">
                         <th> No </th>
                         <th> Kode P3K </th>
@@ -118,9 +117,7 @@
                 </tbody>
             </table>
         </div>
-
-
-
+    </div>
 </div>
 @endsection
 

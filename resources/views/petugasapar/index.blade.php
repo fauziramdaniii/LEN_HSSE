@@ -1,20 +1,18 @@
 @extends('petugasapar.layout')
 <?php $no = 1 ?>
 @section ("content")
-<div class="content-wrapper">
+<h3 class="font-weight-bold">
+    <center>Dashboard</center>
+</h3>
+<div class="col-sm-12">
     <br>
-    <h3>
-        <center>Dashboard
-    </h3>
-    <div class="col-sm-12">
-        <br>
-        @if (session()->get('success'))
-        <div class="alert alert-sucess">
-            {{ session()->get('sucess') }}
-        </div>
-        @endif
+    @if (session()->get('success'))
+    <div class="alert alert-sucess">
+        {{ session()->get('sucess') }}
     </div>
+    @endif
 </div>
+
 @endsection
 
 @section('modal')

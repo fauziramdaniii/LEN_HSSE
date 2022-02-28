@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MasterInspeksiP3K extends Model
 {
+    use SoftDeletes, HasFactory;
     protected $fillable = [
         'periode', 'status', 'sudah_inspeksi', 'belum_inspeksi'
     ];
@@ -15,5 +17,15 @@ class MasterInspeksiP3K extends Model
     {
         return $this->hasMany(InspeksiP3K::class, 'periode_id');
     }
-    use HasFactory;
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($p3k) {
+            foreach ($p3k->DetailInspeksi()->get() as $inspeksi) {
+                $inspeksi->delete();
+            }
+        });
+    }
 }

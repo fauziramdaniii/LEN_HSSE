@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LoginAdminController extends Controller
 {
@@ -20,10 +22,10 @@ class LoginAdminController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'email' => 'required|email|exists:admins',
+            'email' => 'required|email',
             'password' => 'required'
         ]);
-
+        $email = User::where('email', $request->email)->first();
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
@@ -34,10 +36,9 @@ class LoginAdminController extends Controller
                 return redirect('/dashboard');
             }
         }
+        toast('Email dan Password salah', 'error');
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ]);
+        return back()->withInput();
     }
 
     public function logout(Request $request)

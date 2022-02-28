@@ -19,7 +19,10 @@ class CreateIsiInspeksisTable extends Migration
             $table->foreignId('isi_id');
             $table->integer('jumlah')->nullable();
             $table->string('keterangan')->nullable();
+            $table->foreign('inspeksi_id')->references('id')->on('inspeksi_p3_k_s');
+            $table->foreign('isi_id')->references('id')->on('isi_p3_k_s');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

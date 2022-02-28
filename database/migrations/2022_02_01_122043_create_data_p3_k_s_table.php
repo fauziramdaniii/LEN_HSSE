@@ -27,6 +27,7 @@ class CreateDataP3KSTable extends Migration
             $table->string('titik');
             $table->string('keterangan');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

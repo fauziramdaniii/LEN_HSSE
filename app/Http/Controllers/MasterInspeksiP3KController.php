@@ -29,12 +29,17 @@ class MasterInspeksiP3KController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'periode' => 'required'
+        ]);
         if (DataP3K::count() < 1) {
-            return back()->with('error', 'Isi terlebih dahulu Data P3K');
+            toast('Isi terlebih dahulu Data P3K', 'error');
+            return back();
         }
         $check = MasterInspeksiP3K::where('periode',  date('Y-m-d', strtotime($request->periode)))->first();
         if (!empty($check)) {
-            return back()->with('error', 'Periode sudah ada');
+            toast('Periode ' . date('F Y', strtotime($request->periode)) . ' sudah tersedia', 'error');
+            return back();
         }
         $periode = date('Y-m-d', strtotime($request->periode));
         $request->validate([
@@ -75,6 +80,15 @@ class MasterInspeksiP3KController extends Controller
                 }
             }
         }
+        toast('Periode Inspeksi berhasil ditambah', 'success');
         return redirect('/p3k/masterinspeksi')->with('success', 'Periode saved!');
+    }
+
+    public function destroy(MasterInspeksiP3K $masterinspeksi)
+    {
+        $masterinspeksi->delete();
+
+        toast('Periode berhasil dihapus', 'success');
+        return back();
     }
 }

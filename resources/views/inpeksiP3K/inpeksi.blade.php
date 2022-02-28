@@ -43,27 +43,25 @@
 @endsection
 
 @section ("content")
-<div class="content-wrapper">
-    <br>
-    <h3>
-        <center>Pilih Periode Inspeksi
-    </h3>
-    <br>
-    <div class="row">
-        @foreach($periode as $periode)
-        <div class="col-md-4 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">{{ date('F Y',strtotime ($periode->periode))  }}</h4>
-                    <div class="media">
-                        <div class="media-body">
-                            <a href="/p3k/inspeksi/{{$periode->id}}" class=" card-text btn btn-success btn-sm" style="">Lihat Inspeksi</a>
-                        </div>
+<h3 class="font-weight-bold">
+    <center>Pilih Periode Inspeksi</center>
+</h3>
+<br>
+<div class="row">
+    @foreach($periode as $periode)
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">{{ date('F Y',strtotime ($periode->periode))  }}</h4>
+                <div class="media">
+                    <div class="media-body">
+                        <a href="/p3k/inspeksi/{{$periode->id}}" class=" card-text btn btn-success btn-sm" style="">Lihat Inspeksi</a>
                     </div>
                 </div>
             </div>
         </div>
-        @endforeach
     </div>
+    @endforeach
 </div>
+
 @endsection

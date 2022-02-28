@@ -17,6 +17,7 @@ class CreateMasterInspeksiP3KSTable extends Migration
             $table->id();
             $table->date('periode');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

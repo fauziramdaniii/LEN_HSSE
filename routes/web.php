@@ -15,6 +15,7 @@ use App\Http\Controllers\KelolaParameterController;
 use App\Http\Controllers\MasterInspeksiP3KController;
 use App\Http\Controllers\ReportAparController;
 use GuzzleHttp\Middleware;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,9 +41,7 @@ Route::get('/', function () {
 // Route::get('/aparcreate', function () {
 //     return view('apar.create');
 // });
-Route::get('/pilih', function () {
-    return view('layouts.pilih');
-});
+Route::get('/pilih', [DashboardController::class, 'pilih']);
 // Route::group([
 //     'prefix' => config('admin.prefix'),
 //     'namespace' => 'App\\Http\\Controllers',
@@ -59,6 +58,7 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 Route::group(['prefix' => 'apar', 'middleware' => 'auth'], function () {
     Route::get('/dashboard', [DashboardController::class, 'apar']);
     Route::get('/dataapar/export', [DataAparController::class, 'export']);
+    Route::get('/inspeksiTahunan/{id}/export', [AparInspeksiController::class, 'exportTahunan']);
     Route::resource('/dataapar', DataAparController::class);
     Route::get('/masterinspeksi/{id}/export', [MasterInspeksiController::class, 'export']);
     Route::resource('/masterinspeksi', MasterInspeksiController::class);
@@ -82,6 +82,7 @@ Route::group(['prefix' => 'apar', 'middleware' => 'auth'], function () {
 
 Route::group(['prefix' => 'p3k', 'middleware' => 'auth'], function () {
     Route::get('/dashboard', [DashboardController::class, 'p3k']);
+    Route::get('/datap3k/export', [DataP3KController::class, 'export']);
     Route::resource('/datap3k', DataP3KController::class);
     Route::resource('/masterinspeksi', MasterInspeksiP3KController::class);
     Route::get('/inspeksi', [InspeksiP3KController::class, 'index']);

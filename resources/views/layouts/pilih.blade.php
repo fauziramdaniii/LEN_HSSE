@@ -24,8 +24,8 @@
                     <div class="card-body">
                         <center>
                             <p class="mb-4 text-center"> APAR </p>
-                            <p class="fs-30 mb-2 text-center">136</p>
-                            <p class="mb-2 text-center">(30 days)</p>
+                            <p class="fs-30 mb-2 text-center">{{$jumlahApar}}</p>
+                            <p class="mb-2 text-center">(Jumlah APAR)</p>
                             <a href="/apar/dashboard" class="btn btn-info">Go</a>
                     </div>
                 </div>
@@ -35,8 +35,8 @@
                     <div class="card-body">
                         <center>
                             <p class="mb-4 text-center">P3K</p>
-                            <p class="fs-30 mb-2 text-center">120</p>
-                            <p class="mb-2 text-center">(30 days)</p>
+                            <p class="fs-30 mb-2 text-center">{{$jumlahP3K}}</p>
+                            <p class="mb-2 text-center">(Jumlah P3K)</p>
                             <a href="/p3k/dashboard" class="btn btn-primary">Go</a>
                     </div>
                 </div>

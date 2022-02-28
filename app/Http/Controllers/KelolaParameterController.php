@@ -23,7 +23,7 @@ class KelolaParameterController extends Controller
         tipeAPAR::create([
             'nama_tipe' => $request->nama_tipe
         ]);
-
+        toast('Tipe APAR berhasil ditambah', 'success');
         return back()->with('success', 'Tipe APAR berhasil ditambah');
     }
 
@@ -35,7 +35,7 @@ class KelolaParameterController extends Controller
         JenisAPAR::create([
             'nama_jenis' => $request->nama_jenis
         ]);
-
+        toast('Jenis APAR berhasil ditambah', 'success');
         return back()->with('success', 'Jenis APAR berhasil ditambah');
     }
 
@@ -47,7 +47,7 @@ class KelolaParameterController extends Controller
         $id->update([
             'nama_tipe' => $request->nama_tipe
         ]);
-
+        toast('Tipe APAR berhasil diubah', 'success');
         return back()->with('success', 'Tipe APAR Berhasil diubah');
     }
 
@@ -59,19 +59,21 @@ class KelolaParameterController extends Controller
         $id->update([
             'nama_jenis' => $request->nama_jenis
         ]);
-
+        toast('Jenis APAR berhasil diubah', 'success');
         return back()->with('success', 'Jenis APAR Berhasil diubah');
     }
 
     public function deleteTipe(tipeAPAR $id)
     {
         $id->delete();
+        toast('Tipe APAR berhasil dihapus', 'success');
         return back()->with('success', 'Tipe APAR berhasil dihapus');
     }
 
     public function deleteJenis(JenisAPAR $id)
     {
         $id->delete();
+        toast('Jenis APAR berhasil dihapus', 'success');
         return back()->with('success', 'Jenis APAR berhasil dihapus');
     }
 }

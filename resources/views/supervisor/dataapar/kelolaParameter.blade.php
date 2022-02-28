@@ -1,6 +1,7 @@
 @extends('supervisor.dataapar.layout')
 
 @section ("content")
+@include('sweetalert::alert')
 <div class="content-wrapper">
     <div class="row">
         <div class="col-lg-6 col-sm-12 mt-4">

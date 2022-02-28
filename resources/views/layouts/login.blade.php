@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Skydash Admin</title>
+  <title>Login</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="{{ asset ('template/vendors/feather/feather.css')}}">
   <link rel="stylesheet" href="{{ asset ('template/vendors/ti-icons/css/themify-icons.css')}}">
@@ -20,6 +20,7 @@
 </head>
 
 <body>
+  @include('sweetalert::alert')
   <div class="container-scroller">
     <div class="container-fluid page-body-wrapper full-page-wrapper">
       <div class="content-wrapper d-flex align-items-center auth px-0">
@@ -36,11 +37,11 @@
               <form class="pt-3" action="/login" method="post">
                 @csrf
                 <div class="form-group">
-                  <input type="email" name="email" class="form-control form-control-lg {{ $errors->has('email') ? ' is-invalid':'' }}" id="exampleInputEmail1" placeholder="Username">
+                  <input type="email" name="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username" value="{{old('email')}} ">
                 </div>
 
                 <div class="form-group">
-                  <input type="password" name="password" class="form-control form-control-lg {{ $errors->has('password') ? ' is-invalid':'' }}" id="exampleInputPassword1" placeholder="Password">
+                  <input type="password" name="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
                 </div>
                 <div class="mt-3">
                   <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="submit">SIGN IN</button>

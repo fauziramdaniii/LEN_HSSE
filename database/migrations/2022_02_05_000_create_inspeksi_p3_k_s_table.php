@@ -20,7 +20,10 @@ class CreateInspeksiP3KSTable extends Migration
             $table->string('status');
             // $table->integer('jumlah');
             // $table->string('keterangan');
+            $table->foreign('periode_id')->references('id')->on('master_inspeksi_p3_k_s');
+            $table->foreign('p3k_id')->references('id')->on('data_p3_k_s');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

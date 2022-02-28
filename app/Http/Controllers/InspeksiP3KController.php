@@ -50,7 +50,7 @@ class InspeksiP3KController extends Controller
         $inpeksi->update([
             'status' => 'Sudah Inpeksi'
         ]);
-
+        toast('Inspeksi berhasil diinput', 'success');
         return redirect('p3k/inspeksi/' . $inpeksi->periode_id);
     }
 

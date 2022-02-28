@@ -30,42 +30,38 @@
 @endsection
 
 @section ("content")
-<div class="content-wrapper">
-    <br>
-    <h3>
-        <center>Input Inpeksi
-    </h3>
-    <br>
-    <div class="card">
-        <div class="card-body">
-            <div class="table-responsive">
-                <table width="100%" class="table table-bordered">
-                    <thead>
-                        <tr class="text-center">
-                            <th width="35%">Isi</th>
-                            <th width="15%">Standar</th>
-                            <th widt="15%">Jumlah</th>
-                            <th width="35%">Keterangan</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($inpeksi->isi as $isi)
-                        <tr>
-                            <td>
-                                <p class="ml-2">{{$isi->detail->isi}}</p>
-                            </td>
-                            <td class="text-center">{{$isi->detail->standar}}</td>
-                            <td class="text-center">{{$isi->jumlah}}</td>
-                            <td>
-                                <p class="ml-2">{{empty($isi->keterangan) ? '-' :$isi->keterangan }}</p>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+<h3>
+    <center>Input Inpeksi
+</h3>
+<br>
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table width="100%" class="table table-bordered">
+                <thead>
+                    <tr class="text-center">
+                        <th width="35%">Isi</th>
+                        <th width="15%">Standar</th>
+                        <th widt="15%">Jumlah</th>
+                        <th width="35%">Keterangan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($inpeksi->isi as $isi)
+                    <tr>
+                        <td>
+                            <p class="ml-2">{{$isi->detail->isi}}</p>
+                        </td>
+                        <td class="text-center">{{$isi->detail->standar}}</td>
+                        <td class="text-center">{{$isi->jumlah}}</td>
+                        <td>
+                            <p class="ml-2">{{empty($isi->keterangan) ? '-' :$isi->keterangan }}</p>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
-
 </div>
 @endsection

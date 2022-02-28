@@ -20,6 +20,7 @@ class CreateMasterInspeksisTable extends Migration
             $table->integer('sudah_inspeksi')->default(0);
             $table->integer('belum_inspeksi')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -13,6 +13,7 @@ use App\Models\DetailInpeksiApar;
 use Maatwebsite\Excel\Facades\Excel;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use App\Models\JenisAPAR as ModelsJenisAPAR;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class DataAparController extends Controller
@@ -73,6 +74,7 @@ class DataAparController extends Controller
                 ]);
             }
         }
+        toast('Data APAR berhasil ditambah', 'success');
         return redirect('/apar/dataapar')->with('success', 'dataapar saved!');
     }
 
@@ -125,6 +127,7 @@ class DataAparController extends Controller
         ]);
 
         $dataapar->update($request->all());
+        toast('Data APAR berhasil diubah', 'success');
         return redirect('/apar/dataapar')->with('success', 'Data Updated!');
     }
 
@@ -137,6 +140,7 @@ class DataAparController extends Controller
     public function destroy(DataApar $dataapar)
     {
         $dataapar->delete();
+        toast('Data APAR berhasil dihapus', 'success');
         return redirect('/apar/dataapar')->with('success', 'Data Apar Deleted');
     }
 

@@ -43,49 +43,45 @@
 @endsection
 
 @section ("content")
-<div class="content-wrapper">
-    <br>
-    <h3>
-        <center>Input Inpeksi
-    </h3>
-    <br>
-    <div class="card">
-        <div class="card-body">
-            <div class="  table-responsive">
-                <form action="/p3k/inputInpeksi/{{$inpeksi->id}}" method="post">
-                    @csrf
-                    @method('PUT')
-                    <table width="100%" class=" table-bordered">
-                        <thead>
-                            <tr class="text-center">
-                                <th width="35%">Isi</th>
-                                <th width="15%">Standar</th>
-                                <th widt="15%">Jumlah</th>
-                                <th width="35%">Keterangan</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($inpeksi->isi as $isi)
-                            <tr>
-                                <td>
-                                    <p class="ml-2">{{$isi->detail->isi}}
-                                        @if (substr($isi->detail->isi,0,7) == 'Aquades' || substr($isi->detail->isi,0,7) == 'Alkohol' || substr($isi->detail->isi,0,7) == 'Povidon')
-                                        <span class="text-danger">*</span>
-                                        @endif
-                                    </p>
-                                </td>
-                                <td class="text-center">{{$isi->detail->standar}}</td>
-                                <td><input type="number" name="jumlah[{{$isi->id}}]" class="form-control" placeholder="Jumlah" required></td>
-                                <td><input type="text" name="keterangan[{{$isi->id}}]" class="form-control" placeholder="Keterangan"></td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    <button type="submit" class="btn btn-primary mt-2" style="float:right">Submit</button>
-                </form>
-            </div>
+<h3>
+    <center>Input Inspeksi
+</h3>
+<br>
+<div class="card">
+    <div class="card-body">
+        <div class="table  table-responsive">
+            <form action="/p3k/inputInpeksi/{{$inpeksi->id}}" method="post">
+                @csrf
+                @method('PUT')
+                <table width="100%" class=" table-bordered">
+                    <thead>
+                        <tr class="text-center">
+                            <th width="30%">Isi</th>
+                            <th width="15%">Standar</th>
+                            <th widt="20%">Jumlah</th>
+                            <th width="35%">Keterangan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($inpeksi->isi as $isi)
+                        <tr>
+                            <td>
+                                <p class="ml-2">{{$isi->detail->isi}}
+                                    @if (substr($isi->detail->isi,0,7) == 'Aquades' || substr($isi->detail->isi,0,7) == 'Alkohol' || substr($isi->detail->isi,0,7) == 'Povidon')
+                                    <span class="text-danger">*</span>
+                                    @endif
+                                </p>
+                            </td>
+                            <td class="text-center">{{$isi->detail->standar}}</td>
+                            <td><input type="number" name="jumlah[{{$isi->id}}]" class="form-control" placeholder="Jumlah" required></td>
+                            <td><input type="text" name="keterangan[{{$isi->id}}]" class="form-control" placeholder="Keterangan"></td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                <button type="submit" class="btn btn-primary mt-2" style="float:right">Submit</button>
+            </form>
         </div>
     </div>
-
 </div>
 @endsection
