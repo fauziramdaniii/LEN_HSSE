@@ -7,7 +7,7 @@
         <div class="card">
             <div class="card-body">
                 <h3>
-                    <center>List Periode Inpeksi</center>
+                    <center>PERIODE INSPEKSI </center>
                 </h3>
                 <center> <a href="masterinspeksi/create" class="btn btn-info"> Tambah Periode </a></center>
                 <div class="col-sm-12">
@@ -24,19 +24,19 @@
                     <table class="display expandable-table" width="100%">
                         <thead>
                             <tr>
-                                <th> No </th>
-                                <th> Periode </th>
-                                <th> Dibuat Tanggal </th>
-                                <th> Action </th>
+                                <th><center> No </th> 
+                                <th><center> Periode </th>
+                                <th><center> Dibuat Tanggal </th>
+                                <th><center> Action </th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($periode as $periode)
                             <tr>
-                                <td>{{$loop->iteration}}</td>
-                                <td>{{ date('F Y',strtotime ($periode->periode))  }}</td>
-                                <td>{{date('d F Y',strtotime($periode->created_at))}}</td>
-                                <td><button type="button" class="btn btn-danger btn-sm deletePeriode" data-id="{{$periode->id}}" data-target="#deletePeriode" data-toggle="modal">Delete</button>
+                                <td> <center> {{$loop->iteration}}</td>
+                                <td> <center> {{ date('F Y',strtotime ($periode->periode))  }}</td>
+                                <td> <center> {{date('d F Y',strtotime($periode->created_at))}}</td>
+                                <td> <center><button type="button" class="btn btn-danger btn-sm deletePeriode" data-id="{{$periode->id}}" data-target="#deletePeriode" data-toggle="modal">Delete</button>
                                     <a href="masterinspeksi/{{$periode->id}}/export" class="btn btn-warning btn-sm">Export</a>
                                 </td>
                             </tr>

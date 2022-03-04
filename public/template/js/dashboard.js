@@ -3,7 +3,7 @@
   $(function() {
     if ($("#order-chart").length) {
       var areaData = {
-        labels: ["10","","","20","","","30","","","40","","", "50","","", "60","","","70"],
+        labels: ["0","","25","","50","","75","","100","","125","","150", "","175","", "200"],
         datasets: [
           {
             data: [200, 480, 700, 600, 620, 350, 380, 350, 850, "600", "650", "350", "590", "350", "620", "500", "990", "780", "650"],
@@ -182,16 +182,21 @@
       var SalesChart = new Chart(SalesChartCanvas, {
         type: 'bar',
         data: {
-          labels: ["Jan", "Feb", "Mar", "Apr", "May"],
+          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun" , "July", "Aug", "Sep", "Oct", "Nov", "Dec"],
           datasets: [{
-              label: 'Offline Sales',
+              label: 'AKTIF',
               data: [480, 230, 470, 210, 330],
               backgroundColor: '#98BDFF'
             },
             {
-              label: 'Online Sales',
+              label: 'SERVICE',
               data: [400, 340, 550, 480, 170],
               backgroundColor: '#4B49AC'
+            },
+            {
+              label: 'STOCK, ieu butut euy sairama keun bob jeung nu luhur',
+              data: [400, 370, 550, 480, 170],
+              backgroundColor: '#FFFF00'
             }
           ]
         },
@@ -218,9 +223,9 @@
               ticks: {
                 display: true,
                 min: 0,
-                max: 560,
+                max: 200,
                 callback: function(value, index, values) {
-                  return  value + '$' ;
+                  return  value + '' ;
                 },
                 autoSkip: true,
                 maxTicksLimit: 10,
@@ -358,13 +363,13 @@
         legendCallback: function(chart) { 
           var text = [];
           text.push('<div class="report-chart">');
-            text.push('<div class="d-flex justify-content-between mx-4 mx-xl-5 mt-3"><div class="d-flex align-items-center"><div class="mr-3" style="width:20px; height:20px; border-radius: 50%; background-color: ' + chart.data.datasets[0].backgroundColor[0] + '"></div><p class="mb-0">Offline sales</p></div>');
+            text.push('<div class="d-flex justify-content-between mx-4 mx-xl-5 mt-3"><div class="d-flex align-items-center"><div class="mr-3" style="width:20px; height:20px; border-radius: 50%; background-color: ' + chart.data.datasets[0].backgroundColor[0] + '"></div><p class="mb-0">CO2</p></div>');
             text.push('<p class="mb-0">88333</p>');
             text.push('</div>');
-            text.push('<div class="d-flex justify-content-between mx-4 mx-xl-5 mt-3"><div class="d-flex align-items-center"><div class="mr-3" style="width:20px; height:20px; border-radius: 50%; background-color: ' + chart.data.datasets[0].backgroundColor[1] + '"></div><p class="mb-0">Online sales</p></div>');
+            text.push('<div class="d-flex justify-content-between mx-4 mx-xl-5 mt-3"><div class="d-flex align-items-center"><div class="mr-3" style="width:20px; height:20px; border-radius: 50%; background-color: ' + chart.data.datasets[0].backgroundColor[1] + '"></div><p class="mb-0">AIR</p></div>');
             text.push('<p class="mb-0">66093</p>');
             text.push('</div>');
-            text.push('<div class="d-flex justify-content-between mx-4 mx-xl-5 mt-3"><div class="d-flex align-items-center"><div class="mr-3" style="width:20px; height:20px; border-radius: 50%; background-color: ' + chart.data.datasets[0].backgroundColor[2] + '"></div><p class="mb-0">Returns</p></div>');
+            text.push('<div class="d-flex justify-content-between mx-4 mx-xl-5 mt-3"><div class="d-flex align-items-center"><div class="mr-3" style="width:20px; height:20px; border-radius: 50%; background-color: ' + chart.data.datasets[0].backgroundColor[2] + '"></div><p class="mb-0">2 Nu Luhur TIPE APAR, nu ieu hapus BOB</p></div>');
             text.push('<p class="mb-0">39836</p>');
             text.push('</div>');
           text.push('</div>');
