@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\DataApar;
 use App\Models\tipeAPAR;
+use PDF;
 use App\Models\JenisAPAR;
 use App\Exports\AparExport;
 use Illuminate\Http\Request;
@@ -12,8 +13,8 @@ use App\Models\MasterInspeksi;
 use App\Models\DetailInpeksiApar;
 use Maatwebsite\Excel\Facades\Excel;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-use App\Models\JenisAPAR as ModelsJenisAPAR;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Models\JenisAPAR as ModelsJenisAPAR;
 
 
 class DataAparController extends Controller
@@ -175,5 +176,15 @@ class DataAparController extends Controller
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header("Content-Disposition: attachment; filename=DataAPAR_" . date('Ymdhis') . ".xlsx");
         $writer->save('php://output');
+    }
+
+    public function export_pdf()
+    {
+        $apars = DataApar::all();
+
+        $pdf = PDF::loadview('layouts.export_pdf_APAR', ['apars' => $apars]);
+        $pdf->setPaper('A4', 'landscape');
+        $file = "DataAPAR_" . date('Ymdhis') . ".pdf";
+        return $pdf->download($file);
     }
 }

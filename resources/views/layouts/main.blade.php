@@ -19,7 +19,7 @@
   <!-- inject:css -->
   <link rel="stylesheet" href="{{ asset ('template/css/vertical-layout-light/style.css') }}">
   <!-- endinject -->
-  <link rel="shortcut icon" href="{{asset ('template/images/favicon.png') }}" />
+  <link rel="shortcut icon" href="{{asset ('template/images/logo2.png') }}" />
 </head>
 
 <body>
@@ -29,16 +29,16 @@
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
         @if(Auth::User()->role=='supervisor')
         <a class="navbar-brand brand-logo mr-5" href="/pilih"><img src="{{ asset ('template/images/logo.png') }}" class="mr-2" alt="logo" /></a>
-        <a class="navbar-brand brand-logo-mini" href="/pilih"><img src="{{ asset ('template/images/logo.png') }}" alt="logo" /></a>
+        <a class="navbar-brand brand-logo-mini" href="/pilih"><img src="{{ asset ('template/images/logo2.png') }}" alt="logo" /></a>
         @else
         <a class="navbar-brand brand-logo mr-5" href="/dashboard"><img src="{{ asset ('template/images/logo.png') }}" class="mr-2" alt="logo" /></a>
-        <a class="navbar-brand brand-logo-mini" href="/dashboard"><img src="{{ asset ('template/images/logo.png') }}" alt="logo" /></a>
+        <a class="navbar-brand brand-logo-mini" href="/dashboard"><img src="{{ asset ('template/images/logo2.png') }}" alt="logo" /></a>
         @endif
 
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-         
+          <span class="icon-menu"></span>
         </button>
         <ul class="navbar-nav mr-lg-2">
           <li class="nav-item nav-search d-none d-lg-block">
@@ -65,7 +65,7 @@
           </li>
         </ul>
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
-         
+          <span class="icon-menu"></span>
         </button>
       </div>
     </nav>
@@ -102,6 +102,7 @@
   <script src="{{ asset ('template/js/todolist.js') }} "></script>
   <script src="{{ asset ('template/js/dashboard.js') }}"></script>
   <script src="{{ asset ('template/js/Chart.roundedBarCharts.js') }} "></script>
+  <script src="{{asset('template/js/chart.js')}}"></script>
   @yield('script')
 </body>
 

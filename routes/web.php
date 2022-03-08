@@ -34,7 +34,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 // Route::post('/login', [LoginController::class, 'authenticate']);
 // // Route Dashboard
 Route::get('/', function () {
-    return view('layouts.login');
+    return redirect('/login');
 });
 
 // Route::get('/dashboardapar', [AparInspeksiController::class, 'index']);
@@ -57,10 +57,10 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 // Route Apar
 Route::group(['prefix' => 'apar', 'middleware' => 'auth'], function () {
     Route::get('/dashboard', [DashboardController::class, 'apar']);
-    Route::get('/dataapar/export', [DataAparController::class, 'export']);
-    Route::get('/inspeksiTahunan/{id}/export', [AparInspeksiController::class, 'exportTahunan']);
+    Route::get('/dataapar/export', [DataAparController::class, 'export_pdf']);
+    Route::get('/inspeksiTahunan/{id}/export', [AparInspeksiController::class, 'exportTahunan_pdf']);
     Route::resource('/dataapar', DataAparController::class);
-    Route::get('/masterinspeksi/{id}/export', [MasterInspeksiController::class, 'export']);
+    Route::get('/masterinspeksi/{id}/export', [MasterInspeksiController::class, 'export_pdf']);
     Route::resource('/masterinspeksi', MasterInspeksiController::class);
     Route::get('/inspeksi', [AparInspeksiController::class, 'index']);
     Route::get('/inspeksi/{periode}', [AparInspeksiController::class, 'detailInspeksi']);
@@ -82,8 +82,10 @@ Route::group(['prefix' => 'apar', 'middleware' => 'auth'], function () {
 
 Route::group(['prefix' => 'p3k', 'middleware' => 'auth'], function () {
     Route::get('/dashboard', [DashboardController::class, 'p3k']);
-    Route::get('/datap3k/export', [DataP3KController::class, 'export']);
+    Route::get('/datap3k/export', [DataP3KController::class, 'export_pdf']);
+    Route::get('/inspeksiTahunan/{id}/export', [InspeksiP3KController::class, 'exportTahunan_pdf']);
     Route::resource('/datap3k', DataP3KController::class);
+    Route::get('/masterinspeksi/{id}/export', [MasterInspeksiP3KController::class, 'export_pdf']);
     Route::resource('/masterinspeksi', MasterInspeksiP3KController::class);
     Route::get('/inspeksi', [InspeksiP3KController::class, 'index']);
     Route::get('/inspeksi/{id}/inputInpeksi', [InspeksiP3KController::class, 'inputInspeksi']);

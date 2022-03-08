@@ -9,6 +9,7 @@ use App\Models\MasterInspeksi;
 use App\Models\DetailInpeksiApar;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use RealRashid\SweetAlert\Facades\Alert;
+use PDF;
 
 class AparInspeksiController extends Controller
 {
@@ -19,7 +20,7 @@ class AparInspeksiController extends Controller
      */
     public function index()
     {
-        $periode = MasterInspeksi::all();
+        $periode = MasterInspeksi::orderBy('periode')->get();
         return view('inpeksiApar.inpeksi', compact('periode'));
     }
 
@@ -51,7 +52,9 @@ class AparInspeksiController extends Controller
      */
     public function create(MasterInspeksi $periode)
     {
-        $aparinspeksi =  $periode->load(['DetailInspeksi']);
+        $aparinspeksi =  $periode->load(['DetailInspeksi' => function ($query) {
+            $query->whereNull('tanggal')->get();
+        }]);
         return view('inpeksiApar.isiInpeksi', compact('aparinspeksi'));
     }
 
@@ -79,6 +82,7 @@ class AparInspeksiController extends Controller
         ]);
         $apart = DetailInpeksiApar::with('periode', 'Apart')->where('id', $request->id)->first();
         $apart->update($request->all());
+
         if ($request->keterangan == 'Service') {
             $apart->Apart->update([
                 'keterangan' => 'Service'
@@ -347,5 +351,65 @@ class AparInspeksiController extends Controller
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header("Content-Disposition: attachment; filename=InspeksiTahunan_" . date('Ymdhis') . ".xlsx");
         $writer->save('php://output');
+    }
+
+    public function exportTahunan_pdf(DataApar $id)
+    {
+        $bulan = [
+            [
+                'key' => '01',
+                'bulan' => 'Januari'
+            ],
+            [
+                'key' => '02',
+                'bulan' => 'Februari'
+            ],
+            [
+                'key' => '03',
+                'bulan' => 'Maret'
+            ],
+            [
+                'key' => '04',
+                'bulan' => 'April'
+            ],
+            [
+                'key' => '05',
+                'bulan' => 'Mei'
+            ],
+            [
+                'key' => '06',
+                'bulan' => 'Juni'
+            ],
+            [
+                'key' => '07',
+                'bulan' => 'Juli'
+            ],
+            [
+                'key' => '08',
+                'bulan' => 'Agustus'
+            ],
+            [
+                'key' => '09',
+                'bulan' => 'September'
+            ],
+            [
+                'key' => '10',
+                'bulan' => 'Oktober'
+            ],
+            [
+                'key' => '11',
+                'bulan' => 'November'
+            ],
+            [
+                'key' => '12',
+                'bulan' => 'Desember'
+            ],
+        ];
+        $periode = MasterInspeksi::whereYear('periode', date('Y'))->orderBy('periode', 'asc')->get();
+        $apar = $id;
+        $pdf = PDF::loadview('layouts.export_pdf_APAR_tahun', ['periode' => $periode, 'apar' => $apar, 'bulan' => $bulan]);
+        $pdf->setPaper('A4', 'landscape');
+        $file = "InspeksiTahunan_" . date('Ymdhis') . ".pdf";
+        return $pdf->download($file);
     }
 }

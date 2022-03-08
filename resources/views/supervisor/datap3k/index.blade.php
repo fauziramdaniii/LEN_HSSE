@@ -29,7 +29,7 @@
                                         <th> Lantai </th>
                                         <th> Titik </th>
                                         <th> Keterangan </th>
-                                        <th colspan='2'>
+                                        <th colspan='3'>
                                             <center>Aksi
                                         </th>
                                     </tr>
@@ -58,6 +58,10 @@
                                                 @method('DELETE')
                                                 <button class="btn btn-danger btn-sm" type="submit"> Delete</button>
                                             </form>
+                                        </td>
+                                        <td>
+                                            <a href="/p3k/inspeksiTahunan/{{$datap3k->id}}/export" class="btn btn-success btn-sm"><i class="ti-download btn-icon-append text-light"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                     @endforeach

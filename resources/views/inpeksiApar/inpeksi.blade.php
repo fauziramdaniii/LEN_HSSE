@@ -47,14 +47,16 @@
 <h3 class="font-weight-bold text-center">
     PILIH PERIODE INSPEKSI
 </h3>
-<h4> Heyang Tambahan Filter Tahun Bob </h4>
+
 <br>
 <div class="row">
     @foreach($periode as $periode)
     <div class="col-md-4 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title"> <center> {{ date('F Y',strtotime ($periode->periode))  }}</h4>
+                <h4 class="card-title">
+                    <center> {{ date('F Y',strtotime ($periode->periode))  }}
+                </h4>
                 <div class="media">
                     <div class="media-body">
                         <center> <a href="/apar/inspeksi/{{$periode->id}}" class=" card-text btn btn-success btn-sm" style="">Lihat Inspeksi</a>

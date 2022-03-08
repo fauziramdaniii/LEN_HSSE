@@ -10,7 +10,7 @@ class InspeksiP3K extends Model
 {
     use SoftDeletes;
     protected $fillable = [
-        'periode_id', 'p3k_id', 'status'
+        'periode_id', 'p3k_id', 'status', 'keterangan', 'tanggal', 'pemeriksa'
     ];
 
     public function periode()

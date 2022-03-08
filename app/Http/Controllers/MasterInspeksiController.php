@@ -8,6 +8,7 @@ use App\Models\MasterInspeksi;
 use App\Models\DetailInpeksiApar;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use RealRashid\SweetAlert\Facades\Alert;
+use PDF;
 
 class MasterInspeksiController extends Controller
 {
@@ -18,7 +19,7 @@ class MasterInspeksiController extends Controller
      */
     public function index()
     {
-        $periode = MasterInspeksi::all();
+        $periode = MasterInspeksi::orderBy('periode')->get();
         return view('supervisor.dataapar.periode', compact('periode'));
     }
 
@@ -167,5 +168,15 @@ class MasterInspeksiController extends Controller
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header("Content-Disposition: attachment; filename=HasilInspeksi_" . $bulan . "_" . date('Ymdhis') . ".xlsx");
         $writer->save('php://output');
+    }
+
+    public function export_pdf(MasterInspeksi $id)
+    {
+        $periode = $id->load('DetailInspeksi', 'DetailInspeksi.Apart');
+        $bulan = date('F-Y', strtotime($id->periode));
+        $pdf = PDF::loadview('layouts.export_pdf_inspeksiAPAR', ['periode' => $periode]);
+        $pdf->setPaper('A4', 'landscape');
+        $file = "HasilInspeksi_" . $bulan . "_" . date('Ymdhis') . ".xlsx";
+        return $pdf->download($file);
     }
 }

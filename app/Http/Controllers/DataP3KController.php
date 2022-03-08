@@ -9,6 +9,7 @@ use App\Models\IsiInspeksi;
 use Illuminate\Http\Request;
 use App\Models\MasterInspeksiP3K;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use PDF;
 
 class DataP3KController extends Controller
 {
@@ -179,5 +180,15 @@ class DataP3KController extends Controller
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header("Content-Disposition: attachment; filename=dataP3K_" . date('Ymdhis') . ".xlsx");
         $writer->save('php://output');
+    }
+
+    public function export_pdf()
+    {
+        $p3k = DataP3K::all();
+
+        $pdf = PDF::loadview('layouts.export_pdf_P3K', ['p3k' => $p3k]);
+        $pdf->setPaper('A4', 'landscape');
+        $file = "DataP3K_" . date('Ymdhis') . ".pdf";
+        return $pdf->download($file);
     }
 }

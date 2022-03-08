@@ -35,7 +35,9 @@
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{ date('F Y',strtotime ($periode->periode))  }}</td>
                                 <td>{{date('d F Y',strtotime($periode->created_at))}}</td>
-                                <td><button type="button" class="btn btn-danger btn-sm deletePeriode" data-id="{{$periode->id}}" data-target="#deletePeriode" data-toggle="modal">Delete</button></td>
+                                <td><button type="button" class="btn btn-danger btn-sm deletePeriode" data-id="{{$periode->id}}" data-target="#deletePeriode" data-toggle="modal">Delete</button>
+                                    <a href="/p3k/masterinspeksi/{{$periode->id}}/export" class="btn btn-warning btn-sm">Export</a>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

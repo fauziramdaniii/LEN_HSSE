@@ -19,7 +19,7 @@
   <!-- inject:css -->
   <link rel="stylesheet" href="{{ asset ('template/css/vertical-layout-light/style.css') }}">
   <!-- endinject -->
-  <link rel="shortcut icon" href="{{asset ('template/images/favicon.png') }}" />
+  <link rel="shortcut icon" href="{{asset ('template/images/logo2.png') }}" />
 </head>
 
 <body>
@@ -33,7 +33,7 @@
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-         
+
         </button>
         <ul class="navbar-nav mr-lg-2">
           <li class="nav-item nav-search d-none d-lg-block">
@@ -49,15 +49,17 @@
                 <i class="ti-settings text-primary"></i>
                 Settings
               </a>
-              <a class="dropdown-item">
-                <i class="ti-power-off text-primary"></i>
-                Logout
-              </a>
+              <form action="/logout" method="post" id="form-id">
+                @csrf
+                <a class="dropdown-item" href="#" onclick="document.getElementById('form-id').submit();">
+                  <i class="ti-power-off text-primary"></i>
+                  Logout
+                </a>
             </div>
           </li>
         </ul>
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
-          
+
         </button>
       </div>
     </nav>

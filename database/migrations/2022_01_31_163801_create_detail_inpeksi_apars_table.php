@@ -29,8 +29,10 @@ class CreateDetailInpeksiAparsTable extends Migration
             $table->string('keterangan')->nullable();
             $table->string('foto')->nullable();
             $table->date('tanggal')->nullable();
+            $table->string('pemeriksa')->nullable();
             $table->foreign('periode_id')->references('id')->on('master_inspeksis');
             $table->foreign('apart_id')->references('id')->on('data_apars');
+
             $table->timestamps();
             $table->softDeletes();
         });

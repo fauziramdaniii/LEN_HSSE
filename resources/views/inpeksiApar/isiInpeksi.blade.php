@@ -59,6 +59,7 @@
             <form method="post" action="/apar/inputInpeksiApar">
                 @csrf
                 <input type="hidden" value="{{date('Y-m-d')}}" name="tanggal">
+                <input type="hidden" value="{{auth()->user()->name}}" name="pemeriksa">
                 <div class="form-group">
                     <label for="id"> Kode Apar </label>
                     <select class="form-control " name="id" required>

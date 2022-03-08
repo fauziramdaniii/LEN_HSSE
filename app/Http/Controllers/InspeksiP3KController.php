@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DataP3K;
 use App\Models\InspeksiP3K;
 use App\Models\IsiInspeksi;
 use App\Models\MasterInspeksiP3K;
 use Illuminate\Http\Request;
+use PDF;
 
 class InspeksiP3KController extends Controller
 {
@@ -16,7 +18,7 @@ class InspeksiP3KController extends Controller
      */
     public function index()
     {
-        $periode = MasterInspeksiP3K::all();
+        $periode = MasterInspeksiP3K::orderBy('periode')->get();
         return view('inpeksiP3K.inpeksi', compact('periode'));
     }
 
@@ -39,16 +41,25 @@ class InspeksiP3KController extends Controller
 
     public function storeInpeksi(InspeksiP3K $id, Request $request)
     {
-        $inpeksi = $id->load('isi');
+        $keterangan = "Lengkap";
+        $inpeksi = $id->load('isi', 'isi.detail');
+
         foreach ($inpeksi->isi as $isi) {
             $isi->update([
                 'jumlah' => $request->jumlah[$isi->id],
                 'keterangan' => $request->keterangan[$isi->id]
             ]);
+
+            if ($request->jumlah[$isi->id] < $isi->detail->standar) {
+                $keterangan = "Belum Lengkap";
+            }
         }
 
         $inpeksi->update([
-            'status' => 'Sudah Inpeksi'
+            'status' => 'Sudah Inpeksi',
+            'keterangan' => $keterangan,
+            'tanggal' => date('Y-m-d'),
+            'pemeriksa' => auth()->user()->name,
         ]);
         toast('Inspeksi berhasil diinput', 'success');
         return redirect('p3k/inspeksi/' . $inpeksi->periode_id);
@@ -140,5 +151,65 @@ class InspeksiP3KController extends Controller
     {
         $inspeksip3k->delete();
         return redirect('/inspeksip3k')->with('success', 'Data inspeksi P3K Deleted');
+    }
+
+    public function exportTahunan_pdf(DataP3K $id)
+    {
+        $bulan = [
+            [
+                'key' => '01',
+                'bulan' => 'Januari'
+            ],
+            [
+                'key' => '02',
+                'bulan' => 'Februari'
+            ],
+            [
+                'key' => '03',
+                'bulan' => 'Maret'
+            ],
+            [
+                'key' => '04',
+                'bulan' => 'April'
+            ],
+            [
+                'key' => '05',
+                'bulan' => 'Mei'
+            ],
+            [
+                'key' => '06',
+                'bulan' => 'Juni'
+            ],
+            [
+                'key' => '07',
+                'bulan' => 'Juli'
+            ],
+            [
+                'key' => '08',
+                'bulan' => 'Agustus'
+            ],
+            [
+                'key' => '09',
+                'bulan' => 'September'
+            ],
+            [
+                'key' => '10',
+                'bulan' => 'Oktober'
+            ],
+            [
+                'key' => '11',
+                'bulan' => 'November'
+            ],
+            [
+                'key' => '12',
+                'bulan' => 'Desember'
+            ],
+        ];
+
+        $p3k = $id->load('inspeksi', 'inspeksi.isi', 'inspeksi.isi.detail');
+        $pdf = PDF::loadview('layouts.export_pdf_P3K_tahun', ['p3k' => $p3k, 'bulan' => $bulan]);
+        $pdf->setPaper('A4', 'landscape');
+        $file = "InspeksiTahunan_" . date('Ymdhis') . ".pdf";
+        return $pdf->download($file);
     }
 }

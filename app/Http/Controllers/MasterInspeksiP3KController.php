@@ -8,12 +8,13 @@ use App\Models\IsiInspeksi;
 use App\Models\IsiP3K;
 use Illuminate\Http\Request;
 use App\Models\MasterInspeksiP3K;
+use PDF;
 
 class MasterInspeksiP3KController extends Controller
 {
     public function index()
     {
-        $periode = MasterInspeksiP3K::all();
+        $periode = MasterInspeksiP3K::orderBy('periode')->get();
         return view('supervisor.datap3k.periode', compact('periode'));
     }
 
@@ -90,5 +91,15 @@ class MasterInspeksiP3KController extends Controller
 
         toast('Periode berhasil dihapus', 'success');
         return back();
+    }
+
+    public function export_pdf(MasterInspeksiP3K $id)
+    {
+        $periode = $id->load('DetailInspeksi', 'DetailInspeksi.isi', 'DetailInspeksi.isi.detail');
+        $bulan = date('F-Y', strtotime($id->periode));
+        $pdf = PDF::loadview('layouts.export_pdf_inspeksiP3K', ['periode' => $periode]);
+        $pdf->setPaper('A4', 'landscape');
+        $file = "HasilInspeksi_" . $bulan . "_" . date('Ymdhis') . ".xlsx";
+        return $pdf->download($file);
     }
 }
