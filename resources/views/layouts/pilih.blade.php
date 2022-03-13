@@ -19,7 +19,7 @@
     <div class="col-md-12 grid-margin transparent">
         <div class="row">
             <div class="col-md-3"> </div>
-            <div class="col-md-3 stretch-card transparent">
+            <div class="col-md-3 stretch-card transparent mt-5">
                 <div class="card card-tale">
                     <div class="card-body">
                         <center>
@@ -30,7 +30,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 stretch-card transparent">
+            <div class="col-md-3 stretch-card transparent mt-5">
                 <div class="card card-dark-blue">
                     <div class="card-body">
                         <center>

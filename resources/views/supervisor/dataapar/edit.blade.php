@@ -36,7 +36,7 @@
                 </div>
                 <div class="form-group">
                     <label for="berat"> Berat Apar </label>
-                    <input type="number" class="form-control" name="berat" required value="{{ $dataapar->berat }}">
+                    <input type="number" step=".01" min=0 class="form-control" name="berat" required value="{{ $dataapar->berat }}">
                 </div>
 
                 <div class="form-group">

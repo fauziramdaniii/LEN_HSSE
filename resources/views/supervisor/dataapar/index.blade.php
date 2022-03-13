@@ -20,7 +20,7 @@
                             <table class="display expandable-table mt-3" id="tableAPAR" width="100%">
                                 <thead>
                                     <tr class="text-center">
-                                      <th> No </th>
+                                        <th> No </th>
                                         <th> Kode </th>
                                         <th> Tipe </th>
                                         <th> Jenis </th>
@@ -42,11 +42,11 @@
                                 <tbody>
                                     @foreach ($dataapar as $dataapar)
                                     <tr class="text-center">
-                                      <td> {{ $no++ }} </td>
+                                        <td> {{ $no++ }} </td>
                                         <td> {{ $dataapar->id }} </td>
                                         <td> {{ $dataapar->tipe }} </td>
                                         <td> {{ $dataapar->jenis }} </td>
-                                        <td> {{ $dataapar->berat }} </td>
+                                        <td> {{ $dataapar->berat }} KG </td>
                                         <td> {{ $dataapar->zona }} </td>
                                         <td> {{ $dataapar->lokasi }} </td>
                                         <td> {{ $dataapar->provinsi }} </td>

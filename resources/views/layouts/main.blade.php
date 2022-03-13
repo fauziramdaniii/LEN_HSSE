@@ -18,6 +18,7 @@
   <!-- End plugin css for this page -->
   <!-- inject:css -->
   <link rel="stylesheet" href="{{ asset ('template/css/vertical-layout-light/style.css') }}">
+  <link rel="stylesheet" href="{{ asset ('template/css/vertical-layout-light/custom.css') }}">
   <!-- endinject -->
   <link rel="shortcut icon" href="{{asset ('template/images/logo2.png') }}" />
 </head>
@@ -50,10 +51,12 @@
               <img src="{{ asset ('template/images/faces/face28.jpg') }}" style="width:100%" alt="profile" />
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+              @if(auth()->user()->role != 'superadmin')
               <a class="dropdown-item">
                 <i class="ti-settings text-primary"></i>
                 Settings
               </a>
+              @endif
               <form action="/logout" method="post" id="form-id">
                 @csrf
                 <a class="dropdown-item" href="#" onclick="document.getElementById('form-id').submit();">
@@ -82,8 +85,8 @@
           @yield("content")
         </div>
         <footer class="footer">
-          <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">COPYRIGHT © 2022 PT LEN INDUSTRI</span>
+          <div class="">
+            <center><span class="text-muted">COPYRIGHT © 2022 PT LEN INDUSTRI</span></center>
           </div>
         </footer>
       </div>

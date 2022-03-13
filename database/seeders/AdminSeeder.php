@@ -22,16 +22,23 @@ class AdminSeeder extends Seeder
         ]);
 
         Admin::create([
-            'name'     => 'PetugasApar',
-            'email'    => 'petugasapar@len.co.id',
+            'name'     => 'PelaksanaApar',
+            'email'    => 'pelaksanaapar@len.co.id',
             'role'    => 'petugasapar',
             'password' => bcrypt('password'),
         ]);
 
         Admin::create([
-            'name'     => 'PetugasP3k',
-            'email'    => 'petugasp3k@len.co.id',
+            'name'     => 'PelaksanaP3k',
+            'email'    => 'pelaksana3k@len.co.id',
             'role'    => 'petugasp3k',
+            'password' => bcrypt('password'),
+        ]);
+
+        Admin::create([
+            'name'     => 'Superadmin',
+            'email'    => 'superadmin@len.co.id',
+            'role'    => 'superadmin',
             'password' => bcrypt('password'),
         ]);
     }

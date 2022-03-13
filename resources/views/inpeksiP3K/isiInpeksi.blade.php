@@ -43,23 +43,24 @@
 @endsection
 
 @section ("content")
+@include('sweetalert::alert')
 <h3>
     <center>Input Inspeksi
 </h3>
 <br>
-<div class="card">
-    <div class="card-body">
-        <div class="table  table-responsive">
-            <form action="/p3k/inputInpeksi/{{$inpeksi->id}}" method="post">
-                @csrf
-                @method('PUT')
-                <table width="100%" class=" table-bordered">
+<form action="/p3k/inputInpeksi/{{$inpeksi->id}}" method="post">
+    @csrf
+    @method('PUT')
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table width="100%" class="table table-bordered">
                     <thead>
                         <tr class="text-center">
-                            <th width="30%">Isi</th>
-                            <th width="15%">Standar</th>
-                            <th widt="20%">Jumlah</th>
-                            <th width="35%">Keterangan</th>
+                            <th>Isi</th>
+                            <th>Standar</th>
+                            <th>Jumlah Sekarang</th>
+                            <th>Keterangan Inspeksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -73,15 +74,66 @@
                                 </p>
                             </td>
                             <td class="text-center">{{$isi->detail->standar}}</td>
-                            <td><input type="number" name="jumlah[{{$isi->id}}]" class="form-control" placeholder="Jumlah" required></td>
-                            <td><input type="text" name="keterangan[{{$isi->id}}]" class="form-control" placeholder="Keterangan"></td>
+                            <td><input type="number" min=0 name="jumlah[{{$isi->id}}]" class="form-control col-sm-12" placeholder="Jumlah" required></td>
+                            <td><input required type="text" size="40" name="keterangan[{{$isi->id}}]" class="form-control" placeholder="Keterangan"></td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
-                <button type="submit" class="btn btn-primary mt-2" style="float:right">Submit</button>
-            </form>
+
+
+            </div>
         </div>
     </div>
-</div>
+    <div class="card mt-3">
+        <div class="card-body">
+            <p class="card-title"> Bukti Foto</p>
+            <div class="row">
+                <div class="col-sm-6">
+                    <center>
+                        <div id="my_camera"></div>
+                    </center>
+                    <center><input type=button value="Ambil Foto" class="btn btn-info my-2" onClick="take_snapshot()"></center>
+                    <input type="hidden" name="bukti" class="image-tag">
+
+                </div>
+                <div class="col-sm-6">
+                    <center>
+                        <div id="results"></div>
+                    </center>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary mt-2" style="float:right">Submit</button>
+        </div>
+    </div>
+</form>
+@endsection
+
+@section('script')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.js"></script>
+<script language="JavaScript">
+    Webcam.set({
+        width: 250,
+        height: 333,
+        image_format: 'jpeg',
+        jpeg_quality: 90
+    });
+
+    Webcam.attach('#my_camera');
+
+    function take_snapshot() {
+
+        Webcam.snap(function(data_uri) {
+
+            $(".image-tag").val(data_uri);
+
+            document.getElementById('results').innerHTML = '<img src="' + data_uri + '"/>';
+
+        });
+
+    }
+</script>
+
 @endsection

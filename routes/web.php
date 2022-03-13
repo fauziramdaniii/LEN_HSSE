@@ -1,20 +1,21 @@
 <?php
 
+use GuzzleHttp\Middleware;
 use App\Models\AparInspeksi;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AparController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DataP3KController;
 use App\Http\Controllers\DataAparController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginAdminController;
+use App\Http\Controllers\ReportAparController;
 use App\Http\Controllers\InspeksiP3KController;
 use App\Http\Controllers\AparInspeksiController;
 use App\Http\Controllers\MasterInspeksiController;
 use App\Http\Controllers\KelolaParameterController;
 use App\Http\Controllers\MasterInspeksiP3KController;
-use App\Http\Controllers\ReportAparController;
-use GuzzleHttp\Middleware;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -54,6 +55,11 @@ Route::post('/logout', [LoginAdminController::class, 'logout'])->middleware('aut
 //dashboard petugas
 Route::get('/dashboard', [DashboardController::class, 'index']);
 
+//tambah Supervisior    
+Route::post('/user', [UserController::class, 'store']);
+Route::put('/user/update/{id}', [UserController::class, 'update']);
+Route::put('/user/resetPassword/{id}', [UserController::class, 'resetPassword']);
+Route::delete('/user/{id}', [UserController::class, 'destroy']);
 // Route Apar
 Route::group(['prefix' => 'apar', 'middleware' => 'auth'], function () {
     Route::get('/dashboard', [DashboardController::class, 'apar']);

@@ -17,7 +17,7 @@ class CreateDataAparsTable extends Migration
             $table->id();
             $table->string('tipe');
             $table->string('jenis');
-            $table->string('berat');
+            $table->double('berat');
             $table->string('zona');
             $table->string('lokasi');
             $table->string('provinsi');

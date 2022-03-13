@@ -24,7 +24,7 @@
                 </div>
                 <div class="form-label">
                     <label for="tipe" class="form-label">Tipe P3K</label>
-                    <select name="tipe" class="form-control">
+                    <select name="tipe" class="form-control" required>
                         <option value=>-Pilih Tipe P3K-</option>
                         <option value="A">A</option>
                         <option value="B">B</option>

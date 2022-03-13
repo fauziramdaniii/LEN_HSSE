@@ -43,6 +43,7 @@
 @endsection
 
 @section ("content")
+
 <h3 class="font-weight-bold">
     <center>Pilih Periode Inspeksi</center>
 </h3>

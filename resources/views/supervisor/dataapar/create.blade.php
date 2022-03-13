@@ -43,7 +43,7 @@
                 </div>
                 <div class="form-group">
                     <label for="berat" class="form-label">Berat APAR</label>
-                    <input type="number" min=1 name="berat" class="form-control">
+                    <input type="number" step=".01" min=1 name="berat" class="form-control">
                 </div>
 
                 <div class="form-group">

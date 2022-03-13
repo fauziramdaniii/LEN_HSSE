@@ -64,6 +64,8 @@ class DataAparController extends Controller
             'kedaluarsa' => 'required',
             'keterangan' => 'required',
         ]);
+
+
         $apar =  DataApar::create($request->all());
         $periodeNow = MasterInspeksi::whereDate('periode', '>=', date('Y-m-01'))->get();
 
@@ -126,7 +128,6 @@ class DataAparController extends Controller
             'kedaluarsa' => 'required',
             'keterangan' => 'required',
         ]);
-
         $dataapar->update($request->all());
         toast('Data APAR berhasil diubah', 'success');
         return redirect('/apar/dataapar')->with('success', 'Data Updated!');
@@ -158,7 +159,7 @@ class DataAparController extends Controller
                 ->setCellValue("B{$row}", "{$data->id}")
                 ->setCellValue("C{$row}", "{$data->tipe}")
                 ->setCellValue("D{$row}", "{$data->jenis}")
-                ->setCellValue("E{$row}", "{$data->berat}")
+                ->setCellValue("E{$row}", "{$data->berat} KG")
                 ->setCellValue("F{$row}", "{$data->lokasi}")
                 ->setCellValue("G{$row}", "{$data->provinsi}")
                 ->setCellValue("H{$row}", "{$data->kota}")

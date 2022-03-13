@@ -17,7 +17,7 @@ class CreateAdminsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->enum('role', ['supervisor', 'petugasapar', 'petugasp3k'])->default('petugasapar');
+            $table->enum('role', ['supervisor', 'petugasapar', 'petugasp3k', 'superadmin'])->default('petugasapar');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

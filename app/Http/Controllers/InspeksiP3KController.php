@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
+use Exception;
 use App\Models\DataP3K;
 use App\Models\InspeksiP3K;
 use App\Models\IsiInspeksi;
-use App\Models\MasterInspeksiP3K;
 use Illuminate\Http\Request;
-use PDF;
+use App\Models\MasterInspeksiP3K;
 
 class InspeksiP3KController extends Controller
 {
@@ -41,6 +42,23 @@ class InspeksiP3KController extends Controller
 
     public function storeInpeksi(InspeksiP3K $id, Request $request)
     {
+        if (empty($request->bukti)) {
+            toast('Ambil Foto terlebih dahulu!', 'error');
+            return back();
+        }
+        try {
+            $img = $request->bukti;
+            $folderPath = "foto_inspeksi_p3k/";
+            $image_parts = explode(";base64,", $img);
+            $image_type_aux = explode("image/", $image_parts[0]);
+            $image_type = $image_type_aux[1];
+            $image_base64 = base64_decode($image_parts[1]);
+            $fileName = uniqid() . '.jpeg';
+            $file = $folderPath . $fileName;
+            file_put_contents($file, $image_base64);
+        } catch (Exception $e) {
+            return back();
+        }
         $keterangan = "Lengkap";
         $inpeksi = $id->load('isi', 'isi.detail');
 
@@ -60,6 +78,7 @@ class InspeksiP3KController extends Controller
             'keterangan' => $keterangan,
             'tanggal' => date('Y-m-d'),
             'pemeriksa' => auth()->user()->name,
+            'foto' => $fileName
         ]);
         toast('Inspeksi berhasil diinput', 'success');
         return redirect('p3k/inspeksi/' . $inpeksi->periode_id);

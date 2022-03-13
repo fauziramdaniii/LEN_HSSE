@@ -86,7 +86,7 @@
                 <td>{{$apar->id}}</td>
                 <td>{{$apar->tipe}}</td>
                 <td>{{$apar->jenis}}</td>
-                <td>{{$apar->berat}}</td>
+                <td>{{$apar->berat}} KG</td>
                 <td>{{$apar->lokasi}}</td>
                 <td>{{$apar->provinsi}}</td>
                 <td>{{$apar->kota}}</td>

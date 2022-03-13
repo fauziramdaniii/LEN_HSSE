@@ -7,6 +7,7 @@ use App\Models\AparInspeksi;
 use Illuminate\Http\Request;
 use App\Models\MasterInspeksi;
 use App\Models\DetailInpeksiApar;
+use Exception;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use RealRashid\SweetAlert\Facades\Alert;
 use PDF;
@@ -66,6 +67,7 @@ class AparInspeksiController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'id' => 'required',
             'jenis' => 'required',
@@ -78,8 +80,26 @@ class AparInspeksiController extends Controller
             'pin' => 'required',
             'roda' => 'required',
             'keterangan' => 'required',
-            'tanggal' => 'required'
+            'tanggal' => 'required',
         ]);
+        if (empty($request->bukti)) {
+            toast('Ambil Foto terlebih dahulu!', 'error');
+            return back();
+        }
+        try {
+            $img = $request->bukti;
+            $folderPath = "foto_inspeksi_apar/";
+            $image_parts = explode(";base64,", $img);
+            $image_type_aux = explode("image/", $image_parts[0]);
+            $image_type = $image_type_aux[1];
+            $image_base64 = base64_decode($image_parts[1]);
+            $fileName = uniqid() . '.jpeg';
+            $file = $folderPath . $fileName;
+            file_put_contents($file, $image_base64);
+        } catch (Exception $e) {
+            return back();
+        }
+        $request['foto'] = $fileName;
         $apart = DetailInpeksiApar::with('periode', 'Apart')->where('id', $request->id)->first();
         $apart->update($request->all());
 

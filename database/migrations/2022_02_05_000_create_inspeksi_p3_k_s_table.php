@@ -22,6 +22,7 @@ class CreateInspeksiP3KSTable extends Migration
             $table->string('keterangan')->nullable();
             $table->date('tanggal')->nullable();
             $table->string('pemeriksa')->nullable();
+            $table->string('foto')->nullable();
             $table->foreign('periode_id')->references('id')->on('master_inspeksi_p3_k_s');
             $table->foreign('p3k_id')->references('id')->on('data_p3_k_s');
             $table->timestamps();

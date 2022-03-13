@@ -182,6 +182,7 @@
 
                 </table>
                 <p class="mt-3 font-weight-bold">Bukti Foto :</p>
+                <img id="buktiFoto" class="fotoBukti" alt="">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -193,9 +194,8 @@
 
 @section('script')
 <script>
-    $(document).on('ready', function() {
-        console.log('aa');
-    })
+    var flagsUrl = "{{ URL::asset('/foto_inspeksi_apar') }}";
+
     $('.lihatHasil').on('click', function() {
         var id = $(this).attr('data-id');
         $.get('/apar/hasilInspeksi/' + id, function(data) {
@@ -210,7 +210,9 @@
             $('#roda').text(data.data.roda);
             $('#keterangan').text(data.data.keterangan);
             $('#tanggal').text(data.data.tanggal);
-            $('#kdApar').text(data.apar.id);        });
+            $('#kdApar').text(data.apar.id);
+            $("#buktiFoto").attr("src", flagsUrl + "/" + data.apar.foto);
+        });
     });
 </script>
 @endsection

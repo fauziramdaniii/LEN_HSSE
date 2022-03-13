@@ -64,7 +64,7 @@
                 <div class="media">
 
                     <div class="media-body">
-                        <p class="card-text">P3K yang sudah diisnpeksi</p>
+                        <p class="card-text">P3K yang sudah diinspeksi</p>
                     </div>
                 </div>
             </div>
@@ -97,7 +97,6 @@
                             Status
                         </th>
                     </tr>
-
                 </thead>
                 <tbody>
                     @foreach($periode->DetailInspeksi as $detil)
