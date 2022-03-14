@@ -211,7 +211,7 @@
             $('#keterangan').text(data.data.keterangan);
             $('#tanggal').text(data.data.tanggal);
             $('#kdApar').text(data.apar.id);
-            $("#buktiFoto").attr("src", flagsUrl + "/" + data.apar.foto);
+            $("#buktiFoto").attr("src", flagsUrl + "/" + data.data.foto);
         });
     });
 </script>

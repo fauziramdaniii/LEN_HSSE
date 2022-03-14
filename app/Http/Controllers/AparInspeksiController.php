@@ -176,7 +176,7 @@ class AparInspeksiController extends Controller
     public function hasil(DetailInpeksiApar $id)
     {
         $apar = $id->load('Apart');
-        return response()->json(['data' => $id, 'apar' => $apar]);
+        return response()->json(['data' => $id, 'apar' => $apar->Apart]);
     }
 
     public function exportTahunan(DataApar $id)
