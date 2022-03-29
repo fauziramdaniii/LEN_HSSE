@@ -3,39 +3,39 @@
 @if(Auth::User()->role == 'supervisor')
 <li class="nav-item {{Request::is('p3k/dashboard*') ? 'active' : ''}}">
     <a class="nav-link" href="/p3k/dashboard">
-        <i class="icon-grid menu-icon"></i>
+        <i class="mdi mdi-view-dashboard menu-icon"></i>
         <span class="menu-title">Dashboard</span>
     </a>
 </li>
 <li class="nav-item {{Request::is('p3k/datap3k*') ? 'active' : ''}}">
     <a class="nav-link" href="/p3k/datap3k">
-        <i class="icon-contract menu-icon"></i>
+        <i class="mdi mdi-medical-bag menu-icon"></i>
         <span class="menu-title">Master P3K</span>
     </a>
 </li>
 <li class="nav-item {{Request::is('p3k/masterinspeksi*') ? 'active' : ''}}">
     <a class="nav-link" href="/p3k/masterinspeksi">
-        <i class="icon-paper menu-icon"></i>
+        <i class="mdi mdi-calendar-clock menu-icon"></i>
         <span class="menu-title">Master Inspeksi</span>
     </a>
 </li>
 
 <li class="nav-item {{Request::is('p3k/inspeksi*') ? 'active' : ''}}">
     <a class="nav-link" href="/p3k/inspeksi">
-        <i class="icon-paper menu-icon"></i>
+        <i class="mdi mdi-clipboard-text menu-icon"></i>
         <span class="menu-title">Inspeksi P3K</span>
     </a>
 </li>
 @else
-<li class="nav-item">
+<li class="nav-item {{Request::is('dashboard*') ? 'active' : ''}}">
     <a class="nav-link" href="/dashboard">
-        <i class="icon-grid menu-icon"></i>
+        <i class="mdi mdi-view-dashboard menu-icon"></i>
         <span class="menu-title">Dashboard</span>
     </a>
 </li>
-<li class="nav-item">
+<li class="nav-item {{Request::is('p3k/inspeksi*') ? 'active' : ''}}">
     <a class="nav-link" href="/p3k/inspeksi">
-        <i class="icon-paper menu-icon"></i>
+        <i class="mdi mdi-clipboard-text menu-icon"></i>
         <span class="menu-title">Inspeksi P3K</span>
     </a>
 </li>
@@ -75,7 +75,13 @@
                             </td>
                             <td class="text-center">{{$isi->detail->standar}}</td>
                             <td><input type="number" min=0 name="jumlah[{{$isi->id}}]" class="form-control col-sm-12" placeholder="Jumlah" required></td>
-                            <td><input required type="text" size="40" name="keterangan[{{$isi->id}}]" class="form-control" placeholder="Keterangan"></td>
+                            <td>
+                                @if (substr($isi->detail->isi,0,7) == 'Aquades' || substr($isi->detail->isi,0,7) == 'Alkohol' || substr($isi->detail->isi,0,7) == 'Povidon')
+                                <input required type="text" size="40" name="keterangan[{{$isi->id}}]" class="form-control" placeholder="Keterangan">
+                                @else
+                                <input type="text" size="40" name="keterangan[{{$isi->id}}]" class="form-control" placeholder="Keterangan">
+                                @endif
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -91,7 +97,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <center>
-                        <div id="my_camera"></div>
+                        <div id="my_camera" style="width:250px; height:333px;"></div>
                     </center>
                     <center><input type=button value="Ambil Foto" class="btn btn-info my-2" onClick="take_snapshot()"></center>
                     <input type="hidden" name="bukti" class="image-tag">
@@ -114,11 +120,10 @@
 @section('script')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.js"></script>
 <script language="JavaScript">
-    Webcam.set({
-        width: 250,
-        height: 333,
+    Webcam.set('constraints', {
         image_format: 'jpeg',
-        jpeg_quality: 90
+        jpeg_quality: 90,
+        facingMode: "environment"
     });
 
     Webcam.attach('#my_camera');

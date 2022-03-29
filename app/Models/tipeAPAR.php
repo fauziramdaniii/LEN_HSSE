@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class tipeAPAR extends Model
+class TipeApar extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'nama_tipe'
     ];
-    use HasFactory;
 }

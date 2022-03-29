@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMasterInspeksiP3KSTable extends Migration
+class CreateIsiP3ksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateMasterInspeksiP3KSTable extends Migration
      */
     public function up()
     {
-        Schema::create('master_inspeksi_p3_k_s', function (Blueprint $table) {
+        Schema::create('isi_p3ks', function (Blueprint $table) {
             $table->id();
-            $table->date('periode');
+            $table->string('isi');
+            $table->integer('standar');
+            $table->string('tipe');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -28,6 +29,6 @@ class CreateMasterInspeksiP3KSTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('master_inspeksi_p3_k_s');
+        Schema::dropIfExists('isi_p3ks');
     }
 }

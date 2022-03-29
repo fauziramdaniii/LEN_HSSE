@@ -1,41 +1,42 @@
 @extends('layouts.main')
 @section('sidebar')
 @if(Auth::User()->role == 'supervisor')
-<li class="nav-item">
-    <a class="nav-link {{Request::is('apar/dashboard*') ? 'active' : ''}} " href="/apar/dashboard">
-        <i class="icon-grid menu-icon"></i>
+<li class="nav-item {{Request::is('apar/dashboard') ? 'active' : ''}}">
+    <a class="nav-link " href="/apar/dashboard">
+        <i class="mdi mdi-view-dashboard menu-icon"></i>
         <span class="menu-title">Dashboard</span>
     </a>
 </li>
 <li class="nav-item {{Request::is('apar/dataapar*') ? 'active' : ''}}">
     <a class="nav-link" href="/apar/dataapar">
-        <i class="icon-contract menu-icon"></i>
+        <i class="mdi mdi-fire-extinguisher menu-icon"></i>
         <span class="menu-title">Master APAR</span>
     </a>
 </li>
 <li class="nav-item {{Request::is('apar/masterinspeksi*') ? 'active' : ''}}">
     <a class="nav-link" href="/apar/masterinspeksi">
-        <i class="icon-paper menu-icon"></i>
+        <i class="mdi mdi-calendar-clock menu-icon"></i>
         <span class="menu-title">Master Inspeksi</span>
     </a>
 </li>
 
 <li class="nav-item {{Request::is('apar/inspeksi*') ? 'active' : ''}}">
     <a class="nav-link" href="/apar/inspeksi">
-        <i class="icon-paper menu-icon"></i>
+        <i class="mdi mdi-clipboard-text menu-icon"></i>
         <span class="menu-title">Inspeksi APAR</span>
     </a>
 </li>
+
 @else
-<li class="nav-item">
+<li class="nav-item  {{Request::is('dashboard*') ? 'active' : ''}}">
     <a class="nav-link" href="/dashboard">
-        <i class="icon-grid menu-icon"></i>
+        <i class="mdi mdi-view-dashboard menu-icon"></i>
         <span class="menu-title">Dashboard</span>
     </a>
 </li>
-<li class="nav-item">
+<li class="nav-item {{Request::is('apar/inspeksi*') ? 'active' : ''}}">
     <a class="nav-link" href="/apar/inspeksi">
-        <i class="icon-paper menu-icon"></i>
+        <i class="mdi mdi-clipboard-text menu-icon"></i>
         <span class="menu-title">Inspeksi APAR</span>
     </a>
 </li>
@@ -46,7 +47,7 @@
 @include('sweetalert::alert')
 <br>
 <h3 class="font-weight-bold text-center">
-    Data Inpeksi APAR (Periode {{date('F Y',strtotime($aparinspeksi->periode))}})
+    Data Inspeksi APAR (Periode {{date('F Y',strtotime($aparinspeksi->periode))}})
 </h3>
 
 <div class="col-sm-12">
@@ -66,7 +67,7 @@
                 <div class="media">
 
                     <div class="media-body">
-                        <p class="card-text">APAR yang sudah diinpeksi</p>
+                        <p class="card-text">APAR yang sudah diinspeksi</p>
                     </div>
                 </div>
             </div>
@@ -79,7 +80,7 @@
                 <div class="media">
 
                     <div class="media-body">
-                        <p class="card-text">APAR yang belum diinpeksi</p>
+                        <p class="card-text">APAR yang belum diinspeksi</p>
                     </div>
                 </div>
             </div>
@@ -92,9 +93,9 @@
         <thead>
             <tr class="text-center">
                 <th> No </th>
-                <th> Kode Apar </th>
-                <th> Tipe Apar </th>
-                <th> Jenis Apar </th>
+                <th> Kode APAR </th>
+                <th> Tipe APAR </th>
+                <th> Jenis APAR </th>
                 <th>
                     Status
                 </th>
@@ -104,14 +105,14 @@
             @foreach ($aparinspeksi->DetailInspeksi as $dataapar)
             <tr class="text-center">
                 <td> {{ $no++ }} </td>
-                <td> {{ $dataapar->Apart->id }} </td>
-                <td> {{ $dataapar->Apart->tipe }} </td>
-                <td> {{ $dataapar->Apart->jenis }} </td>
+                <td> {{ $dataapar->Apart->kd_apar }} </td>
+                <td> {{ $dataapar->Apart->Tipe->nama_tipe }} </td>
+                <td> {{ $dataapar->Apart->Jenis->nama_jenis }} </td>
                 <td>
                     @if($dataapar->jenis==null)
-                    <p class="text-danger">Apar Belum Diinpeksi</p>
+                    <p class="text-danger">APAR Belum Diinspeksi</p>
                     @else
-                    <a class="text-success lihatHasil" href="#" data-toggle="modal" data-target="#modalHasil" data-id="{{$dataapar->id}}">Apar Sudah Diinpeksi</a>
+                    <a class="text-success lihatHasil" href="#" data-toggle="modal" data-target="#modalHasil" data-id="{{$dataapar->id}}">APAR Sudah Diinspeksi</a>
                     @endif
                 </td>
 

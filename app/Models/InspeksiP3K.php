@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class InspeksiP3K extends Model
+class InspeksiP3k extends Model
 {
     use SoftDeletes;
     protected $fillable = [
@@ -15,12 +15,12 @@ class InspeksiP3K extends Model
 
     public function periode()
     {
-        return $this->belongsTo(MasterInspeksiP3K::class, 'periode_id');
+        return $this->belongsTo(MasterInspeksiP3k::class, 'periode_id');
     }
 
     public function dataP3K()
     {
-        return $this->belongsTo(DataP3K::class, 'p3k_id');
+        return $this->belongsTo(DataP3k::class, 'p3k_id');
     }
 
     public function isi()

@@ -3,39 +3,39 @@
 @if(Auth::User()->role == 'supervisor')
 <li class="nav-item {{Request::is('p3k/dashboard*') ? 'active' : ''}}">
     <a class="nav-link" href="/p3k/dashboard">
-        <i class="icon-grid menu-icon"></i>
+        <i class="mdi mdi-view-dashboard menu-icon"></i>
         <span class="menu-title">Dashboard</span>
     </a>
 </li>
 <li class="nav-item {{Request::is('p3k/datap3k*') ? 'active' : ''}}">
     <a class="nav-link" href="/p3k/datap3k">
-        <i class="icon-contract menu-icon"></i>
+        <i class="mdi mdi-medical-bag menu-icon"></i>
         <span class="menu-title">Master P3K</span>
     </a>
 </li>
 <li class="nav-item {{Request::is('p3k/masterinspeksi*') ? 'active' : ''}}">
     <a class="nav-link" href="/p3k/masterinspeksi">
-        <i class="icon-paper menu-icon"></i>
+        <i class="mdi mdi-calendar-clock menu-icon"></i>
         <span class="menu-title">Master Inspeksi</span>
     </a>
 </li>
 
 <li class="nav-item {{Request::is('p3k/inspeksi*') ? 'active' : ''}}">
     <a class="nav-link" href="/p3k/inspeksi">
-        <i class="icon-paper menu-icon"></i>
+        <i class="mdi mdi-clipboard-text menu-icon"></i>
         <span class="menu-title">Inspeksi P3K</span>
     </a>
 </li>
 @else
-<li class="nav-item">
+<li class="nav-item {{Request::is('dashboard*') ? 'active' : ''}}">
     <a class="nav-link" href="/dashboard">
-        <i class="icon-grid menu-icon"></i>
+        <i class="mdi mdi-view-dashboard menu-icon"></i>
         <span class="menu-title">Dashboard</span>
     </a>
 </li>
-<li class="nav-item">
+<li class="nav-item {{Request::is('p3k/inspeksi*') ? 'active' : ''}}">
     <a class="nav-link" href="/p3k/inspeksi">
-        <i class="icon-paper menu-icon"></i>
+        <i class="mdi mdi-clipboard-text menu-icon"></i>
         <span class="menu-title">Inspeksi P3K</span>
     </a>
 </li>
@@ -45,7 +45,7 @@
 @section ("content")
 @include('sweetalert::alert')
 <h3 class="font-weight-bold">
-    <center>Data Inpeksi P3K (Periode {{date('F Y',strtotime($periode->periode))}})
+    <center>Data Inspeksi P3K (Periode {{date('F Y',strtotime($periode->periode))}})
 </h3>
 
 <div class="col-sm-12">
@@ -102,7 +102,7 @@
                     @foreach($periode->DetailInspeksi as $detil)
                     <tr class="text-center">
                         <td>{{$loop->iteration}}</td>
-                        <td>{{$detil->dataP3K->id}}</td>
+                        <td>{{$detil->dataP3K->kd_p3k}}</td>
                         <td>{{$detil->dataP3K->tipe}}</td>
                         <td>
                             @if($detil->status =="Belum Inspeksi")

@@ -38,12 +38,12 @@
                                     @foreach ($datap3k as $datap3k)
                                     <tr class="text-center">
                                         <td> {{ $no++ }} </td>
-                                        <td> {{ $datap3k->id }} </td>
+                                        <td> {{ $datap3k->kd_p3k }} </td>
                                         <td> {{ $datap3k->tipe }} </td>
                                         <td> {{ $datap3k->lokasi }} </td>
                                         <td> {{ $datap3k->provinsi }} </td>
                                         <td> {{ $datap3k->kota }} </td>
-                                        <td> {{ $datap3k->zona }} </td>
+                                        <td> {{ @$datap3k->Zona->zona }} </td>
                                         <td> {{ $datap3k->gedung }} </td>
                                         <td> {{ $datap3k->lantai }} </td>
                                         <td> {{ $datap3k->titik }} </td>

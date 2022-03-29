@@ -1,6 +1,7 @@
 @extends('supervisor.datap3k.layout')
 
 @section('content')
+@include('sweetalert::alert')
 <div class="col-md-8 offset-md-2">
     <div class="card">
         <div class="card-body">
@@ -20,7 +21,7 @@
                 @csrf
                 <div class="form-group">
                     <label for="id"> Kode P3K </label>
-                    <input type="text" class="form-control" name="id" required>
+                    <input type="text" class="form-control" name="kd_p3k" min=1 required>
                 </div>
                 <div class="form-label">
                     <label for="tipe" class="form-label">Tipe P3K</label>
@@ -37,15 +38,27 @@
                 </div>
                 <div class="form-group">
                     <label for="provinsi"> Provinsi </label>
-                    <input type="text" class="form-control" name="provinsi" required>
+                    <select class="form-control" id="provinsi" name="provinsi" required>
+                        <option selected disabled value="">===Pilih Provinsi===</option>
+                        @foreach($provinsi as $data)
+                        <option value="{{ucfirst(trans($data->id))}}">{{Str::title(Str::lower($data->name))}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="kota"> Kota </label>
-                    <input type="text" class="form-control" name="kota" required>
+                    <select class="form-control" name="kota" required disabled id="optionKota">
+                        <option selected disabled value="">===Pilih Kota===</option>
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label for="zona"> Zona </label>
-                    <input type="text" class="form-control" name="zona" required>
+                    <label for="zona" class="form-label">Pilih Zona P3K</label>
+                    <select name="zona_id" class="form-control">
+                        <option selected disabled value="">===Pilih Zona===</option>
+                        @foreach($zona as $data)
+                        <option value="{{$data->id}}">{{$data->zona}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="gedung"> Gedung </label>
@@ -68,4 +81,22 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+    $('#optionKota').prop('disabled', 'disabled');
+    $('#optionKota').prop('selectedIndex', 0);
+    $(document).on('change', '#provinsi', function() {
+        $.get('/getKota/' + $('#provinsi').val(), function(data) {
+            $('#optionKota').empty();
+            $('#optionKota').removeAttr('disabled');
+            $.each(data.data, function(key, value) {
+                $("#optionKota").append(
+                    '<option value="' + data.data[key].name + '">' + data.data[key].name + '</option>'
+                );
+            });
+        });
+    });
+</script>
 @endsection

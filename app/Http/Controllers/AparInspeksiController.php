@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
+use Exception;
 use App\Models\DataApar;
-use App\Models\AparInspeksi;
 use Illuminate\Http\Request;
 use App\Models\MasterInspeksi;
 use App\Models\DetailInpeksiApar;
-use Exception;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-use RealRashid\SweetAlert\Facades\Alert;
-use PDF;
 
 class AparInspeksiController extends Controller
 {
@@ -19,15 +17,20 @@ class AparInspeksiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $periode = MasterInspeksi::orderBy('periode')->get();
+        if (!empty($request->get('tahun'))) {
+            $periode = MasterInspeksi::whereYear('periode', $request->tahun)->orderBy('periode')->get();
+        } else {
+            $periode = MasterInspeksi::orderBy('periode')->get();
+        }
+
         return view('inpeksiApar.inpeksi', compact('periode'));
     }
 
     public function detailInspeksi(MasterInspeksi $periode)
     {
-        $aparinspeksi = $periode->load('DetailInspeksi');
+        $aparinspeksi = $periode->load('DetailInspeksi', 'DetailInspeksi.Apart', 'DetailInspeksi.Apart.Tipe', 'DetailInspeksi.Apart.Jenis');
         $sudahInspeksi = $periode->DetailInspeksi->whereNotNull('jenis')->count();
         $belumInspeksi = $periode->DetailInspeksi->whereNull('jenis')->count();
         return view('inpeksiApar.status', compact('aparinspeksi', 'sudahInspeksi', 'belumInspeksi'));
@@ -67,7 +70,6 @@ class AparInspeksiController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'id' => 'required',
             'jenis' => 'required',

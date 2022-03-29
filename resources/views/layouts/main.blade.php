@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="{{ asset ('template/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
   <link rel="stylesheet" href="{{ asset ('template/vendors/ti-icons/css/themify-icons.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset ('template/js/select.dataTables.min.css') }}">
+  <link rel="stylesheet" href="{{asset('template/vendors/mdi/css/materialdesignicons.min.css')}}">
   <!-- End plugin css for this page -->
   <!-- inject:css -->
   <link rel="stylesheet" href="{{ asset ('template/css/vertical-layout-light/style.css') }}">
@@ -48,15 +49,13 @@
         <ul class="navbar-nav navbar-nav-right">
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img src="{{ asset ('template/images/faces/face28.jpg') }}" style="width:100%" alt="profile" />
+              <img src="{{ asset ('template/images/faces/face28.jpg') }}" alt="profile" />
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              @if(auth()->user()->role != 'superadmin')
-              <a class="dropdown-item">
+              <a class="dropdown-item" href="/editAkun">
                 <i class="ti-settings text-primary"></i>
                 Settings
               </a>
-              @endif
               <form action="/logout" method="post" id="form-id">
                 @csrf
                 <a class="dropdown-item" href="#" onclick="document.getElementById('form-id').submit();">

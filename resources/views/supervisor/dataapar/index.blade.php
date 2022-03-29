@@ -43,18 +43,18 @@
                                     @foreach ($dataapar as $dataapar)
                                     <tr class="text-center">
                                         <td> {{ $no++ }} </td>
-                                        <td> {{ $dataapar->id }} </td>
-                                        <td> {{ $dataapar->tipe }} </td>
-                                        <td> {{ $dataapar->jenis }} </td>
+                                        <td> {{ $dataapar->kd_apar }} </td>
+                                        <td> {{ @$dataapar->Tipe->nama_tipe }} </td>
+                                        <td> {{ @$dataapar->Jenis->nama_jenis }} </td>
                                         <td> {{ $dataapar->berat }} KG </td>
-                                        <td> {{ $dataapar->zona }} </td>
+                                        <td> {{ @$dataapar->Zona->zona }} </td>
                                         <td> {{ $dataapar->lokasi }} </td>
                                         <td> {{ $dataapar->provinsi }} </td>
                                         <td> {{ $dataapar->kota }} </td>
                                         <td> {{ $dataapar->gedung }} </td>
                                         <td> {{ $dataapar->lantai }} </td>
                                         <td> {{ $dataapar->titik }} </td>
-                                        <td> {{ $dataapar->kedaluarsa }} </td>
+                                        <td class="{{date('Y-m-d') >= $dataapar->kedaluarsa ? 'text-danger' : ''}}"> {{ $dataapar->kedaluarsa }} </td>
                                         <td> {{ $dataapar->keterangan}}
                                         <td>
                                             <center>

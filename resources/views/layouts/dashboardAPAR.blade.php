@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-6 mb-4 stretch-card transparent">
+    <div class="col-md-3 mb-4 stretch-card transparent">
         <div class="card card-tale">
             <div class="card-body">
                 <p class="mb-4 text-center">JUMLAH APAR </p>
@@ -7,11 +7,27 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6 mb-4 stretch-card transparent">
+    <div class="col-md-3 mb-4 stretch-card transparent">
         <div class="card card-dark-blue">
             <div class="card-body">
-                <p class="mb-4 text-center">JUMLAH PERIODE </p>
-                <p class="fs-30 mb-2 text-center">{{$jumlahPeriode}}</p>
+                <p class="mb-4 text-center">APAR AKTIF </p>
+                <p class="fs-30 mb-2 text-center">{{$aparAktif}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-4 stretch-card transparent">
+        <div class="card card-tale">
+            <div class="card-body">
+                <p class="mb-4 text-center">APAR SERVICE </p>
+                <p class="fs-30 mb-2 text-center">{{$aparService}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-4 stretch-card transparent">
+        <div class="card card-dark-blue">
+            <div class="card-body">
+                <p class="mb-4 text-center">APAR STOCK </p>
+                <p class="fs-30 mb-2 text-center">{{$aparStock}}</p>
             </div>
         </div>
     </div>
@@ -20,20 +36,18 @@
     <div class="col-md-6 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <p class="card-title text-right text-center">JENIS APAR </p>
-                <p class="font-weight-500 text-center">Berikut adalah informasi dari jumlah jenis APAR yang ada</p>
-                <canvas id="jenisChart"></canvas>
+                <p class="card-title text-right text-center">INSPEKSI APAR {{date('F Y')}} </p>
+                <p class="font-weight-500 text-center">Berikut adalah informasi dari Inspeksi periode saat ini </p>
+                <canvas id="jumlahInspeksiAPAR"></canvas>
             </div>
         </div>
     </div>
     <div class="col-md-6 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <p class="card-title text-center">STATUS APAR </p>
-
-                <p class="font-weight-500 text-center">Berikut adalah Informasi Jumlah dari status APAR {{date('Y')}}</p>
-                <div id="sales-legends" class="chartjs-legend mt-4 mb-2"></div>
-                <canvas id="sales-charts"></canvas>
+                <p class="card-title text-right text-center">JENIS APAR </p>
+                <p class="font-weight-500 text-center">Berikut adalah informasi dari jumlah jenis APAR yang ada</p>
+                <canvas id="jenisChart"></canvas>
             </div>
         </div>
     </div>
@@ -58,141 +72,23 @@
                                         <div class="col-md-6 border-right">
                                             <div class="table-responsive mb-3 mb-md-0 mt-3">
                                                 <table class="table table-borderless report-table">
+                                                    @foreach($zonas as $zona)
                                                     <tr>
-                                                        <td class="text-muted">Zona 1</td>
-                                                        <td class="w-1- px-0">
-                                                            <div class="progress progress-md mx-4">
-                                                                @if($dataAPAR->where('zona',1)->count() != 0)
-                                                                <div class="progress-bar bg-primary" role="progressbar" style="width: <?php echo round($dataAPAR->where('zona', 1)->count() / $jumlahAPAR * 100, 2) . "%" ?>" aria-valuenow="{{$dataAPAR->where('zona',1)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                @else
-                                                                <div class="progress-bar bg-primary" role="progressbar" style="width: 0%" aria-valuenow="{{$dataAPAR->where('zona',1)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                @endif
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="font-weight-bold mb-0">{{$dataAPAR->where('zona',1)->count()}}</h5>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-muted">Zona 2</td>
+                                                        <td class="text-muted">Zona {{$zona->zona}}</td>
                                                         <td class="w-100 px-0">
                                                             <div class="progress progress-md mx-4">
-                                                                @if($dataAPAR->where('zona',2)->count() != 0)
-                                                                <div class="progress-bar bg-warning" role="progressbar" style="width: <?php echo round($dataAPAR->where('zona', 2)->count() / $jumlahAPAR * 100, 2) . "%" ?>" aria-valuenow="{{$dataAPAR->where('zona',2)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                @if($dataAPAR->where('zona_id',$zona->id)->count() != 0)
+                                                                <div class="progress-bar bg-info" role="progressbar" style="width: <?php echo round($dataAPAR->where('zona_id', $zona->id)->count() / $jumlahAPAR * 100, 2) . "%" ?>" aria-valuenow="{{$dataAPAR->where('zona',$zona->id)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                 @else
-                                                                <div class="progress-bar bg-warning" role="progressbar" style="width: 0%" aria-valuenow="{{$dataAPAR->where('zona',1)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                <div class="progress-bar bg-info" role="progressbar" style="width: 0%" aria-valuenow="{{$dataAPAR->where('zona_id',$zona->id)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                 @endif
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <h5 class="font-weight-bold mb-0">{{$dataAPAR->where('zona',2)->count()}}</h5>
+                                                            <h5 class="font-weight-bold mb-0">{{$dataAPAR->where('zona_id',$zona->id)->count()}}</h5>
                                                         </td>
                                                     </tr>
-                                                    <tr>
-                                                        <td class="text-muted">Zona 3</td>
-                                                        <td class="w-100 px-0">
-                                                            <div class="progress progress-md mx-4">
-                                                                @if($dataAPAR->where('zona',3)->count() != 0)
-                                                                <div class="progress-bar bg-danger" role="progressbar" style="width: <?php echo round($dataAPAR->where('zona', 3)->count() / $jumlahAPAR * 100, 2) . "%" ?>" aria-valuenow="{{$dataAPAR->where('zona',3)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                @else
-                                                                <div class="progress-bar bg-danger" role="progressbar" style="width: 0%" aria-valuenow="{{$dataAPAR->where('zona',3)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                @endif
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="font-weight-bold mb-0">{{$dataAPAR->where('zona',3)->count()}}</h5>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-muted">Zona 4</td>
-                                                        <td class="w-100 px-0">
-                                                            <div class="progress progress-md mx-4">
-                                                                @if($dataAPAR->where('zona',4)->count() != 0)
-                                                                <div class="progress-bar bg-info" role="progressbar" style="width: <?php echo round($dataAPAR->where('zona', 4)->count() / $jumlahAPAR  * 100, 2) . "%" ?>" aria-valuenow="{{$dataAPAR->where('zona',4)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                @else
-                                                                <div class="progress-bar bg-info" role="progressbar" style="width: 0%" aria-valuenow="{{$dataAPAR->where('zona',4)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                @endif
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="font-weight-bold mb-0">{{$dataAPAR->where('zona',4)->count()}}</h5>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-muted">Zona 5</td>
-                                                        <td class="w-100 px-0">
-                                                            <div class="progress progress-md mx-4">
-                                                                @if($dataAPAR->where('zona',5)->count() != 0)
-                                                                <div class="progress-bar bg-primary" role="progressbar" style="width: <?php echo round($dataAPAR->where('zona', 5)->count() / $jumlahAPAR * 100, 2) . "%" ?>" aria-valuenow="{{$dataAPAR->where('zona',5)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                @else
-                                                                <div class="progress-bar bg-primary" role="progressbar" style="width: 0%" aria-valuenow="{{$dataAPAR->where('zona',5)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                @endif
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="font-weight-bold mb-0">{{$dataAPAR->where('zona',5)->count()}}</h5>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-muted">Zona 6</td>
-                                                        <td class="w-100 px-0">
-                                                            <div class="progress progress-md mx-4">
-                                                                @if($dataAPAR->where('zona',6)->count() != 0)
-                                                                <div class="progress-bar bg-warning" role="progressbar" style="width: <?php echo round($dataAPAR->where('zona', 6)->count() / $jumlahAPAR  * 100, 2) . "%" ?>" aria-valuenow="{{$dataAPAR->where('zona',6)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                @else
-                                                                <div class="progress-bar bg-warning" role="progressbar" style="width: 0%" aria-valuenow="{{$dataAPAR->where('zona',6)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                @endif
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="font-weight-bold mb-0">{{$dataAPAR->where('zona',6)->count()}}</h5>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-muted">Zona 7</td>
-                                                        <td class="w-100 px-0">
-                                                            <div class="progress progress-md mx-4">
-                                                                @if($dataAPAR->where('zona',7)->count() != 0)
-                                                                <div class="progress-bar bg-danger" role="progressbar" style="width: <?php echo round($dataAPAR->where('zona', 7)->count() / $jumlahAPAR * 100, 2) . "%" ?>" aria-valuenow="{{$dataAPAR->where('zona',7)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                @else
-                                                                <div class="progress-bar bg-danger" role="progressbar" style="width: 0%" aria-valuenow="{{$dataAPAR->where('zona',7)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                @endif
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="font-weight-bold mb-0">{{$dataAPAR->where('zona',7)->count()}}</h5>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-muted">Zona 8</td>
-                                                        <td class="w-100 px-0">
-                                                            <div class="progress progress-md mx-4">
-                                                                @if($dataAPAR->where('zona',8)->count() != 0)
-                                                                <div class="progress-bar bg-info" role="progressbar" style="width: <?php echo round($dataAPAR->where('zona', 8)->count() / $jumlahAPAR  * 100, 2) . "%" ?>" aria-valuenow="{{$dataAPAR->where('zona',8)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                @else
-                                                                <div class="progress-bar bg-info" role="progressbar" style="width: 0%" aria-valuenow="{{$dataAPAR->where('zona',8)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                @endif
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="font-weight-bold mb-0">{{$dataAPAR->where('zona',8)->count()}}</h5>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-muted">Zona 9</td>
-                                                        <td class="w-100 px-0">
-                                                            <div class="progress progress-md mx-4">
-                                                                @if($dataAPAR->where('zona',9)->count() != 0)
-                                                                <div class="progress-bar bg-primary" role="progressbar" style="width: <?php echo round($dataAPAR->where('zona', 9)->count() / $jumlahAPAR * 100, 2) . "%" ?>" aria-valuenow="{{$dataAPAR->where('zona',9)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                @else
-                                                                <div class="progress-bar bg-primary" role="progressbar" style="width: 0%" aria-valuenow="{{$dataAPAR->where('zona',9)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                @endif
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="font-weight-bold mb-0">{{$dataAPAR->where('zona',9)->count()}}</h5>
-                                                        </td>
-                                                    </tr>
+                                                    @endforeach
                                                 </table>
                                             </div>
                                         </div>
@@ -207,6 +103,19 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-title text-center">STATUS APAR </p>
+
+                <p class="font-weight-50 text-center">Berikut adalah Informasi Hasil Inspeksi APAR {{date('Y')}}</p>
+                <div id="sales-legends" class="chartjs-legend mt-4 mb-2"></div>
+                <canvas id="sales-charts"></canvas>
             </div>
         </div>
     </div>

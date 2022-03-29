@@ -15,10 +15,11 @@ class CreateDataAparsTable extends Migration
     {
         Schema::create('data_apars', function (Blueprint $table) {
             $table->id();
-            $table->string('tipe');
-            $table->string('jenis');
+            $table->string('kd_apar')->unique();
+            $table->foreignId('tipe_id')->nullable();
+            $table->foreignId('jenis_id')->nullable();
             $table->double('berat');
-            $table->string('zona');
+            $table->foreignId('zona_id')->nullable();
             $table->string('lokasi');
             $table->string('provinsi');
             $table->string('kota');
@@ -27,6 +28,9 @@ class CreateDataAparsTable extends Migration
             $table->string('titik');
             $table->date('kedaluarsa');
             $table->string('keterangan');
+            $table->foreign('tipe_id')->references('id')->on('tipe_apars')->onDelete('set null');
+            $table->foreign('jenis_id')->references('id')->on('jenis_apars')->onDelete('set null');
+            $table->foreign('zona_id')->references('id')->on('zona_lokasis')->onDelete('set null');
             $table->timestamps();
             $table->softDeletes();
         });

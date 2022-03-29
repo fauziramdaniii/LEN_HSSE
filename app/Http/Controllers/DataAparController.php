@@ -2,20 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
-use App\Models\DataApar;
-use App\Models\tipeAPAR;
 use PDF;
-use App\Models\JenisAPAR;
-use App\Exports\AparExport;
+use App\Models\Kota;
+use App\Models\DataApar;
+use App\Models\Provinsi;
+use App\Models\TipeApar;
+use App\Models\JenisApar;
+use App\Models\ZonaLokasi;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\MasterInspeksi;
 use App\Models\DetailInpeksiApar;
-use Maatwebsite\Excel\Facades\Excel;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-use RealRashid\SweetAlert\Facades\Alert;
-use App\Models\JenisAPAR as ModelsJenisAPAR;
-
 
 class DataAparController extends Controller
 {
@@ -26,7 +24,7 @@ class DataAparController extends Controller
      */
     public function index()
     {
-        $dataapar = DataApar::all();
+        $dataapar = DataApar::with('Tipe', 'Jenis', 'Zona')->get();
         return view('supervisor.dataapar.index', compact('dataapar'));
     }
 
@@ -37,9 +35,11 @@ class DataAparController extends Controller
      */
     public function create()
     {
-        $tipe = tipeAPAR::all();
-        $jenis = JenisAPAR::all();
-        return view('supervisor.dataapar.create', compact('tipe', 'jenis'));
+        $provinsi = Provinsi::orderBy('name')->get();
+        $tipe = TipeApar::all();
+        $jenis = JenisApar::all();
+        $zona = ZonaLokasi::all();
+        return view('supervisor.dataapar.create', compact('tipe', 'jenis', 'provinsi', 'zona'));
     }
 
     /**
@@ -51,10 +51,11 @@ class DataAparController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'tipe' => 'required',
-            'jenis' => 'required',
+            'kd_apar' => 'required',
+            'tipe_id' => 'required',
+            'jenis_id' => 'required',
             'berat' => 'required',
-            'zona' => 'required',
+            'zona_id' => 'required',
             'lokasi' => 'required',
             'provinsi' => 'required',
             'kota' => 'required',
@@ -64,11 +65,15 @@ class DataAparController extends Controller
             'kedaluarsa' => 'required',
             'keterangan' => 'required',
         ]);
-
-
+        $checkKode = DataApar::where('kd_apar', $request->kd_apar)->count();
+        if ($checkKode > 0) {
+            toast('Kode APAR sudah dipakai', 'error');
+            return back();
+        }
+        $nama_provinsi = Provinsi::where('id', $request->provinsi)->first();
+        $request['provinsi'] =  Str::title(Str::lower($nama_provinsi->name));
         $apar =  DataApar::create($request->all());
         $periodeNow = MasterInspeksi::whereDate('periode', '>=', date('Y-m-01'))->get();
-
         if (!empty($periodeNow)) {
             foreach ($periodeNow as $periode) {
                 DetailInpeksiApar::create([
@@ -99,10 +104,14 @@ class DataAparController extends Controller
      */
     public function edit($id)
     {
-        $tipe = tipeAPAR::all();
-        $jenis = JenisAPAR::all();
-        $dataapar = DataApar::find($id);
-        return view('supervisor.dataapar.edit', ['dataapar' => $dataapar, 'jenis' => $jenis, 'tipe' => $tipe]);
+        $provinsi = Provinsi::orderBy('name')->get();
+        $tipe = TipeApar::all();
+        $jenis = JenisApar::all();
+        $zona = ZonaLokasi::all();
+        $dataapar = DataApar::with('Tipe', 'Jenis', 'Zona')->find($id);
+        $id_provinsi = Provinsi::where('name', $dataapar->provinsi)->first();
+        $kota = Kota::where('province_id', $id_provinsi->id)->get();
+        return view('supervisor.dataapar.edit', ['dataapar' => $dataapar, 'jenis' => $jenis, 'tipe' => $tipe, 'provinsi' => $provinsi, 'kota' => $kota, 'zona' => $zona]);
     }
 
     /**
@@ -115,10 +124,10 @@ class DataAparController extends Controller
     public function update(Request $request, DataApar $dataapar)
     {
         $request->validate([
-            'tipe' => 'required',
-            'jenis' => 'required',
+            'tipe_id' => 'required',
+            'jenis_id' => 'required',
             'berat' => 'required',
-            'zona' => 'required',
+            'zona_id' => 'required',
             'lokasi' => 'required',
             'provinsi' => 'required',
             'kota' => 'required',
@@ -128,6 +137,8 @@ class DataAparController extends Controller
             'kedaluarsa' => 'required',
             'keterangan' => 'required',
         ]);
+        $nama_provinsi = Provinsi::where('id', $request->provinsi)->first();
+        $request['provinsi'] =  Str::title(Str::lower($nama_provinsi->name));
         $dataapar->update($request->all());
         toast('Data APAR berhasil diubah', 'success');
         return redirect('/apar/dataapar')->with('success', 'Data Updated!');
@@ -141,6 +152,9 @@ class DataAparController extends Controller
      */
     public function destroy(DataApar $dataapar)
     {
+        $dataapar->update([
+            'kd_apar' => $dataapar->kd_apar . date('ymdhis')
+        ]);
         $dataapar->delete();
         toast('Data APAR berhasil dihapus', 'success');
         return redirect('/apar/dataapar')->with('success', 'Data Apar Deleted');
@@ -153,10 +167,10 @@ class DataAparController extends Controller
         $spreadsheet->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
         $row = 6;
         $no = 1;
-        foreach (DataApar::all() as $data) {
+        foreach (DataApar::with('Zona', 'Jenis', 'Tipe')->get() as $data) {
             $spreadsheet->setActiveSheetIndex(0)
                 ->setCellValue("A{$row}", "{$no}")
-                ->setCellValue("B{$row}", "{$data->id}")
+                ->setCellValue("B{$row}", "{$data->kd_apar}")
                 ->setCellValue("C{$row}", "{$data->tipe}")
                 ->setCellValue("D{$row}", "{$data->jenis}")
                 ->setCellValue("E{$row}", "{$data->berat} KG")
@@ -181,7 +195,7 @@ class DataAparController extends Controller
 
     public function export_pdf()
     {
-        $apars = DataApar::all();
+        $apars = DataApar::with('Zona', 'Jenis', 'Tipe')->get();
 
         $pdf = PDF::loadview('layouts.export_pdf_APAR', ['apars' => $apars]);
         $pdf->setPaper('A4', 'landscape');

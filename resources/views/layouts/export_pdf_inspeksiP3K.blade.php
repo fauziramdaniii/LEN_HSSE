@@ -68,14 +68,14 @@
         </tr>
     </table>
     <h2>
-        <center>INSPEKSI CHECKLIST APAR</center>
+        <center>INSPEKSI CHECKLIST P3K</center>
     </h2>
     @foreach($periode->DetailInspeksi as $period)
     <table>
         <tr>
             <td><strong>Kode P3K</strong></td>
             <td><strong> :</strong> </td>
-            <td><strong>{{$period->p3k_id}}</strong></td>
+            <td><strong>{{$period->dataP3k->kd_p3k}}</strong></td>
         </tr>
         <tr>
             <td><strong>Tipe P3K</strong></td>
@@ -126,6 +126,25 @@
     <br>
     <br>
     @endforeach
+
+    <table width="100%">
+        <tr style="font-size:small">
+            <td style="text-align:left;vertical-align:top" width=85%>Disusun Oleh,</td>
+            <td style="text-align:left;vertical-align:top">Mengetahui,</td>
+        </tr>
+        <tr>
+            <td style="text-align:left;vertical-align:top"></td>
+            <td style="text-align:left;vertical-align:top">Manager K3L</td>
+        </tr>
+        <tr style="font-size:small">
+            <td style="text-align:left;vertical-align:top;padding-top:80px"><b>____________________</b></td>
+            <td style="text-align:left;vertical-align:top;padding-top:80px"><b>____________________</b></td>
+        </tr>
+        <tr style="font-size:small">
+            <td style="text-align:left;vertical-align:top">NIK.</td>
+            <td style="text-align:left;vertical-align:top">NIK.</td>
+        </tr>
+    </table>
 </body>
 
 </html>

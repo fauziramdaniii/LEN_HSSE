@@ -92,12 +92,12 @@
             @foreach($p3k as $data)
             <tr>
                 <th>{{$loop->iteration}}</th>
-                <td>{{$data->id}}</td>
+                <td>{{$data->kd_p3k}}</td>
                 <td>{{$data->tipe}}</td>
                 <td>{{$data->lokasi}}</td>
                 <td>{{$data->provinsi}}</td>
                 <td>{{$data->kota}}</td>
-                <td>{{$data->zona}}</td>
+                <td>{{@$data->Zona->zona}}</td>
                 <td>{{$data->gedung}}</td>
                 <td>{{$data->lantai}}</td>
                 <td>{{$data->titik}}</td>
@@ -106,7 +106,27 @@
             @endforeach
         </tbody>
     </table>
-
+    <br>
+    <br>
+    <br>
+    <table width="100%">
+        <tr style="font-size:small">
+            <td style="text-align:left;vertical-align:top" width=85%>Disusun Oleh,</td>
+            <td style="text-align:left;vertical-align:top">Mengetahui,</td>
+        </tr>
+        <tr>
+            <td style="text-align:left;vertical-align:top"></td>
+            <td style="text-align:left;vertical-align:top">Manager K3L</td>
+        </tr>
+        <tr style="font-size:small">
+            <td style="text-align:left;vertical-align:top;padding-top:80px"><b>____________________</b></td>
+            <td style="text-align:left;vertical-align:top;padding-top:80px"><b>____________________</b></td>
+        </tr>
+        <tr style="font-size:small">
+            <td style="text-align:left;vertical-align:top">NIK.</td>
+            <td style="text-align:left;vertical-align:top">NIK.</td>
+        </tr>
+    </table>
 </body>
 
 </html>

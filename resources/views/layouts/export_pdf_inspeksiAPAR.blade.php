@@ -130,8 +130,8 @@
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{$periode->Apart->id}}</td>
-                <td>{{$periode->Apart->tipe}}</td>
-                <td>{{$periode->Apart->jenis}}</td>
+                <td>{{@$periode->Apart->Tipe->nama_tipe}}</td>
+                <td>{{@$periode->Apart->Jenis->nama_jenis}}</td>
                 <td>{{$periode->Apart->berat}}</td>
                 <td>{{$periode->Apart->titik}}</td>
                 <td>{{$periode->Apart->kedaluarsa}}</td>
@@ -163,12 +163,12 @@
             <td style="text-align:left;vertical-align:top">Manager K3L</td>
         </tr>
         <tr style="font-size:small">
-            <td style="text-align:left;vertical-align:top;padding-top:80px"><b><u>Yanto Harisyanto</b></u></td>
-            <td style="text-align:left;vertical-align:top;padding-top:80px"><b><u>Fashol Nasrul</b></u></td>
+            <td style="text-align:left;vertical-align:top;padding-top:80px"><b>____________________</b></td>
+            <td style="text-align:left;vertical-align:top;padding-top:80px"><b>____________________</b></td>
         </tr>
         <tr style="font-size:small">
-            <td style="text-align:left;vertical-align:top">NIK. 1311080</td>
-            <td style="text-align:left;vertical-align:top">NIK. 0902260</td>
+            <td style="text-align:left;vertical-align:top">NIK.</td>
+            <td style="text-align:left;vertical-align:top">NIK.</td>
         </tr>
     </table>
 </body>

@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DataP3K;
-use App\Models\InspeksiP3K;
-use App\Models\IsiInspeksi;
-use App\Models\IsiP3K;
-use Illuminate\Http\Request;
-use App\Models\MasterInspeksiP3K;
 use PDF;
+use App\Models\IsiP3k;
+use App\Models\DataP3k;
+use App\Models\InspeksiP3k;
+use App\Models\IsiInspeksi;
+use Illuminate\Http\Request;
+use App\Models\MasterInspeksiP3k;
 
-class MasterInspeksiP3KController extends Controller
+
+class MasterInspeksiP3kController extends Controller
 {
     public function index()
     {
-        $periode = MasterInspeksiP3K::orderBy('periode')->get();
+        $periode = MasterInspeksiP3k::orderBy('periode')->get();
         return view('supervisor.datap3k.periode', compact('periode'));
     }
 
@@ -33,11 +34,11 @@ class MasterInspeksiP3KController extends Controller
         $request->validate([
             'periode' => 'required'
         ]);
-        if (DataP3K::count() < 1) {
+        if (DataP3k::count() < 1) {
             toast('Isi terlebih dahulu Data P3K', 'error');
             return back();
         }
-        $check = MasterInspeksiP3K::where('periode',  date('Y-m-d', strtotime($request->periode)))->first();
+        $check = MasterInspeksiP3k::where('periode',  date('Y-m-d', strtotime($request->periode)))->first();
         if (!empty($check)) {
             toast('Periode ' . date('F Y', strtotime($request->periode)) . ' sudah tersedia', 'error');
             return back();
@@ -46,13 +47,13 @@ class MasterInspeksiP3KController extends Controller
         $request->validate([
             'periode' => 'required',
         ]);
-        $createPeriode = MasterInspeksiP3K::create([
+        $createPeriode = MasterInspeksiP3k::create([
             'periode' => $periode,
 
         ]);
         if ($createPeriode) {
-            foreach (DataP3K::all() as $p3k) {
-                $createInspeksi = InspeksiP3K::create([
+            foreach (DataP3k::all() as $p3k) {
+                $createInspeksi = InspeksiP3k::create([
                     'periode_id' => $createPeriode->id,
                     'p3k_id' => $p3k->id,
                     'status' => 'Belum Inspeksi',
@@ -60,13 +61,13 @@ class MasterInspeksiP3KController extends Controller
                 if ($createInspeksi) {
                     switch ($p3k->tipe) {
                         case 'A':
-                            $isi = IsiP3K::where('tipe', 'A')->get();
+                            $isi = IsiP3k::where('tipe', 'A')->get();
                             break;
                         case 'B':
-                            $isi = IsiP3K::where('tipe', 'B')->get();
+                            $isi = IsiP3k::where('tipe', 'B')->get();
                             break;
                         case 'C':
-                            $isi = IsiP3K::where('tipe', 'C')->get();
+                            $isi = IsiP3k::where('tipe', 'C')->get();
                             break;
                         default:
                             break;
@@ -85,7 +86,7 @@ class MasterInspeksiP3KController extends Controller
         return redirect('/p3k/masterinspeksi')->with('success', 'Periode saved!');
     }
 
-    public function destroy(MasterInspeksiP3K $masterinspeksi)
+    public function destroy(MasterInspeksiP3k $masterinspeksi)
     {
         $masterinspeksi->delete();
 
@@ -93,13 +94,13 @@ class MasterInspeksiP3KController extends Controller
         return back();
     }
 
-    public function export_pdf(MasterInspeksiP3K $id)
+    public function export_pdf(MasterInspeksiP3k $id)
     {
         $periode = $id->load('DetailInspeksi', 'DetailInspeksi.isi', 'DetailInspeksi.isi.detail');
         $bulan = date('F-Y', strtotime($id->periode));
         $pdf = PDF::loadview('layouts.export_pdf_inspeksiP3K', ['periode' => $periode]);
         $pdf->setPaper('A4', 'landscape');
-        $file = "HasilInspeksi_" . $bulan . "_" . date('Ymdhis') . ".xlsx";
+        $file = "HasilInspeksi_" . $bulan . "_" . date('Ymdhis') . ".pdf";
         return $pdf->download($file);
     }
 }

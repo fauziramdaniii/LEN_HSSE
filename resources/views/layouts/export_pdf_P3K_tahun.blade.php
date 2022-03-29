@@ -74,7 +74,7 @@
         <tr>
             <td><strong>Kode P3K</strong></td>
             <td><strong> :</strong> </td>
-            <td><strong>{{$p3k->id}}</strong></td>
+            <td><strong>{{$p3k->kd_p3k}}</strong></td>
         </tr>
         <tr>
             <td><strong>Tipe P3K</strong></td>
@@ -108,13 +108,13 @@
             </tr>
         </thead>
         <tbody class="baris">
-            @foreach($p3k->inspeksi->first()->isi as $isi)
+            @foreach($isi as $isi)
             <tr>
-                <td>{{$isi->detail->isi}}</td>
+                <td>{{$isi->isi}}</td>
                 @foreach($bulan as $data)
                 @php
                 $jumlah = null;
-                $getPeriode = App\Models\MasterInspeksiP3K::whereYear('periode', date('Y'))->whereMonth('periode',$data['key'])->first();
+                $getPeriode = App\Models\MasterInspeksiP3k::whereYear('periode', date('Y'))->whereMonth('periode',$data['key'])->first();
                 $inspeksi = $p3k->inspeksi->where('periode_id',@$getPeriode->id)->first();
                 @endphp
                 <td>
@@ -134,7 +134,7 @@
                 @foreach($bulan as $data)
                 @php
                 $jumlah = null;
-                $getPeriode = App\Models\MasterInspeksiP3K::whereYear('periode', date('Y'))->whereMonth('periode',$data['key'])->first();
+                $getPeriode = App\Models\MasterInspeksiP3k::whereYear('periode', date('Y'))->whereMonth('periode',$data['key'])->first();
                 $inspeksi = $p3k->inspeksi->where('periode_id',@$getPeriode->id)->first();
                 @endphp
                 <td>
@@ -150,7 +150,7 @@
                 @foreach($bulan as $data)
                 @php
                 $jumlah = null;
-                $getPeriode = App\Models\MasterInspeksiP3K::whereYear('periode', date('Y'))->whereMonth('periode',$data['key'])->first();
+                $getPeriode = App\Models\MasterInspeksiP3k::whereYear('periode', date('Y'))->whereMonth('periode',$data['key'])->first();
                 $inspeksi = $p3k->inspeksi->where('periode_id',@$getPeriode->id)->first();
                 @endphp
                 <td>
@@ -166,7 +166,7 @@
                 @foreach($bulan as $data)
                 @php
                 $jumlah = null;
-                $getPeriode = App\Models\MasterInspeksiP3K::whereYear('periode', date('Y'))->whereMonth('periode',$data['key'])->first();
+                $getPeriode = App\Models\MasterInspeksiP3k::whereYear('periode', date('Y'))->whereMonth('periode',$data['key'])->first();
                 $inspeksi = $p3k->inspeksi->where('periode_id',@$getPeriode->id)->first();
                 @endphp
                 <td>
@@ -180,7 +180,27 @@
 
         </tbody>
     </table>
-
+    <br>
+    <br>
+    <br>
+    <table width="100%">
+        <tr style="font-size:small">
+            <td style="text-align:left;vertical-align:top" width=85%>Disusun Oleh,</td>
+            <td style="text-align:left;vertical-align:top">Mengetahui,</td>
+        </tr>
+        <tr>
+            <td style="text-align:left;vertical-align:top"></td>
+            <td style="text-align:left;vertical-align:top">Manager K3L</td>
+        </tr>
+        <tr style="font-size:small">
+            <td style="text-align:left;vertical-align:top;padding-top:80px"><b>____________________</b></td>
+            <td style="text-align:left;vertical-align:top;padding-top:80px"><b>____________________</b></td>
+        </tr>
+        <tr style="font-size:small">
+            <td style="text-align:left;vertical-align:top">NIK.</td>
+            <td style="text-align:left;vertical-align:top">NIK.</td>
+        </tr>
+    </table>
 </body>
 
 </html>

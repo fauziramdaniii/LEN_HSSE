@@ -15,11 +15,11 @@ class IsiInspeksi extends Model
 
     public function detail()
     {
-        return $this->belongsTo(IsiP3K::class, 'isi_id');
+        return $this->belongsTo(IsiP3k::class, 'isi_id');
     }
 
     public function inspeksi()
     {
-        return $this->belongsTo(InspeksiP3K::class, 'inspeksi_id');
+        return $this->belongsTo(InspeksiP3k::class, 'inspeksi_id');
     }
 }

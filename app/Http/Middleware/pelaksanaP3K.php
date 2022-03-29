@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class pelaksanaP3K
 {
@@ -16,6 +17,20 @@ class pelaksanaP3K
      */
     public function handle(Request $request, Closure $next)
     {
-        return $next($request);
+        if (Auth::user()->role == 'supervisor') {
+            return redirect()->intended('pilih');
+        }
+
+        if (Auth::user()->role == 'petugasapar') {
+            return redirect()->intended('dashboard');
+        }
+
+        if (Auth::user()->role == 'petugasp3k') {
+
+            return $next($request);
+        }
+        if (Auth::user()->role == 'superadmin') {
+            return redirect()->intended('dashboard');
+        }
     }
 }

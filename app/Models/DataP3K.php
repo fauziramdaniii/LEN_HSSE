@@ -2,20 +2,26 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class DataP3K extends Model
+class DataP3k extends Model
 {
+    use HasFactory;
     use SoftDeletes;
     protected $fillable = [
-        'tipe', 'lokasi', 'provinsi', 'kota', 'zona', 'gedung', 'lantai', 'titik', 'keterangan'
+        'kd_p3k', 'tipe', 'lokasi', 'provinsi', 'kota', 'zona_id', 'gedung', 'lantai', 'titik', 'keterangan'
     ];
 
     public function inspeksi()
     {
-        return $this->hasMany(InspeksiP3K::class, 'p3k_id');
+        return $this->hasMany(InspeksiP3k::class, 'p3k_id');
+    }
+
+    public function Zona()
+    {
+        return $this->belongsTo(ZonaLokasi::class, 'zona_id');
     }
 
     protected static function boot()

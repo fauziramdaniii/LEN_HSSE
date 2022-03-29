@@ -45,7 +45,7 @@
               <img src="{{ asset ('template/images/faces/face28.jpg') }}" style="width:100%" alt="profile" />
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item">
+              <a href="/editAkun" class="dropdown-item">
                 <i class="ti-settings text-primary"></i>
                 Settings
               </a>
@@ -55,6 +55,7 @@
                   <i class="ti-power-off text-primary"></i>
                   Logout
                 </a>
+              </form>
             </div>
           </li>
         </ul>
@@ -74,7 +75,7 @@
         <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">COPYRIGHT © 2022 PT LEN INDUSTRI</span>
       </div>
     </footer>
-
+    @yield("modal")
     <script src="{{ asset ('template/vendors/js/vendor.bundle.base.js') }}"></script>
     <script src="{{ asset ('template/vendors/chart.js/Chart.min.js')}}"></script>
     <script src="{{ asset ('template/js/dataTables.select.min.js') }}"></script>
@@ -85,6 +86,7 @@
     <script src="{{ asset ('template/js/todolist.js') }} "></script>
     <script src="{{ asset ('template/js/dashboard.js') }}"></script>
     <script src="{{ asset ('template/js/Chart.roundedBarCharts.js') }} "></script>
+    @yield('script')
 </body>
 
 </html>

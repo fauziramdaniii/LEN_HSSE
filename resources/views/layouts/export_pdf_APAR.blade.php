@@ -59,6 +59,20 @@
         <center>Data APAR</center>
     </h2>
     <br />
+    <table>
+        <tr>
+            <td><strong>Nama Perusahaan</strong></td>
+            <td><strong> :</strong> </td>
+            <td><strong>PT.Len Industri (Persero)</strong></td>
+        </tr>
+        <tr>
+            <td><strong>Tanggal</strong></td>
+            <td><strong> :</strong> </td>
+            <td><strong>{{date('d F Y')}}</strong></td>
+        </tr>
+
+    </table>
+    <br>
 
     <table width="100%" class="tab">
         <thead class="blue">
@@ -83,14 +97,14 @@
             @foreach($apars as $apar)
             <tr>
                 <th>{{$loop->iteration}}</th>
-                <td>{{$apar->id}}</td>
-                <td>{{$apar->tipe}}</td>
-                <td>{{$apar->jenis}}</td>
+                <td>{{$apar->kd_apar}}</td>
+                <td>{{@$apar->Tipe->nama_tipe}}</td>
+                <td>{{@$apar->Jenis->nama_jenis}}</td>
                 <td>{{$apar->berat}} KG</td>
                 <td>{{$apar->lokasi}}</td>
                 <td>{{$apar->provinsi}}</td>
                 <td>{{$apar->kota}}</td>
-                <td>{{$apar->zona}}</td>
+                <td>{{@$apar->Zona->zona}}</td>
                 <td>{{$apar->gedung}}</td>
                 <td>{{$apar->lantai}}</td>
                 <td>{{$apar->titik}}</td>
@@ -113,12 +127,12 @@
             <td style="text-align:left;vertical-align:top">Manager K3L</td>
         </tr>
         <tr style="font-size:small">
-            <td style="text-align:left;vertical-align:top;padding-top:80px"><b><u>Yanto Harisyanto</b></u></td>
-            <td style="text-align:left;vertical-align:top;padding-top:80px"><b><u>Fashol Nasrul</b></u></td>
+            <td style="text-align:left;vertical-align:top;padding-top:80px"><b>____________________</b></td>
+            <td style="text-align:left;vertical-align:top;padding-top:80px"><b>____________________</b></td>
         </tr>
         <tr style="font-size:small">
-            <td style="text-align:left;vertical-align:top">NIK. 1311080</td>
-            <td style="text-align:left;vertical-align:top">NIK. 0902260</td>
+            <td style="text-align:left;vertical-align:top">NIK.</td>
+            <td style="text-align:left;vertical-align:top">NIK.</td>
         </tr>
     </table>
 </body>

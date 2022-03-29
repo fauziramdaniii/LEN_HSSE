@@ -18,19 +18,19 @@
                 @method('PUT')
                 <div class="form-group">
                     <label for="tipe" class="form-label"> Tipe APAR </label>
-                    <select name="tipe" class="form-control">
-                        <option disabled selected>--Pilih Tipe APAR--</option>
+                    <select name="tipe_id" class="form-control">
+                        <option disabled>--Pilih Tipe APAR--</option>
                         @foreach($tipe as $tipe)
-                        <option value="{{$tipe->nama_tipe}}" {{$tipe->nama_tipe == $dataapar->tipe ? 'selected' : ''}}>{{$tipe->nama_tipe}}</option>
+                        <option value="{{$tipe->id}}" {{$tipe->id == $dataapar->tipe_id ? 'selected' : ''}}>{{$tipe->nama_tipe}}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="jenis" class="form-label">Pilih Jenis APAR</label>
-                    <select name="jenis" class="form-control">
-                        <option disabled selected>--Pilih Jenis APAR--</option>
+                    <select name="jenis_id" class="form-control">
+                        <option disabled>--Pilih Jenis APAR--</option>
                         @foreach($jenis as $jenis)
-                        <option value="{{$jenis->nama_jenis}}" {{$jenis->nama_jenis == $dataapar->jenis ? 'selected' : ''}}>{{$jenis->nama_jenis}}</option>
+                        <option value="{{$jenis->id}}" {{$jenis->id == $dataapar->jenis_id ? 'selected' : ''}}>{{$jenis->nama_jenis}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -45,24 +45,29 @@
                 </div>
                 <div class="form-group">
                     <label for="provinsi"> Provinsi </label>
-                    <input type="text" class="form-control" name="provinsi" required value="{{ $dataapar->provinsi }}">
+                    <select class="form-control" id="provinsi" name="provinsi" required>
+                        <option selected disabled value="">===Pilih Provinsi===</option>
+                        @foreach($provinsi as $data)
+                        <option value="{{ucfirst(trans($data->id))}}" {{Str::title(Str::lower($data->name)) == Str::title(Str::lower($dataapar->provinsi)) ? 'selected' : ''}}>{{Str::title(Str::lower($data->name))}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="kota"> Kota </label>
-                    <input type="text" class="form-control" name="kota" required value="{{ $dataapar->kota }}">
+                    <select class="form-control" name="kota" required id="optionKota">
+                        <option selected disabled value="">===Pilih Kota===</option>
+                        @foreach($kota as $data)
+                        <option value="{{Str::title(Str::lower($data->name))}}" {{Str::title(Str::lower($data->name)) == Str::title(Str::lower($dataapar->kota)) ? 'selected' : ''}}>{{Str::title(Str::lower($data->name))}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="zona"> Pilih Zona APAR</label>
-                    <select name="zona" class="form-control">
-                        <option value="1" {{ $dataapar->zona=='1' ? 'selected' : '' }}>1</option>
-                        <option value="2" {{ $dataapar->zona=='2' ? 'selected' : '' }}>2</option>
-                        <option value="3" {{ $dataapar->zona=='3' ? 'selected' : '' }}>3</option>
-                        <option value="4" {{ $dataapar->zona=='4' ? 'selected' : '' }}>4</option>
-                        <option value="5" {{ $dataapar->zona=='5' ? 'selected' : '' }}>5</option>
-                        <option value="6" {{ $dataapar->zona=='6' ? 'selected' : '' }}>6</option>
-                        <option value="7" {{ $dataapar->zona=='7' ? 'selected' : '' }}>7</option>
-                        <option value="8" {{ $dataapar->zona=='8' ? 'selected' : '' }}>8</option>
-                        <option value="9" {{ $dataapar->zona=='9' ? 'selected' : '' }}>9</option>
+                    <select name="zona_id" class="form-control">
+                        <option disabled>===Pilih Zona===</option>
+                        @foreach($zona as $data)
+                        <option value="{{$data->id}}" {{$data->id == $dataapar->zona_id ? 'selected' : ''}}>{{$data->zona}}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-group">
@@ -96,4 +101,20 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+    $(document).on('change', '#provinsi', function() {
+        $.get('/getKota/' + $('#provinsi').val(), function(data) {
+            $('#optionKota').empty();
+            $('#optionKota').removeAttr('disabled');
+            $.each(data.data, function(key, value) {
+                $("#optionKota").append(
+                    '<option value="' + data.data[key].name + '">' + data.data[key].name + '</option>'
+                );
+            });
+        });
+    });
+</script>
 @endsection

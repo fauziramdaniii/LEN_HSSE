@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTipeAPARSTable extends Migration
+class CreateZonaLokasisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateTipeAPARSTable extends Migration
      */
     public function up()
     {
-        Schema::create('tipe_a_p_a_r_s', function (Blueprint $table) {
+        Schema::create('zona_lokasis', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_tipe');
+            $table->string('zona');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateTipeAPARSTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipe_a_p_a_r_s');
+        Schema::dropIfExists('zona_lokasis');
     }
 }

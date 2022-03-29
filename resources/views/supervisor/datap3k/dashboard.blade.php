@@ -19,12 +19,8 @@
         datasets: [{
             data: jumlahInspeksi,
             backgroundColor: [
-                '#4B49AC',
                 '#57B657',
-                '#FFC100',
-                '#248AFD',
                 '#FF4747',
-                '#282f3a',
             ],
         }],
 

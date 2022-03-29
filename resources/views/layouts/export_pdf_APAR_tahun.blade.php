@@ -74,12 +74,12 @@
         <tr>
             <td><strong>Kode APAR</strong></td>
             <td><strong> :</strong> </td>
-            <td><strong>{{$apar->id}}</strong></td>
+            <td><strong>{{$apar->kd_apar}}</strong></td>
         </tr>
         <tr>
             <td><strong>Jenis APAR</strong></td>
             <td><strong> :</strong> </td>
-            <td><strong>{{$apar->jenis}}</strong></td>
+            <td><strong>{{@$apar->Jenis->nama_jenis}}</strong></td>
         </tr>
         <tr>
             <td><strong>Lokasi</strong></td>
@@ -141,7 +141,30 @@
             @endforeach
         </tbody>
     </table>
-
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <table width="100%">
+        <tr style="font-size:small">
+            <td style="text-align:left;vertical-align:top" width=85%>Disusun Oleh,</td>
+            <td style="text-align:left;vertical-align:top">Mengetahui,</td>
+        </tr>
+        <tr>
+            <td style="text-align:left;vertical-align:top"></td>
+            <td style="text-align:left;vertical-align:top">Manager K3L</td>
+        </tr>
+        <tr style="font-size:small">
+            <td style="text-align:left;vertical-align:top;padding-top:80px"><b>____________________</b></td>
+            <td style="text-align:left;vertical-align:top;padding-top:80px"><b>____________________</b></td>
+        </tr>
+        <tr style="font-size:small">
+            <td style="text-align:left;vertical-align:top">NIK.</td>
+            <td style="text-align:left;vertical-align:top">NIK.</td>
+        </tr>
+    </table>
 </body>
 
 </html>

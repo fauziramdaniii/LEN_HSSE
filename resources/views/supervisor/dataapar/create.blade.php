@@ -1,6 +1,7 @@
 @extends('supervisor.dataapar.layout')
 
 @section('content')
+@include('sweetalert::alert')
 <div class="col-md-8 offset-md-2">
     <div class="card">
         <div class="card-body">
@@ -21,23 +22,23 @@
                 @csrf
                 <div class="form-group">
                     <label for="id" class="form-label"> Kode APAR </label>
-                    <input type="text" class="form-control" name="id" required>
+                    <input type="number" class="form-control" name="kd_apar" min=1 required>
                 </div>
                 <div class="form-group">
                     <label for="tipe" class="form-label"> Tipe APAR </label>
-                    <select name="tipe" class="form-control">
+                    <select name="tipe_id" class="form-control">
                         <option disabled selected>--Pilih Tipe APAR--</option>
                         @foreach($tipe as $tipe)
-                        <option value="{{$tipe->nama_tipe}}">{{$tipe->nama_tipe}}</option>
+                        <option value="{{$tipe->id}}">{{$tipe->nama_tipe}}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="jenis" class="form-label">Pilih Jenis APAR</label>
-                    <select name="jenis" class="form-control">
+                    <select name="jenis_id" class="form-control">
                         <option disabled selected>--Pilih Jenis APAR--</option>
                         @foreach($jenis as $jenis)
-                        <option value="{{$jenis->nama_jenis}}">{{$jenis->nama_jenis}}</option>
+                        <option value="{{$jenis->id}}">{{$jenis->nama_jenis}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -52,24 +53,26 @@
                 </div>
                 <div class="form-group">
                     <label for="provinsi"> Provinsi </label>
-                    <input type="text" class="form-control" name="provinsi" required>
+                    <select class="form-control" id="provinsi" name="provinsi" required>
+                        <option selected disabled value="">===Pilih Provinsi===</option>
+                        @foreach($provinsi as $data)
+                        <option value="{{ucfirst(trans($data->id))}}">{{Str::title(Str::lower($data->name))}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="kota"> Kota </label>
-                    <input type="text" class="form-control" name="kota" required>
+                    <select class="form-control" name="kota" required disabled id="optionKota">
+                        <option selected disabled value="">===Pilih Kota===</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="zona" class="form-label">Pilih Zona APAR</label>
-                    <select name="zona" class="form-control">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="4">6</option>
-                        <option value="5">7</option>
-                        <option value="4">8</option>
-                        <option value="5">9</option>
+                    <select name="zona_id" class="form-control">
+                        <option selected disabled value="">===Pilih Zona===</option>
+                        @foreach($zona as $data)
+                        <option value="{{$data->id}}">{{$data->zona}}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-group">
@@ -98,11 +101,29 @@
                     </select>
                 </div>
                 <center>
-                    <a href="/apar/kelolaParameter" class="btn btn-info"> Kelola Tipe & Jenis</a>
+                    <a href="/apar/kelolaParameter" class="btn btn-info"> Kelola Parameter</a>
                     <button type="submit" class="btn btn-primary"> Simpan </button>
                 </center>
             </form>
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+    $('#optionKota').prop('disabled', 'disabled');
+    $('#optionKota').prop('selectedIndex', 0);
+    $(document).on('change', '#provinsi', function() {
+        $.get('/getKota/' + $('#provinsi').val(), function(data) {
+            $('#optionKota').empty();
+            $('#optionKota').removeAttr('disabled');
+            $.each(data.data, function(key, value) {
+                $("#optionKota").append(
+                    '<option value="' + data.data[key].name + '">' + data.data[key].name + '</option>'
+                );
+            });
+        });
+    });
+</script>
 @endsection

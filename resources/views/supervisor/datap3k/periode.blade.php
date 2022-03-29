@@ -7,7 +7,7 @@
         <div class="card">
             <div class="card-body">
                 <h3>
-                    <center>List Periode Inpeksi</center>
+                    <center>List Periode Inspeksi</center>
                 </h3>
                 <center> <a href="masterinspeksi/create" class="btn btn-info"> Tambah Periode </a></center>
                 <div class="col-sm-12">

@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class MasterInspeksiP3K extends Model
+class MasterInspeksiP3k extends Model
 {
     use SoftDeletes, HasFactory;
     protected $fillable = [
@@ -15,7 +15,7 @@ class MasterInspeksiP3K extends Model
 
     public function DetailInspeksi()
     {
-        return $this->hasMany(InspeksiP3K::class, 'periode_id');
+        return $this->hasMany(InspeksiP3k::class, 'periode_id');
     }
 
     protected static function boot()

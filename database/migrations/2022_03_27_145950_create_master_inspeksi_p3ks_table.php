@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateJenisAPARSTable extends Migration
+class CreateMasterInspeksiP3ksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateJenisAPARSTable extends Migration
      */
     public function up()
     {
-        Schema::create('jenis_a_p_a_r_s', function (Blueprint $table) {
+        Schema::create('master_inspeksi_p3ks', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_jenis');
+            $table->date('periode');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -27,6 +28,6 @@ class CreateJenisAPARSTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jenis_a_p_a_r_s');
+        Schema::dropIfExists('master_inspeksi_p3ks');
     }
 }

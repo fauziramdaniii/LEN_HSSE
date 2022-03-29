@@ -18,6 +18,7 @@
   var aktif = <?php echo $aktif; ?>;
   var service = <?php echo $service; ?>;
   var stock = <?php echo $stock; ?>;
+  var jumlahInspeksi = <?php echo $jumlahInspeksi; ?>;
 
   // console.log(jumlahJenis);
   //Jenis APAR
@@ -50,6 +51,35 @@
       type: 'pie',
       data: doughnutPieData,
       options: doughnutPieOptions
+    });
+  }
+
+  var doughnutPieData2 = {
+    datasets: [{
+      data: jumlahInspeksi,
+      backgroundColor: [
+        '#FF4747',
+        '#57B657',
+        '#282f3a',
+      ],
+    }],
+
+    // These labels appear in the legend and in the tooltips when hovering different arcs
+    labels: ['Belum Inspeksi', 'Sudah Inpeksi']
+  };
+  var doughnutPieOptions2 = {
+    responsive: true,
+    animation: {
+      animateScale: true,
+      animateRotate: true
+    }
+  };
+  if ($("#jumlahInspeksiAPAR").length) {
+    var pieChartCanvas = $("#jumlahInspeksiAPAR").get(0).getContext("2d");
+    var pieChart = new Chart(pieChartCanvas, {
+      type: 'pie',
+      data: doughnutPieData2,
+      options: doughnutPieOptions2
     });
   }
 

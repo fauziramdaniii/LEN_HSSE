@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Models\MasterInspeksi;
 use App\Models\DetailInpeksiApar;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-use RealRashid\SweetAlert\Facades\Alert;
 use PDF;
 
 class MasterInspeksiController extends Controller
@@ -42,7 +41,8 @@ class MasterInspeksiController extends Controller
     public function store(Request $request)
     {
         if (DataApar::count() < 1) {
-            return back()->with('error', 'Isi terlebih dahulu Data Apar');
+            toast('Isi terlebih dahulu Data Apar', 'error');
+            return back();
         }
         $check = MasterInspeksi::where('periode',  date('Y-m-d', strtotime($request->periode)))->where('deleted_at', null)->first();
         if (!empty($check)) {
@@ -172,11 +172,11 @@ class MasterInspeksiController extends Controller
 
     public function export_pdf(MasterInspeksi $id)
     {
-        $periode = $id->load('DetailInspeksi', 'DetailInspeksi.Apart');
+        $periode = $id->load('DetailInspeksi', 'DetailInspeksi.Apart', 'DetailInspeksi.Apart.Tipe', 'DetailInspeksi.Apart.Jenis');
         $bulan = date('F-Y', strtotime($id->periode));
         $pdf = PDF::loadview('layouts.export_pdf_inspeksiAPAR', ['periode' => $periode]);
         $pdf->setPaper('A4', 'landscape');
-        $file = "HasilInspeksi_" . $bulan . "_" . date('Ymdhis') . ".xlsx";
+        $file = "HasilInspeksi_" . $bulan . "_" . date('Ymdhis') . ".pdf";
         return $pdf->download($file);
     }
 }

@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             P3KSeeder::class,
             JenisAPARSeeder::class,
             TipeAPARSeeder::class,
+            ZonaLokasiSeeder::class,
         ]);
     }
 }

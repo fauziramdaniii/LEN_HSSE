@@ -2,41 +2,42 @@
 
 @section('sidebar')
 @if(Auth::User()->role == 'supervisor')
-<li class="nav-item">
-    <a class="nav-link {{Request::is('apar/dashboard*') ? 'active' : ''}} " href="/apar/dashboard">
-        <i class="icon-grid menu-icon"></i>
+<li class="nav-item {{Request::is('apar/dashboard') ? 'active' : ''}}">
+    <a class="nav-link " href="/apar/dashboard">
+        <i class="mdi mdi-view-dashboard menu-icon"></i>
         <span class="menu-title">Dashboard</span>
     </a>
 </li>
 <li class="nav-item {{Request::is('apar/dataapar*') ? 'active' : ''}}">
     <a class="nav-link" href="/apar/dataapar">
-        <i class="icon-contract menu-icon"></i>
+        <i class="mdi mdi-fire-extinguisher menu-icon"></i>
         <span class="menu-title">Master APAR</span>
     </a>
 </li>
 <li class="nav-item {{Request::is('apar/masterinspeksi*') ? 'active' : ''}}">
     <a class="nav-link" href="/apar/masterinspeksi">
-        <i class="icon-paper menu-icon"></i>
+        <i class="mdi mdi-calendar-clock menu-icon"></i>
         <span class="menu-title">Master Inspeksi</span>
     </a>
 </li>
 
 <li class="nav-item {{Request::is('apar/inspeksi*') ? 'active' : ''}}">
     <a class="nav-link" href="/apar/inspeksi">
-        <i class="icon-paper menu-icon"></i>
+        <i class="mdi mdi-clipboard-text menu-icon"></i>
         <span class="menu-title">Inspeksi APAR</span>
     </a>
 </li>
+
 @else
-<li class="nav-item">
+<li class="nav-item  {{Request::is('dashboard*') ? 'active' : ''}}">
     <a class="nav-link" href="/dashboard">
-        <i class="icon-grid menu-icon"></i>
+        <i class="mdi mdi-view-dashboard menu-icon"></i>
         <span class="menu-title">Dashboard</span>
     </a>
 </li>
-<li class="nav-item">
+<li class="nav-item {{Request::is('apar/inspeksi*') ? 'active' : ''}}">
     <a class="nav-link" href="/apar/inspeksi">
-        <i class="icon-paper menu-icon"></i>
+        <i class="mdi mdi-clipboard-text menu-icon"></i>
         <span class="menu-title">Inspeksi APAR</span>
     </a>
 </li>
@@ -57,7 +58,7 @@
                         <label for="id"> Kode Apar </label>
                         <select class="form-control " name="id" required>
                             @foreach($aparinspeksi->DetailInspeksi as $apart)
-                            <option value="{{$apart->id}}">{{$apart->apart_id}}</option>
+                            <option value="{{$apart->id}}">{{$apart->apart->kd_apar}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -152,7 +153,7 @@
                     <center><canvas id="canvas" width="250px" height="333px"></canvas></center> -->
 
                     <center>
-                        <div id="my_camera"></div>
+                        <div id="my_camera" style="width:250px; height:333px;"></div>
                     </center>
                     <center><input type=button value="Ambil Foto" class="btn btn-info my-2" onClick="take_snapshot()"></center>
                     <input type="hidden" name="bukti" class="image-tag">
@@ -174,11 +175,10 @@
 @section('script')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.js"></script>
 <script language="JavaScript">
-    Webcam.set({
-        width: 250,
-        height: 333,
+    Webcam.set('constraints', {
         image_format: 'jpeg',
-        jpeg_quality: 90
+        jpeg_quality: 90,
+        facingMode: "environment"
     });
 
     Webcam.attach('#my_camera');
@@ -195,7 +195,6 @@
 
     }
 </script>
-<!-- 
 <script>
     $('.fieldInspeksi').on('change', function() {
         $('#status').val('Aktif');
@@ -205,7 +204,9 @@
             }
         });
     });
-
+</script>
+<!-- 
+<script>
     let camera_button = document.querySelector("#start-camera");
     let video = document.querySelector("#video");
     let click_button = document.querySelector("#click-photo");

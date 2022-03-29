@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use PDF;
 use Exception;
-use App\Models\DataP3K;
-use App\Models\InspeksiP3K;
-use App\Models\IsiInspeksi;
+use App\Models\IsiP3k;
+use App\Models\DataP3k;
+use App\Models\InspeksiP3k;
 use Illuminate\Http\Request;
-use App\Models\MasterInspeksiP3K;
+use App\Models\MasterInspeksiP3k;
 
-class InspeksiP3KController extends Controller
+
+class InspeksiP3kController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +20,7 @@ class InspeksiP3KController extends Controller
      */
     public function index()
     {
-        $periode = MasterInspeksiP3K::orderBy('periode')->get();
+        $periode = MasterInspeksiP3k::orderBy('periode')->get();
         return view('inpeksiP3K.inpeksi', compact('periode'));
     }
 
@@ -28,19 +29,19 @@ class InspeksiP3KController extends Controller
         return view('inpeksiP3K.status');
     }
 
-    public function detailInspeksi(MasterInspeksiP3K $periode)
+    public function detailInspeksi(MasterInspeksiP3k $periode)
     {
         $periode = $periode->load('DetailInspeksi', 'DetailInspeksi.dataP3K');
         return view('inpeksiP3K.status', compact('periode'));
     }
 
-    public function inputInspeksi(InspeksiP3K $id)
+    public function inputInspeksi(InspeksiP3k $id)
     {
         $inpeksi = $id->load('isi', 'isi.detail');
         return view('inpeksiP3K.isiInpeksi', compact('inpeksi'));
     }
 
-    public function storeInpeksi(InspeksiP3K $id, Request $request)
+    public function storeInpeksi(InspeksiP3k $id, Request $request)
     {
         if (empty($request->bukti)) {
             toast('Ambil Foto terlebih dahulu!', 'error');
@@ -84,7 +85,7 @@ class InspeksiP3KController extends Controller
         return redirect('p3k/inspeksi/' . $inpeksi->periode_id);
     }
 
-    public function hasilInpeksi(InspeksiP3K $id)
+    public function hasilInpeksi(InspeksiP3k $id)
     {
         $inpeksi = $id->load('isi', 'isi.detail');
         return view('inpeksiP3K.hasil', compact('inpeksi'));
@@ -114,29 +115,29 @@ class InspeksiP3KController extends Controller
             'jumlah' => 'required',
             'keterangan' => 'required',
         ]);
-        InspeksiP3K::create($request->all());
+        InspeksiP3k::create($request->all());
         return redirect('/inspeksip3k')->with('success', 'inspeksip3k saved!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\InspeksiP3K  $inspeksip3k
+     * @param  \App\Models\InspeksiP3k  $inspeksip3k
      * @return \Illuminate\Http\Response
      */
-    public function show(InspeksiP3K $inspeksip3k)
+    public function show(InspeksiP3k $inspeksip3k)
     {
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\InspeksiP3K  $inspeksip3k
+     * @param  \App\Models\InspeksiP3k  $inspeksip3k
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $inspeksip3k = InspeksiP3K::find($id);
+        $inspeksip3k = InspeksiP3k::find($id);
         return view('inspeksip3k.edit', ['inspeksip3k' => $inspeksip3k]);
     }
 
@@ -144,10 +145,10 @@ class InspeksiP3KController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\InspeksiP3K  $inspeksip3k
+     * @param  \App\Models\InspeksiP3k  $inspeksip3k
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, InspeksiP3K $inspeksip3k)
+    public function update(Request $request, InspeksiP3k $inspeksip3k)
     {
         $request->validate([
             'isi' => 'required',
@@ -163,16 +164,16 @@ class InspeksiP3KController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\InspeksiP3K  $inspeksip3k
+     * @param  \App\Models\InspeksiP3k  $inspeksip3k
      * @return \Illuminate\Http\Response
      */
-    public function destroy(InspeksiP3K $inspeksip3k)
+    public function destroy(InspeksiP3k $inspeksip3k)
     {
         $inspeksip3k->delete();
         return redirect('/inspeksip3k')->with('success', 'Data inspeksi P3K Deleted');
     }
 
-    public function exportTahunan_pdf(DataP3K $id)
+    public function exportTahunan_pdf(DataP3k $id)
     {
         $bulan = [
             [
@@ -224,9 +225,9 @@ class InspeksiP3KController extends Controller
                 'bulan' => 'Desember'
             ],
         ];
-
+        $isi = IsiP3k::where('tipe', $id->tipe)->get();
         $p3k = $id->load('inspeksi', 'inspeksi.isi', 'inspeksi.isi.detail');
-        $pdf = PDF::loadview('layouts.export_pdf_P3K_tahun', ['p3k' => $p3k, 'bulan' => $bulan]);
+        $pdf = PDF::loadview('layouts.export_pdf_P3K_tahun', ['p3k' => $p3k, 'bulan' => $bulan, 'isi' => $isi]);
         $pdf->setPaper('A4', 'landscape');
         $file = "InspeksiTahunan_" . date('Ymdhis') . ".pdf";
         return $pdf->download($file);

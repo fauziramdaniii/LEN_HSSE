@@ -21,7 +21,7 @@
         <div class="card">
             <div class="card-body">
                 <p class="card-title text-right text-center">INSPEKSI P3K {{date('F Y')}} </p>
-                <p class="font-weight-500 text-center">Berikut adalah informasi dari jumlah jenis P3K yang ada</p>
+                <p class="font-weight-500 text-center">Berikut adalah informasi dari Inspeksi periode saat ini</p>
                 <canvas id="inspeksiChart"></canvas>
             </div>
         </div>
@@ -31,7 +31,7 @@
             <div class="card-body">
                 <p class="card-title text-center">STATUS P3K </p>
 
-                <p class="font-weight-500 text-center">Berikut adalah Informasi Jumlah dari status P3K {{date('Y')}}</p>
+                <p class="font-weight-500 text-center">Berikut adalah Informasi Hasil Inspeksi P3K {{date('Y')}}</p>
                 <div id="sales-legends" class="chartjs-legend mt-4 mb-2"></div>
                 <canvas id="sales-charts"></canvas>
             </div>
@@ -58,141 +58,23 @@
                                         <div class="col-md-6 border-right">
                                             <div class="table-responsive mb-3 mb-md-0 mt-3">
                                                 <table class="table table-borderless report-table">
+                                                    @foreach($zonas as $zona)
                                                     <tr>
-                                                        <td class="text-muted">Zona 1</td>
-                                                        <td class="w-1- px-0">
-                                                            <div class="progress progress-md mx-4">
-                                                                @if($dataP3K->where('zona',1)->count() != 0)
-                                                                <div class="progress-bar bg-primary" role="progressbar" style="width: <?php echo round($dataP3K->where('zona', 1)->count() / $jumlahP3K * 100, 2) . "%" ?>" aria-valuenow="{{$dataP3K->where('zona',1)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                @else
-                                                                <div class="progress-bar bg-primary" role="progressbar" style="width: 0%" aria-valuenow="{{$dataP3K->where('zona',1)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                @endif
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="font-weight-bold mb-0">{{$dataP3K->where('zona',1)->count()}}</h5>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-muted">Zona 2</td>
+                                                        <td class="text-muted">Zona {{$zona->zona}}</td>
                                                         <td class="w-100 px-0">
                                                             <div class="progress progress-md mx-4">
-                                                                @if($dataP3K->where('zona',2)->count() != 0)
-                                                                <div class="progress-bar bg-warning" role="progressbar" style="width: <?php echo round($dataP3K->where('zona', 2)->count() / $jumlahP3K * 100, 2) . "%" ?>" aria-valuenow="{{$dataP3K->where('zona',2)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                @if($dataP3K->where('zona_id',$zona->id)->count() != 0)
+                                                                <div class="progress-bar bg-info" role="progressbar" style="width: <?php echo round($dataP3K->where('zona_id', $zona->id)->count() / $jumlahP3K * 100, 2) . "%" ?>" aria-valuenow="{{$dataP3K->where('zona',$zona->id)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                 @else
-                                                                <div class="progress-bar bg-warning" role="progressbar" style="width: 0%" aria-valuenow="{{$dataP3K->where('zona',1)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                <div class="progress-bar bg-info" role="progressbar" style="width: 0%" aria-valuenow="{{$dataP3K->where('zona_id',$zona->id)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                 @endif
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <h5 class="font-weight-bold mb-0">{{$dataP3K->where('zona',2)->count()}}</h5>
+                                                            <h5 class="font-weight-bold mb-0">{{$dataP3K->where('zona_id',$zona->id)->count()}}</h5>
                                                         </td>
                                                     </tr>
-                                                    <tr>
-                                                        <td class="text-muted">Zona 3</td>
-                                                        <td class="w-100 px-0">
-                                                            <div class="progress progress-md mx-4">
-                                                                @if($dataP3K->where('zona',3)->count() != 0)
-                                                                <div class="progress-bar bg-danger" role="progressbar" style="width: <?php echo round($dataP3K->where('zona', 3)->count() / $jumlahP3K * 100, 2) . "%" ?>" aria-valuenow="{{$dataP3K->where('zona',3)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                @else
-                                                                <div class="progress-bar bg-danger" role="progressbar" style="width: 0%" aria-valuenow="{{$dataP3K->where('zona',3)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                @endif
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="font-weight-bold mb-0">{{$dataP3K->where('zona',3)->count()}}</h5>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-muted">Zona 4</td>
-                                                        <td class="w-100 px-0">
-                                                            <div class="progress progress-md mx-4">
-                                                                @if($dataP3K->where('zona',4)->count() != 0)
-                                                                <div class="progress-bar bg-info" role="progressbar" style="width: <?php echo round($dataP3K->where('zona', 4)->count() / $jumlahP3K  * 100, 2) . "%" ?>" aria-valuenow="{{$dataP3K->where('zona',4)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                @else
-                                                                <div class="progress-bar bg-info" role="progressbar" style="width: 0%" aria-valuenow="{{$dataP3K->where('zona',4)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                @endif
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="font-weight-bold mb-0">{{$dataP3K->where('zona',4)->count()}}</h5>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-muted">Zona 5</td>
-                                                        <td class="w-100 px-0">
-                                                            <div class="progress progress-md mx-4">
-                                                                @if($dataP3K->where('zona',5)->count() != 0)
-                                                                <div class="progress-bar bg-primary" role="progressbar" style="width: <?php echo round($dataP3K->where('zona', 5)->count() / $jumlahP3K * 100, 2) . "%" ?>" aria-valuenow="{{$dataP3K->where('zona',5)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                @else
-                                                                <div class="progress-bar bg-primary" role="progressbar" style="width: 0%" aria-valuenow="{{$dataP3K->where('zona',5)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                @endif
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="font-weight-bold mb-0">{{$dataP3K->where('zona',5)->count()}}</h5>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-muted">Zona 6</td>
-                                                        <td class="w-100 px-0">
-                                                            <div class="progress progress-md mx-4">
-                                                                @if($dataP3K->where('zona',6)->count() != 0)
-                                                                <div class="progress-bar bg-warning" role="progressbar" style="width: <?php echo round($dataP3K->where('zona', 6)->count() / $jumlahP3K  * 100, 2) . "%" ?>" aria-valuenow="{{$dataP3K->where('zona',6)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                @else
-                                                                <div class="progress-bar bg-warning" role="progressbar" style="width: 0%" aria-valuenow="{{$dataP3K->where('zona',6)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                @endif
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="font-weight-bold mb-0">{{$dataP3K->where('zona',6)->count()}}</h5>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-muted">Zona 7</td>
-                                                        <td class="w-100 px-0">
-                                                            <div class="progress progress-md mx-4">
-                                                                @if($dataP3K->where('zona',7)->count() != 0)
-                                                                <div class="progress-bar bg-danger" role="progressbar" style="width: <?php echo round($dataP3K->where('zona', 7)->count() / $jumlahP3K * 100, 2) . "%" ?>" aria-valuenow="{{$dataP3K->where('zona',7)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                @else
-                                                                <div class="progress-bar bg-danger" role="progressbar" style="width: 0%" aria-valuenow="{{$dataP3K->where('zona',7)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                @endif
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="font-weight-bold mb-0">{{$dataP3K->where('zona',7)->count()}}</h5>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-muted">Zona 8</td>
-                                                        <td class="w-100 px-0">
-                                                            <div class="progress progress-md mx-4">
-                                                                @if($dataP3K->where('zona',8)->count() != 0)
-                                                                <div class="progress-bar bg-info" role="progressbar" style="width: <?php echo round($dataP3K->where('zona', 8)->count() / $jumlahP3K  * 100, 2) . "%" ?>" aria-valuenow="{{$dataP3K->where('zona',8)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                @else
-                                                                <div class="progress-bar bg-info" role="progressbar" style="width: 0%" aria-valuenow="{{$dataP3K->where('zona',8)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                @endif
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="font-weight-bold mb-0">{{$dataP3K->where('zona',8)->count()}}</h5>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-muted">Zona 9</td>
-                                                        <td class="w-100 px-0">
-                                                            <div class="progress progress-md mx-4">
-                                                                @if($dataP3K->where('zona',9)->count() != 0)
-                                                                <div class="progress-bar bg-primary" role="progressbar" style="width: <?php echo round($dataP3K->where('zona', 9)->count() / $jumlahP3K * 100, 2) . "%" ?>" aria-valuenow="{{$dataP3K->where('zona',9)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                @else
-                                                                <div class="progress-bar bg-primary" role="progressbar" style="width: 0%" aria-valuenow="{{$dataP3K->where('zona',9)->count()}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                @endif
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="font-weight-bold mb-0">{{$dataP3K->where('zona',9)->count()}}</h5>
-                                                        </td>
-                                                    </tr>
+                                                    @endforeach
                                                 </table>
                                             </div>
                                         </div>
