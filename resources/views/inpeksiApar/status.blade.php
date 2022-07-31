@@ -19,6 +19,12 @@
         <span class="menu-title">Master Inspeksi</span>
     </a>
 </li>
+<li class="nav-item {{Request::is('apar/masterinspeksi*') ? 'active' : ''}}">
+    <a class="nav-link" href="/apar/masterinspeksi">
+        <i class="mdi mdi-calendar-clock menu-icon"></i>
+        <span class="menu-title">Master Inspeksi</span>
+    </a>
+</li>
 
 <li class="nav-item {{Request::is('apar/inspeksi*') ? 'active' : ''}}">
     <a class="nav-link" href="/apar/inspeksi">
