@@ -118,8 +118,8 @@
                                     class="btn btn-dark btn-sm my-2">Belum Inspeksi </a>
                             @else
                                 <button type="button" class="btn btn-info btn-sm my-2 lihatHasil" href="#"
-                                    data-toggle="modal" data-target="#modalHasil" data-id="{{ $dataapar->id }}"> Sudah
-                                    Diinspeksi </button>
+                                    data-toggle="modal" data-target="#modalHasil" data-id="{{ $dataapar->id }}"> Periksa
+                                    Inspeksi </button>
                             @endif
                         </td>
                     </tr>
@@ -190,6 +190,8 @@
                     <img id="buktiFoto" class="fotoBukti" alt="">
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Verifikasi</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Gagal Verifikasi</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
