@@ -15,9 +15,9 @@
                     <a href="{{$dataapar->count() > 0 ? 'dataapar/export' : '#'}}" class="btn btn-success"> Export Data </a>
                 </center>
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-12 mt-3">
                         <div class="table-responsive">
-                            <table class="display expandable-table mt-3" id="tableAPAR" width="100%">
+                            <table class="display expandable-table dataTable no-footer mb-2" id="order-listing" width="100%">
                                 <thead>
                                     <tr class="text-center">
                                         <th> No </th>
@@ -25,50 +25,51 @@
                                         <th> Tipe </th>
                                         <th> Jenis </th>
                                         <th> Berat </th>
-                                        <th> Zona </th>
+                                        <!-- <th> Zona </th>
                                         <th> Lokasi </th>
                                         <th> Provinsi </th>
                                         <th> Kota </th>
                                         <th> Gedung </th>
                                         <th> Lantai </th>
-                                        <th> Titik </th>
+                                        <th> Titik </th> -->
                                         <th> Kedaluarsa </th>
                                         <th> Keterangan </th>
-                                        <th colspan="3">
-                                            <center>Aksi
+                                        <th>
+                                            Aksi
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($dataapar as $dataapar)
-                                    <tr class="text-center">
+                                    <tr>
                                         <td> {{ $no++ }} </td>
                                         <td> {{ $dataapar->kd_apar }} </td>
                                         <td> {{ @$dataapar->Tipe->nama_tipe }} </td>
                                         <td> {{ @$dataapar->Jenis->nama_jenis }} </td>
                                         <td> {{ $dataapar->berat }} KG </td>
-                                        <td> {{ @$dataapar->Zona->zona }} </td>
+                                        <!-- <td> {{ @$dataapar->Zona->zona }} </td>
                                         <td> {{ $dataapar->lokasi }} </td>
                                         <td> {{ $dataapar->provinsi }} </td>
                                         <td> {{ $dataapar->kota }} </td>
                                         <td> {{ $dataapar->gedung }} </td>
                                         <td> {{ $dataapar->lantai }} </td>
-                                        <td> {{ $dataapar->titik }} </td>
+                                        <td> {{ $dataapar->titik }} </td> -->
                                         <td class="{{date('Y-m-d') >= $dataapar->kedaluarsa ? 'text-danger' : ''}}"> {{ $dataapar->kedaluarsa }} </td>
-                                        <td> {{ $dataapar->keterangan}}
+                                        <td> {{ $dataapar->keterangan}} </td>
                                         <td>
-                                            <center>
-                                                <a href="/apar/dataapar/{{ $dataapar->id }}/edit/" class="btn btn-dark btn-sm"><i class="ti-pencil btn-icon-append text-light"></i>
-                                                </a>
-                                            </center>
-                                        </td>
-                                        <td>
-                                            <button href="#" class="btn btn-danger btn-sm  deleteApar" data-id="{{$dataapar->id}}" data-toggle="modal" data-target="#modalDelete"><i class="ti-trash btn-icon-append text-light"></i>
-                                            </button>
-                                        </td>
-                                        <td>
-                                            <a href="/apar/inspeksiTahunan/{{$dataapar->id}}/export" class="btn btn-success btn-sm"><i class="ti-download btn-icon-append text-light"></i>
-                                            </a>
+                                            <div class="dropdown">
+                                                <button type="button" class="btn btn-outline-secondary dropdown-toggle btn-lg p-3" id="dropdownMenuIconButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Action
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuIconButton3">
+                                                    <a class="dropdown-item p-2" href="#">Detail</a>
+                                                    <a class="dropdown-item p-2" href="/apar/dataapar/{{ $dataapar->id }}/edit/">Edit</a>
+                                                    <a class="dropdown-item p-2 deleteApar" href="javascript:void(0)" data-id="{{$dataapar->id}}" data-toggle="modal" data-target="#modalDelete">Delete</a>
+                                                    <a class="dropdown-item p-2" href="/apar/inspeksiTahunan/{{$dataapar->id}}/export">Report Inspeksi</a>
+
+
+                                                </div>
+
                                         </td>
                                     </tr>
                                     @endforeach
@@ -115,5 +116,7 @@
     $('.deleteApar').on('click', function() {
         $('#deleteApar').prop('action', '/apar/dataapar/' + $(this).attr('data-id'));
     });
+
+    $('#order-listing').DataTable();
 </script>
 @endsection
