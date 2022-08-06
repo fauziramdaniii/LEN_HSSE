@@ -20,10 +20,10 @@
             </div>
             <form method="post" action="/apar/dataapar">
                 @csrf
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label for="id" class="form-label"> Kode APAR </label>
                     <input type="number" class="form-control" name="kd_apar" min=1 required>
-                </div>
+                </div> -->
                 <div class="form-group">
                     <label for="tipe" class="form-label"> Tipe APAR </label>
                     <select name="tipe_id" class="form-control">

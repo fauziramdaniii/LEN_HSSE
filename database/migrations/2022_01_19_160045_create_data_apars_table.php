@@ -15,7 +15,7 @@ class CreateDataAparsTable extends Migration
     {
         Schema::create('data_apars', function (Blueprint $table) {
             $table->id();
-            $table->string('kd_apar')->unique();
+            $table->string('kd_apar')->unique()->nullable();
             $table->foreignId('tipe_id')->nullable();
             $table->foreignId('jenis_id')->nullable();
             $table->double('berat');

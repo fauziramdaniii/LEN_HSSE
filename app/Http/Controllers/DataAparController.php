@@ -51,7 +51,6 @@ class DataAparController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'kd_apar' => 'required',
             'tipe_id' => 'required',
             'jenis_id' => 'required',
             'berat' => 'required',
@@ -65,14 +64,19 @@ class DataAparController extends Controller
             'kedaluarsa' => 'required',
             'keterangan' => 'required',
         ]);
-        $checkKode = DataApar::where('kd_apar', $request->kd_apar)->count();
-        if ($checkKode > 0) {
-            toast('Kode APAR sudah dipakai', 'error');
-            return back();
-        }
+        // $checkKode = DataApar::where('kd_apar', $request->kd_apar)->count();
+        // if ($checkKode > 0) {
+        //     toast('Kode APAR sudah dipakai', 'error');
+        //     return back();
+        // }
         $nama_provinsi = Provinsi::where('id', $request->provinsi)->first();
         $request['provinsi'] =  Str::title(Str::lower($nama_provinsi->name));
         $apar =  DataApar::create($request->all());
+        $zona = ZonaLokasi::find($request->zona_id);
+        $kd = $this->generateCode($request->gedung, $request->lantai, $zona->zona, $apar->id);
+        $apar->update([
+            'kd_apar'=>$kd
+        ]);
         $periodeNow = MasterInspeksi::whereDate('periode', '>=', date('Y-m-01'))->get();
         if (!empty($periodeNow)) {
             foreach ($periodeNow as $periode) {
@@ -84,6 +88,11 @@ class DataAparController extends Controller
         }
         toast('Data APAR berhasil ditambah', 'success');
         return redirect('/apar/dataapar')->with('success', 'dataapar saved!');
+    }
+
+    public function generateCode($gedung, $lantai, $zona, $id){
+        $kd = $gedung . $lantai . "." . $zona . "." . $id;
+        return $kd;
     }
 
     /**
