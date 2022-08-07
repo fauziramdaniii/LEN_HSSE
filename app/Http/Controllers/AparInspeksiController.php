@@ -66,7 +66,7 @@ class AparInspeksiController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response                                                                                                            
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -133,6 +133,7 @@ class AparInspeksiController extends Controller
      */
     public function edit($id)
     {
+
     }
 
     /**
@@ -433,5 +434,12 @@ class AparInspeksiController extends Controller
         $pdf->setPaper('A4', 'landscape');
         $file = "InspeksiTahunan_" . date('Ymdhis') . ".pdf";
         return $pdf->download($file);
+    }
+
+    public function verifikasi(Request $request) {
+        $detailInspeksi = DetailInpeksiApar::find($request->id);
+        $detailInspeksi->status = $request->status;
+        $detailInspeksi->save();
+        return redirect('/apar/inspeksi/' . $detailInspeksi->periode_id)->with('success', 'apar inspeksi updated!');
     }
 }

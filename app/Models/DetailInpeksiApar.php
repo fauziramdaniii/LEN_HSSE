@@ -11,7 +11,7 @@ class DetailInpeksiApar extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = [
-        'periode_id', 'apart_id', 'jenis', 'noozle', 'selang', 'tabung', 'rambu', 'label', 'cat', 'pin', 'roda', 'keterangan', 'foto', 'tanggal', 'pemeriksa'
+        'periode_id', 'apart_id', 'jenis', 'noozle', 'selang', 'tabung', 'rambu', 'label', 'cat', 'pin', 'roda', 'keterangan', 'foto', 'tanggal', 'pemeriksa', 'status'
     ];
 
     public function Apart()
