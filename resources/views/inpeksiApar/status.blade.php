@@ -57,25 +57,49 @@
         @endif
     </div>
     <div class="row">
-        <div class="col-md-6 grid-margin stretch-card">
-            <div class="card">
+        <div class="col-md-3 grid-margin stretch-card">
+            <div class="card card-tale">
                 <div class="card-body text-center">
-                    <h4 class="card-title">{{ $sudahInspeksi }}</h4>
+                    <h4 class="card-title text-light">{{ $verifiedInspection }}</h4>
                     <div class="media">
                         <div class="media-body">
-                            <p class="card-text">APAR yang sudah diinspeksi</p>
+                            <p class="card-text">Inspeksi sudah diverifikasi</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-6 grid-margin stretch-card">
-            <div class="card">
+        <div class="col-md-3 grid-margin stretch-card">
+            <div class="card card-dark-blue">
                 <div class="card-body text-center">
-                    <h4 class="card-title">{{ $belumInspeksi }}</h4>
+                    <h4 class="card-title text-light">{{ $waitingInspection }}</h4>
+                    <div class="media">
+                        <div class="media-body">
+                            <p class="card-text">Menunggu Verifikasi</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 grid-margin stretch-card">
+            <div class="card card-light-blue">
+                <div class="card-body text-center">
+                    <h4 class="card-title text-light">{{ $notInspected }}</h4>
                     <div class="media">
                         <div class="media-body">
                             <p class="card-text">APAR yang belum diinspeksi</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 grid-margin stretch-card">
+            <div class="card card-light-danger">
+                <div class="card-body text-center">
+                    <h4 class="card-title text-light">{{ $reInspection }}</h4>
+                    <div class="media">
+                        <div class="media-body">
+                            <p class="card-text">APAR yang perlu inspeksi ulang</p>
                         </div>
                     </div>
                 </div>
@@ -130,9 +154,21 @@
                                                 @if ($dataapar->status == 'Belum Verifikasi')
                                                     <button type="button" class="btn btn-info  btn-sm my-2 p-2 lihatHasil"
                                                         href="#" data-toggle="modal" data-target="#modalHasil"
+<<<<<<< HEAD
                                                         data-id="{{ $dataapar->id }}"> Periksa Data </button>
                                                 @elseif ($dataapar->status == 'Gagal Verifikasi')
                                                     <a href="/apar/inspeksi/{{ $aparinspeksi->id }}/inputInpeksiApar"
+=======
+                                                        data-id="{{ $dataapar->id }}">
+                                                        @if (auth()->user()->role == 'supervisor')
+                                                            Periksa Data
+                                                        @elseif(auth()->user()->role == 'petugasapar')
+                                                            Menunggu Verifikasi
+                                                        @endif
+                                                    </button>
+                                                @elseif ($dataapar->status == 'Gagal Verifikasi')
+                                                    <a href="/apar/inspeksi/{{ $dataapar->id }}/editInspeksi"
+>>>>>>> dfbb723442c4fbb10de6ef58d583a92c7f6742c6
                                                         class="btn btn-warning btn-sm my-2 p-2">Inspeksi Ulang </a>
                                                 @elseif ($dataapar->status == 'Sudah Verifikasi')
                                                     <button type="button"
@@ -141,6 +177,7 @@
                                                         data-id="{{ $dataapar->id }}"> Sudah Verifikasi </button>
                                                 @endif
                                             @endif
+
                                         </td>
                                     </tr>
                                 @endforeach
@@ -218,6 +255,7 @@
                     <img id="buktiFoto" class="fotoBukti" alt="">
                 </div>
                 <div class="modal-footer">
+<<<<<<< HEAD
                     <form action="/apar/inspeksi/verifikasi" method="post" id="verification-success">
                         @csrf
                         <input type="hidden" name="id" id="detail_id">
@@ -231,6 +269,22 @@
                         <input type="submit" class="btn btn-danger" value="Gagal Verifikasi">
                     </form>
 
+=======
+                    @if (auth()->user()->role == 'supervisor')
+                        <form action="/apar/inspeksi/verifikasi" method="post" id="verification-success">
+                            @csrf
+                            <input type="hidden" name="id" id="detail_id">
+                            <input type="hidden" name="status" value="Sudah Verifikasi">
+                            <input type="submit" class="btn btn-success" value="Verifikasi">
+                        </form>
+                        <form action="/apar/inspeksi/verifikasi" method="post" id="verification-failed">
+                            @csrf
+                            <input type="hidden" name="id" id="detail_gagal_id">
+                            <input type="hidden" name="status" value="Gagal Verifikasi">
+                            <input type="submit" class="btn btn-danger" value="Gagal Verifikasi">
+                        </form>
+                    @endif
+>>>>>>> dfbb723442c4fbb10de6ef58d583a92c7f6742c6
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>

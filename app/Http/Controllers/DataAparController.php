@@ -75,7 +75,7 @@ class DataAparController extends Controller
         $zona = ZonaLokasi::find($request->zona_id);
         $kd = $this->generateCode($request->gedung, $request->lantai, $zona->zona, $apar->id);
         $apar->update([
-            'kd_apar'=>$kd
+            'kd_apar' => $kd
         ]);
         $periodeNow = MasterInspeksi::whereDate('periode', '>=', date('Y-m-01'))->get();
         if (!empty($periodeNow)) {
@@ -90,7 +90,8 @@ class DataAparController extends Controller
         return redirect('/apar/dataapar')->with('success', 'dataapar saved!');
     }
 
-    public function generateCode($gedung, $lantai, $zona, $id){
+    public function generateCode($gedung, $lantai, $zona, $id)
+    {
         $kd = $gedung . $lantai . "." . $zona . "." . $id;
         return $kd;
     }
@@ -210,5 +211,11 @@ class DataAparController extends Controller
         $pdf->setPaper('A4', 'landscape');
         $file = "DataAPAR_" . date('Ymdhis') . ".pdf";
         return $pdf->download($file);
+    }
+
+    public function detailApar($id)
+    {
+        $apar = DataApar::with('Zona', 'Jenis', 'Tipe')->where('id', $id)->first();
+        return response()->json(['apar' => $apar]);
     }
 }
