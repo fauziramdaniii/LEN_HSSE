@@ -287,10 +287,15 @@
         Webcam.attach('#my_camera');
 
         function take_snapshot() {
+
             Webcam.snap(function(data_uri) {
+
                 $(".image-tag").val(data_uri);
+
                 document.getElementById('results').innerHTML = '<img src="' + data_uri + '"/>';
+
             });
+
         }
     </script>
     <script>
@@ -305,67 +310,34 @@
         });
     </script>
     <!--
-    <<<<<<< HEAD
-                                                                                                                                                                                                                    <script>
-                                                                                                                                                                                                                        let camera_button = document.querySelector("#start-camera");
-                                                                                                                                                                                                                        let video = document.querySelector("#video");
-                                                                                                                                                                                                                        let click_button = document.querySelector("#click-photo");
-                                                                                                                                                                                                                        let canvas = document.querySelector("#canvas");
-                                                                                                                                                                                                                        let file = null;
+                                                                                                                                                                                                                <script>
+                                                                                                                                                                                                                    let camera_button = document.querySelector("#start-camera");
+                                                                                                                                                                                                                    let video = document.querySelector("#video");
+                                                                                                                                                                                                                    let click_button = document.querySelector("#click-photo");
+                                                                                                                                                                                                                    let canvas = document.querySelector("#canvas");
+                                                                                                                                                                                                                    let file = null;
 
-                                                                                                                                                                                                                        $('#video').hide();
-                                                                                                                                                                                                                        $('#click-photo').hide();
+                                                                                                                                                                                                                    $('#video').hide();
+                                                                                                                                                                                                                    $('#click-photo').hide();
 
-                                                                                                                                                                                                                        camera_button.addEventListener('click', async function() {
-                                                                                                                                                                                                                            $('#video').show();
-                                                                                                                                                                                                                            $('#click-photo').show();
-                                                                                                                                                                                                                            let stream = await navigator.mediaDevices.getUserMedia({
-                                                                                                                                                                                                                                video: true,
-                                                                                                                                                                                                                                audio: false
-                                                                                                                                                                                                                            });
-                                                                                                                                                                                                                            video.srcObject = stream;
+                                                                                                                                                                                                                    camera_button.addEventListener('click', async function() {
+                                                                                                                                                                                                                        $('#video').show();
+                                                                                                                                                                                                                        $('#click-photo').show();
+                                                                                                                                                                                                                        let stream = await navigator.mediaDevices.getUserMedia({
+                                                                                                                                                                                                                            video: true,
+                                                                                                                                                                                                                            audio: false
                                                                                                                                                                                                                         });
+                                                                                                                                                                                                                        video.srcObject = stream;
+                                                                                                                                                                                                                    });
 
-                                                                                                                                                                                                                        click_button.addEventListener('click', function() {
-                                                                                                                                                                                                                            canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-                                                                                                                                                                                                                            let image_base64 = document.querySelector("#canvas").toDataURL('image/jpeg').replace(
-                                                                                                                                                                                                                                /^data:image\/jpeg;base64,/, "");
-
-
-
-                                                                                                                                                                                                                            console.log(image_base64);
-                                                                                                                                                                                                                        });
-                                                                                                                                                                                                                    </script> -->
-    =======
-    <script>
-        let camera_button = document.querySelector("#start-camera");
-        let video = document.querySelector("#video");
-        let click_button = document.querySelector("#click-photo");
-        let canvas = document.querySelector("#canvas");
-        let file = null;
-
-        $('#video').hide();
-        $('#click-photo').hide();
-
-        camera_button.addEventListener('click', async function() {
-            $('#video').show();
-            $('#click-photo').show();
-            let stream = await navigator.mediaDevices.getUserMedia({
-                video: true,
-                audio: false
-            });
-            video.srcObject = stream;
-        });
-
-        click_button.addEventListener('click', function() {
-            canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-            let image_base64 = document.querySelector("#canvas").toDataURL('image/jpeg').replace(
-                /^data:image\/jpeg;base64,/, "");
+                                                                                                                                                                                                                    click_button.addEventListener('click', function() {
+                                                                                                                                                                                                                        canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+                                                                                                                                                                                                                        let image_base64 = document.querySelector("#canvas").toDataURL('image/jpeg').replace(
+                                                                                                                                                                                                                            /^data:image\/jpeg;base64,/, "");
 
 
 
-            console.log(image_base64);
-        });
-    </script> -->
-    >>>>>>> dfbb723442c4fbb10de6ef58d583a92c7f6742c6
+                                                                                                                                                                                                                        console.log(image_base64);
+                                                                                                                                                                                                                    });
+                                                                                                                                                                                                                </script> -->
 @endsection

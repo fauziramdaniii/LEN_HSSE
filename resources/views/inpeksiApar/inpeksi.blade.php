@@ -62,16 +62,16 @@
                         @for ($i = 2022; $i <= 2032; $i++)
                             <a class="dropdown-item" href="/apar/inspeksi?tahun={{ $i }}">{{ $i }}</a>
                         @endfor
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<br>
-<div class="row">
-    @foreach($periode as $periode)
-    <div class="col-md-4 grid-margin stretch-card">
-        <div class="card">
+    <br>
+    <div class="row">
+        @foreach ($periode as $periode)
+            <div class="col-md-4 grid-margin stretch-card">
+                <div class="card">
 
                     <div class="card-body">
                         <h4 class="card-title">
@@ -89,8 +89,4 @@
             </div>
         @endforeach
     </div>
-=======
-    @endforeach
-</div>
->>>>>>> dfbb723442c4fbb10de6ef58d583a92c7f6742c6
 @endsection

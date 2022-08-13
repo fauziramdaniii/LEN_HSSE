@@ -154,11 +154,6 @@
                                                 @if ($dataapar->status == 'Belum Verifikasi')
                                                     <button type="button" class="btn btn-info  btn-sm my-2 p-2 lihatHasil"
                                                         href="#" data-toggle="modal" data-target="#modalHasil"
-<<<<<<< HEAD
-                                                        data-id="{{ $dataapar->id }}"> Periksa Data </button>
-                                                @elseif ($dataapar->status == 'Gagal Verifikasi')
-                                                    <a href="/apar/inspeksi/{{ $aparinspeksi->id }}/inputInpeksiApar"
-=======
                                                         data-id="{{ $dataapar->id }}">
                                                         @if (auth()->user()->role == 'supervisor')
                                                             Periksa Data
@@ -168,7 +163,6 @@
                                                     </button>
                                                 @elseif ($dataapar->status == 'Gagal Verifikasi')
                                                     <a href="/apar/inspeksi/{{ $dataapar->id }}/editInspeksi"
->>>>>>> dfbb723442c4fbb10de6ef58d583a92c7f6742c6
                                                         class="btn btn-warning btn-sm my-2 p-2">Inspeksi Ulang </a>
                                                 @elseif ($dataapar->status == 'Sudah Verifikasi')
                                                     <button type="button"
@@ -255,21 +249,6 @@
                     <img id="buktiFoto" class="fotoBukti" alt="">
                 </div>
                 <div class="modal-footer">
-<<<<<<< HEAD
-                    <form action="/apar/inspeksi/verifikasi" method="post" id="verification-success">
-                        @csrf
-                        <input type="hidden" name="id" id="detail_id">
-                        <input type="hidden" name="status" value="Sudah Verifikasi">
-                        <input type="submit" class="btn btn-success" value="Verifikasi">
-                    </form>
-                    <form action="/apar/inspeksi/verifikasi" method="post" id="verification-failed">
-                        @csrf
-                        <input type="hidden" name="id" id="detail_gagal_id">
-                        <input type="hidden" name="status" value="Gagal Verifikasi">
-                        <input type="submit" class="btn btn-danger" value="Gagal Verifikasi">
-                    </form>
-
-=======
                     @if (auth()->user()->role == 'supervisor')
                         <form action="/apar/inspeksi/verifikasi" method="post" id="verification-success">
                             @csrf
@@ -284,7 +263,6 @@
                             <input type="submit" class="btn btn-danger" value="Gagal Verifikasi">
                         </form>
                     @endif
->>>>>>> dfbb723442c4fbb10de6ef58d583a92c7f6742c6
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -294,6 +272,7 @@
 @section('script')
     <script>
         var flagsUrl = "{{ URL::asset('/foto_inspeksi_apar') }}";
+
         $('.lihatHasil').on('click', function() {
             var id = $(this).attr('data-id');
             $.get('/apar/hasilInspeksi/' + id, function(data) {
@@ -322,6 +301,7 @@
                 }
             });
         });
+
         $('#order-listing').DataTable();
     </script>
 @endsection

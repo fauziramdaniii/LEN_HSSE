@@ -67,7 +67,6 @@ Route::group(['prefix' => 'apar'], function () {
     Route::get('/inspeksi', [AparInspeksiController::class, 'index']);
     Route::get('/inspeksi/{periode}', [AparInspeksiController::class, 'detailInspeksi']);
     Route::get('/inspeksi/{periode}/inputInpeksiApar', [AparInspeksiController::class, 'create']);
-
     Route::get('/inspeksi/{id}/editInspeksi', [AparInspeksiController::class, 'editInspeksi']);
     Route::post('/inspeksi/verifikasi', [AparInspeksiController::class, 'verifikasi']);
     Route::get('/inputInpeksiApar', [AparInspeksiController::class, 'create']);

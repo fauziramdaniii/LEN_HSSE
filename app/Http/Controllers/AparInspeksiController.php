@@ -138,7 +138,6 @@ class AparInspeksiController extends Controller
      */
     public function edit($id)
     {
-
     }
 
     /**
@@ -441,14 +440,6 @@ class AparInspeksiController extends Controller
         return $pdf->download($file);
     }
 
-<<<<<<< HEAD
-    public function verifikasi(Request $request) {
-        $detailInspeksi = DetailInpeksiApar::find($request->id);
-        $detailInspeksi->status = $request->status;
-        $detailInspeksi->save();
-        return redirect('/apar/inspeksi/' . $detailInspeksi->periode_id)->with('success', 'apar inspeksi updated!');
-    }
-=======
     public function verifikasi(Request $request)
     {
         $detailInspeksi = DetailInpeksiApar::find($request->id);
@@ -466,5 +457,4 @@ class AparInspeksiController extends Controller
         $inspeksi = DetailInpeksiApar::find($id);
         return view('inpeksiApar.editInspeksi', compact('inspeksi'));
     }
->>>>>>> dfbb723442c4fbb10de6ef58d583a92c7f6742c6
 }

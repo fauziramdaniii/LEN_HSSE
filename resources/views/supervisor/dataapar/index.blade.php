@@ -28,7 +28,7 @@
                                             <th> Jenis </th>
                                             <th> Berat </th>
                                             <!-- <th> Zona </th>
-                                                                                                                                                                <th> Titik </th> -->
+                                                                                                                                                                        <th> Titik </th> -->
                                             <th> Kedaluarsa </th>
                                             <th> Keterangan </th>
                                             <th>
@@ -45,7 +45,7 @@
                                                 <td> {{ @$dataapar->Jenis->nama_jenis }} </td>
                                                 <td> {{ $dataapar->berat }} KG </td>
                                                 <!-- <td> {{ @$dataapar->Zona->zona }} </td>
-                                                                                                                                                                                                                                                    <td> {{ $dataapar->titik }} </td> -->
+                                                                                                                                                                                                                                                            <td> {{ $dataapar->titik }} </td> -->
                                                 <td
                                                     class="{{ date('Y-m-d') >= $dataapar->kedaluarsa ? 'text-danger' : '' }}">
                                                     {{ $dataapar->kedaluarsa }} </td>
