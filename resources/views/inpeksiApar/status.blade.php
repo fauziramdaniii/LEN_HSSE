@@ -107,9 +107,7 @@
                                     <th> Gedung </th>
                                     <th> Lantai </th>
                                     <th> Titik </th>
-                                    <th>
-                                        Status
-                                    </th>
+                                    <th> Status </th>
                                 </tr>
 
                             </thead>
@@ -129,10 +127,19 @@
                                                 <a href="/apar/inspeksi/{{ $aparinspeksi->id }}/inputInpeksiApar"
                                                     class="btn btn-dark btn-sm my-2 p-2">Belum Inspeksi </a>
                                             @else
-                                                <button type="button" class="btn btn-info  btn-sm my-2 p-2 lihatHasil"
-                                                    href="#" data-toggle="modal" data-target="#modalHasil"
-                                                    data-id="{{ $dataapar->id }}"> Periksa
-                                                    Inspeksi </button>
+                                                @if ($dataapar->status == 'Belum Verifikasi')
+                                                    <button type="button" class="btn btn-info  btn-sm my-2 p-2 lihatHasil"
+                                                        href="#" data-toggle="modal" data-target="#modalHasil"
+                                                        data-id="{{ $dataapar->id }}"> Periksa Data </button>
+                                                @elseif ($dataapar->status == 'Gagal Verifikasi')
+                                                    <a href="/apar/inspeksi/{{ $aparinspeksi->id }}/inputInpeksiApar"
+                                                        class="btn btn-warning btn-sm my-2 p-2">Inspeksi Ulang </a>
+                                                @elseif ($dataapar->status == 'Sudah Verifikasi')
+                                                    <button type="button"
+                                                        class="btn btn-success  btn-sm my-2 p-2 lihatHasil" href="#"
+                                                        data-toggle="modal" data-target="#modalHasil"
+                                                        data-id="{{ $dataapar->id }}"> Sudah Verifikasi </button>
+                                                @endif
                                             @endif
                                         </td>
                                     </tr>
@@ -201,14 +208,29 @@
                                 <td class="font-weight-bold">KETERANGAN </td>
                                 <td> <span id="keterangan"></span></td>
                             </tr>
+                            <tr class="">
+                                <td class="font-weight-bold">Status </td>
+                                <td> <span id="status"></span></td>
+                            </tr>
                         </tbody>
                     </table>
                     <p class="mt-3 font-weight-bold">Bukti Foto :</p>
                     <img id="buktiFoto" class="fotoBukti" alt="">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal">Verifikasi</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Gagal Verifikasi</button>
+                    <form action="/apar/inspeksi/verifikasi" method="post" id="verification-success">
+                        @csrf
+                        <input type="hidden" name="id" id="detail_id">
+                        <input type="hidden" name="status" value="Sudah Verifikasi">
+                        <input type="submit" class="btn btn-success" value="Verifikasi">
+                    </form>
+                    <form action="/apar/inspeksi/verifikasi" method="post" id="verification-failed">
+                        @csrf
+                        <input type="hidden" name="id" id="detail_gagal_id">
+                        <input type="hidden" name="status" value="Gagal Verifikasi">
+                        <input type="submit" class="btn btn-danger" value="Gagal Verifikasi">
+                    </form>
+
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -218,7 +240,6 @@
 @section('script')
     <script>
         var flagsUrl = "{{ URL::asset('/foto_inspeksi_apar') }}";
-
         $('.lihatHasil').on('click', function() {
             var id = $(this).attr('data-id');
             $.get('/apar/hasilInspeksi/' + id, function(data) {
@@ -235,9 +256,18 @@
                 $('#tanggal').text(data.data.tanggal);
                 $('#kdApar').text(data.apar.id);
                 $("#buktiFoto").attr("src", flagsUrl + "/" + data.data.foto);
+                $('#status').text(data.data.status);
+                $('#detail_id').val(data.data.id);
+                $('#detail_gagal_id').val(data.data.id);
+                if (data.data.status == "Belum Verifikasi") {
+                    $('#verification-success').show();
+                    $('#verification-failed').show();
+                } else {
+                    $('#verification-success').hide();
+                    $('#verification-failed').hide();
+                }
             });
         });
-
         $('#order-listing').DataTable();
     </script>
 @endsection

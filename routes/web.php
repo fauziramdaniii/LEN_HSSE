@@ -49,7 +49,7 @@ Route::post('/editAkun/{id}', [UserController::class, 'updateAkun']);
 //dashboard petugas
 Route::get('/dashboard', [DashboardController::class, 'index']);
 
-//tambah Supervisior    
+//tambah Supervisior
 Route::post('/user', [UserController::class, 'store'])->middleware('auth');
 Route::put('/user/update/{id}', [UserController::class, 'update'])->middleware('auth');
 Route::put('/user/resetPassword/{id}', [UserController::class, 'resetPassword'])->middleware('auth');
@@ -66,6 +66,7 @@ Route::group(['prefix' => 'apar'], function () {
     Route::get('/inspeksi', [AparInspeksiController::class, 'index']);
     Route::get('/inspeksi/{periode}', [AparInspeksiController::class, 'detailInspeksi']);
     Route::get('/inspeksi/{periode}/inputInpeksiApar', [AparInspeksiController::class, 'create']);
+    Route::post('/inspeksi/verifikasi', [AparInspeksiController::class, 'verifikasi']);
     Route::get('/inputInpeksiApar', [AparInspeksiController::class, 'create']);
     Route::post('/inputInpeksiApar', [AparInspeksiController::class, 'store']);
     Route::get('/kelolaParameter', [KelolaParameterController::class, 'index'])->middleware('supervisior');
