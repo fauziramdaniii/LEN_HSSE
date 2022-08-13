@@ -115,6 +115,8 @@ class AparInspeksiController extends Controller
         return redirect('/apar/inspeksi/' . $apart->periode->id)->with('success', 'apar inspeksi saved!');
     }
 
+  
+
     /**
      * Display the specified resource.
      *
