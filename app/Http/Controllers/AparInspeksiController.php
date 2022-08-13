@@ -31,9 +31,11 @@ class AparInspeksiController extends Controller
     public function detailInspeksi(MasterInspeksi $periode)
     {
         $aparinspeksi = $periode->load('DetailInspeksi', 'DetailInspeksi.Apart', 'DetailInspeksi.Apart.Tipe', 'DetailInspeksi.Apart.Jenis');
-        $sudahInspeksi = $periode->DetailInspeksi->whereNotNull('jenis')->count();
-        $belumInspeksi = $periode->DetailInspeksi->whereNull('jenis')->count();
-        return view('inpeksiApar.status', compact('aparinspeksi', 'sudahInspeksi', 'belumInspeksi'));
+        $verifiedInspection = $periode->DetailInspeksi->where('status', 'Sudah Verifikasi')->count();
+        $waitingInspection = $periode->DetailInspeksi->where('status', 'Belum Verifikasi')->count();
+        $reInspection = $periode->DetailInspeksi->where('status', 'Gagal Verifikasi')->count();
+        $notInspected = $periode->DetailInspeksi->whereNull('jenis')->count();
+        return view('inpeksiApar.status', compact('aparinspeksi', 'notInspected', 'reInspection', 'verifiedInspection', 'waitingInspection'));
     }
 
     // public function status()
@@ -102,6 +104,7 @@ class AparInspeksiController extends Controller
             return back();
         }
         $request['foto'] = $fileName;
+        $request['status'] = "Belum Verifikasi";
         $apart = DetailInpeksiApar::with('periode', 'Apart')->where('id', $request->id)->first();
         $apart->update($request->all());
 
@@ -111,11 +114,11 @@ class AparInspeksiController extends Controller
             ]);
         }
 
-        toast('Inspeksi berhasil diinput', 'success');
-        return redirect('/apar/inspeksi/' . $apart->periode->id)->with('success', 'apar inspeksi saved!');
+        toast('Inspeksi berhasil diupdate', 'success');
+        return redirect('/apar/inspeksi/' . $apart->periode->id)->with('success', 'apar inspeksi updated!');
     }
 
-  
+
 
     /**
      * Display the specified resource.
@@ -135,7 +138,6 @@ class AparInspeksiController extends Controller
      */
     public function edit($id)
     {
-
     }
 
     /**
@@ -438,10 +440,21 @@ class AparInspeksiController extends Controller
         return $pdf->download($file);
     }
 
-    public function verifikasi(Request $request) {
+    public function verifikasi(Request $request)
+    {
         $detailInspeksi = DetailInpeksiApar::find($request->id);
         $detailInspeksi->status = $request->status;
         $detailInspeksi->save();
+        $countVerified = DetailInpeksiApar::where('periode_id', $detailInspeksi->periode_id)->where('status', 'Sudah Verifikasi')->count();
+        if ($countVerified >= 10) {
+            DetailInpeksiApar::where('periode_id', $detailInspeksi->periode_id)->where('status', 'Belum Verifikasi')->update(['status' => 'Sudah Verifikasi']);
+        }
         return redirect('/apar/inspeksi/' . $detailInspeksi->periode_id)->with('success', 'apar inspeksi updated!');
+    }
+
+    public function editInspeksi($id)
+    {
+        $inspeksi = DetailInpeksiApar::find($id);
+        return view('inpeksiApar.editInspeksi', compact('inspeksi'));
     }
 }

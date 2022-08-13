@@ -58,6 +58,7 @@ Route::delete('/user/{id}', [UserController::class, 'destroy'])->middleware('aut
 // Route Apar
 Route::group(['prefix' => 'apar'], function () {
     Route::get('/dashboard', [DashboardController::class, 'apar'])->middleware('supervisior');
+    Route::get('/dataapar/{id}/detail', [DataAparController::class, 'detailApar'])->middleware('supervisior');
     Route::get('/dataapar/export', [DataAparController::class, 'export_pdf'])->middleware('supervisior');
     Route::get('/inspeksiTahunan/{id}/export', [AparInspeksiController::class, 'exportTahunan_pdf'])->middleware('supervisior');
     Route::resource('/dataapar', DataAparController::class)->middleware('supervisior');
@@ -66,6 +67,7 @@ Route::group(['prefix' => 'apar'], function () {
     Route::get('/inspeksi', [AparInspeksiController::class, 'index']);
     Route::get('/inspeksi/{periode}', [AparInspeksiController::class, 'detailInspeksi']);
     Route::get('/inspeksi/{periode}/inputInpeksiApar', [AparInspeksiController::class, 'create']);
+    Route::get('/inspeksi/{id}/editInspeksi', [AparInspeksiController::class, 'editInspeksi']);
     Route::post('/inspeksi/verifikasi', [AparInspeksiController::class, 'verifikasi']);
     Route::get('/inputInpeksiApar', [AparInspeksiController::class, 'create']);
     Route::post('/inputInpeksiApar', [AparInspeksiController::class, 'store']);

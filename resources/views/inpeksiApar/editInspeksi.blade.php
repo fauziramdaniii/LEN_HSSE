@@ -50,33 +50,33 @@
             <div class="col-md-6 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <p class="card-title">Input Inspeksi</p>
+                        <p class="card-title">Edit Inspeksi</p>
                         <input type="hidden" value="{{ date('Y-m-d') }}" name="tanggal">
                         <input type="hidden" value="{{ auth()->user()->name }}" name="pemeriksa">
                         <div class="form-group">
                             <label for="id"> Kode Apar </label>
-                            <select class="form-control " name="id" required>
-                                @foreach ($aparinspeksi->DetailInspeksi as $apart)
-                                    <option value="{{ $apart->id }}">{{ $apart->apart->kd_apar }}</option>
-                                @endforeach
-                            </select>
+                            <input type="text" class="form-control" readonly value="{{ $inspeksi->Apart->kd_apar }}">
+                            <input type="hidden" value="{{ $inspeksi->id }}" name="id">
                         </div>
                         <div class="form-group">
                             <label for="jenis" class="form-label"> PRESSURE/CATRIDGE </label>
                             <div class="row m-auto">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input fieldInspeksi" type="radio" name="jenis"
-                                        value="Ok" id="flexRadioDefault1">
+                                        value="Ok" {{ $inspeksi->jenis == 'Ok' ? 'checked' : '' }}
+                                        id="flexRadioDefault1">
                                     OK
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input fieldInspeksi" type="radio" name="jenis"
-                                        value="Not Ok" id="flexRadioDefault1">
+                                        value="Not Ok" {{ $inspeksi->jenis == 'Not Ok' ? 'checked' : '' }}
+                                        id="flexRadioDefault1">
                                     NOT OK
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input fieldInspeksi" type="radio" name="jenis"
-                                        value="n/a" id="flexRadioDefault1">
+                                        value="n/a" {{ $inspeksi->jenis == 'n/a' ? 'checked' : '' }}
+                                        id="flexRadioDefault1">
                                     N/A
                                 </div>
                             </div>
@@ -86,17 +86,20 @@
                             <div class="row m-auto">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input fieldInspeksi" type="radio" name="noozle"
-                                        value="Ok" id="flexRadioDefault1">
+                                        value="Ok" {{ $inspeksi->noozle == 'Ok' ? 'checked' : '' }}
+                                        id="flexRadioDefault1">
                                     OK
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input fieldInspeksi" type="radio" name="noozle"
-                                        value="Not Ok" id="flexRadioDefault1">
+                                        value="Not Ok" {{ $inspeksi->noozle == 'Not Ok' ? 'checked' : '' }}
+                                        id="flexRadioDefault1">
                                     NOT OK
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input fieldInspeksi" type="radio" name="noozle"
-                                        value="n/a" id="flexRadioDefault1">
+                                        value="n/a" {{ $inspeksi->noozle == 'n/a' ? 'checked' : '' }}
+                                        id="flexRadioDefault1">
                                     N/A
                                 </div>
                             </div>
@@ -106,17 +109,20 @@
                             <div class="row m-auto">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input fieldInspeksi" type="radio" name="selang"
-                                        value="Ok" id="flexRadioDefault1">
+                                        value="Ok" {{ $inspeksi->selang == 'Ok' ? 'checked' : '' }}
+                                        id="flexRadioDefault1">
                                     OK
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input fieldInspeksi" type="radio" name="selang"
-                                        value="Not Ok" id="flexRadioDefault1">
+                                        value="Not Ok" {{ $inspeksi->selang == 'Not Ok' ? 'checked' : '' }}
+                                        id="flexRadioDefault1">
                                     NOT OK
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input fieldInspeksi" type="radio" name="selang"
-                                        value="n/a" id="flexRadioDefault1">
+                                        value="n/a" {{ $inspeksi->selang == 'n/a' ? 'checked' : '' }}
+                                        id="flexRadioDefault1">
                                     N/A
                                 </div>
                             </div>
@@ -126,17 +132,20 @@
                             <div class="row m-auto">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input fieldInspeksi" type="radio" name="tabung"
-                                        value="Ok" id="flexRadioDefault1">
+                                        value="Ok" {{ $inspeksi->tabung == 'Ok' ? 'checked' : '' }}
+                                        id="flexRadioDefault1">
                                     OK
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input fieldInspeksi" type="radio" name="tabung"
-                                        value="Not Ok" id="flexRadioDefault1">
+                                        value="Not Ok" {{ $inspeksi->tabung == 'Not Ok' ? 'checked' : '' }}
+                                        id="flexRadioDefault1">
                                     NOT OK
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input fieldInspeksi" type="radio" name="tabung"
-                                        value="n/a" id="flexRadioDefault1">
+                                        value="n/a" {{ $inspeksi->tabung == 'n/a' ? 'checked' : '' }}
+                                        id="flexRadioDefault1">
                                     N/A
                                 </div>
                             </div>
@@ -146,17 +155,20 @@
                             <div class="row m-auto">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input fieldInspeksi" type="radio" name="rambu"
-                                        value="Ok" id="flexRadioDefault1">
+                                        value="Ok" {{ $inspeksi->rambu == 'Ok' ? 'checked' : '' }}
+                                        id="flexRadioDefault1">
                                     OK
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input fieldInspeksi" type="radio" name="rambu"
-                                        value="Not Ok" id="flexRadioDefault1">
+                                        value="Not Ok" {{ $inspeksi->rambu == 'Not Ok' ? 'checked' : '' }}
+                                        id="flexRadioDefault1">
                                     NOT OK
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input fieldInspeksi" type="radio" name="rambu"
-                                        value="n/a" id="flexRadioDefault1">
+                                        value="n/a" {{ $inspeksi->rambu == 'n/a' ? 'checked' : '' }}
+                                        id="flexRadioDefault1">
                                     N/A
                                 </div>
                             </div>
@@ -166,17 +178,20 @@
                             <div class="row m-auto">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input fieldInspeksi" type="radio" name="label"
-                                        value="Ok" id="flexRadioDefault1">
+                                        value="Ok" {{ $inspeksi->label == 'Ok' ? 'checked' : '' }}
+                                        id="flexRadioDefault1">
                                     OK
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input fieldInspeksi" type="radio" name="label"
-                                        value="Not Ok" id="flexRadioDefault1">
+                                        value="Not Ok" {{ $inspeksi->label == 'Not Ok' ? 'checked' : '' }}
+                                        id="flexRadioDefault1">
                                     NOT OK
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input fieldInspeksi" type="radio" name="label"
-                                        value="n/a" id="flexRadioDefault1">
+                                        value="n/a" {{ $inspeksi->label == 'n/a' ? 'checked' : '' }}
+                                        id="flexRadioDefault1">
                                     N/A
                                 </div>
                             </div>
@@ -186,17 +201,20 @@
                             <div class="row m-auto">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input fieldInspeksi" type="radio" name="cat"
-                                        value="Ok" id="flexRadioDefault1">
+                                        value="Ok" {{ $inspeksi->cat == 'Ok' ? 'checked' : '' }}
+                                        id="flexRadioDefault1">
                                     OK
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input fieldInspeksi" type="radio" name="cat"
-                                        value="Not Ok" id="flexRadioDefault1">
+                                        value="Not Ok" {{ $inspeksi->cat == 'Not Ok' ? 'checked' : '' }}
+                                        id="flexRadioDefault1">
                                     NOT OK
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input fieldInspeksi" type="radio" name="cat"
-                                        value="n/a" id="flexRadioDefault1">
+                                        value="n/a" {{ $inspeksi->cat == 'n/a' ? 'checked' : '' }}
+                                        id="flexRadioDefault1">
                                     N/A
                                 </div>
                             </div>
@@ -206,17 +224,20 @@
                             <div class="row m-auto">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input fieldInspeksi" type="radio" name="pin"
-                                        value="Ok" id="flexRadioDefault1">
+                                        value="Ok" {{ $inspeksi->pin == 'Ok' ? 'checked' : '' }}
+                                        id="flexRadioDefault1">
                                     OK
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input fieldInspeksi" type="radio" name="pin"
-                                        value="Not Ok" id="flexRadioDefault1">
+                                        value="Not Ok" {{ $inspeksi->pin == 'Not Ok' ? 'checked' : '' }}
+                                        id="flexRadioDefault1">
                                     NOT OK
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input fieldInspeksi" type="radio" name="pin"
-                                        value="n/a" id="flexRadioDefault1">
+                                        value="n/a" {{ $inspeksi->pin == 'n/a' ? 'checked' : '' }}
+                                        id="flexRadioDefault1">
                                     N/A
                                 </div>
                             </div>
@@ -226,17 +247,20 @@
                             <div class="row m-auto">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input fieldInspeksi" type="radio" name="roda"
-                                        value="Ok" id="flexRadioDefault1">
+                                        value="Ok" {{ $inspeksi->roda == 'Ok' ? 'checked' : '' }}
+                                        id="flexRadioDefault1">
                                     OK
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input fieldInspeksi" type="radio" name="roda"
-                                        value="Not Ok" id="flexRadioDefault1">
+                                        value="Not Ok" {{ $inspeksi->roda == 'Not Ok' ? 'checked' : '' }}
+                                        id="flexRadioDefault1">
                                     NOT OK
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input fieldInspeksi" type="radio" name="roda"
-                                        value="n/a" id="flexRadioDefault1">
+                                        value="n/a" {{ $inspeksi->roda == 'n/a' ? 'checked' : '' }}
+                                        id="flexRadioDefault1">
                                     N/A
                                 </div>
                             </div>
@@ -244,7 +268,7 @@
                         <div class="form-group">
                             <label for="keterangan" class="form-label">Status APAR</label>
                             <input type="text" id="status" name="keterangan" readonly class="form-control"
-                                value="Aktif">
+                                value="{{ $inspeksi->keterangan }}">
                         </div>
                     </div>
                 </div>
@@ -310,34 +334,34 @@
         });
     </script>
     <!--
-                                                                                                                                                                                                            <script>
-                                                                                                                                                                                                                let camera_button = document.querySelector("#start-camera");
-                                                                                                                                                                                                                let video = document.querySelector("#video");
-                                                                                                                                                                                                                let click_button = document.querySelector("#click-photo");
-                                                                                                                                                                                                                let canvas = document.querySelector("#canvas");
-                                                                                                                                                                                                                let file = null;
+                                                                                                                                                                                                                                                                                                                    <script>
+                                                                                                                                                                                                                                                                                                                        let camera_button = document.querySelector("#start-camera");
+                                                                                                                                                                                                                                                                                                                        let video = document.querySelector("#video");
+                                                                                                                                                                                                                                                                                                                        let click_button = document.querySelector("#click-photo");
+                                                                                                                                                                                                                                                                                                                        let canvas = document.querySelector("#canvas");
+                                                                                                                                                                                                                                                                                                                        let file = null;
 
-                                                                                                                                                                                                                $('#video').hide();
-                                                                                                                                                                                                                $('#click-photo').hide();
+                                                                                                                                                                                                                                                                                                                        $('#video').hide();
+                                                                                                                                                                                                                                                                                                                        $('#click-photo').hide();
 
-                                                                                                                                                                                                                camera_button.addEventListener('click', async function() {
-                                                                                                                                                                                                                    $('#video').show();
-                                                                                                                                                                                                                    $('#click-photo').show();
-                                                                                                                                                                                                                    let stream = await navigator.mediaDevices.getUserMedia({
-                                                                                                                                                                                                                        video: true,
-                                                                                                                                                                                                                        audio: false
-                                                                                                                                                                                                                    });
-                                                                                                                                                                                                                    video.srcObject = stream;
-                                                                                                                                                                                                                });
+                                                                                                                                                                                                                                                                                                                        camera_button.addEventListener('click', async function() {
+                                                                                                                                                                                                                                                                                                                            $('#video').show();
+                                                                                                                                                                                                                                                                                                                            $('#click-photo').show();
+                                                                                                                                                                                                                                                                                                                            let stream = await navigator.mediaDevices.getUserMedia({
+                                                                                                                                                                                                                                                                                                                                video: true,
+                                                                                                                                                                                                                                                                                                                                audio: false
+                                                                                                                                                                                                                                                                                                                            });
+                                                                                                                                                                                                                                                                                                                            video.srcObject = stream;
+                                                                                                                                                                                                                                                                                                                        });
 
-                                                                                                                                                                                                                click_button.addEventListener('click', function() {
-                                                                                                                                                                                                                    canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-                                                                                                                                                                                                                    let image_base64 = document.querySelector("#canvas").toDataURL('image/jpeg').replace(
-                                                                                                                                                                                                                        /^data:image\/jpeg;base64,/, "");
+                                                                                                                                                                                                                                                                                                                        click_button.addEventListener('click', function() {
+                                                                                                                                                                                                                                                                                                                            canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+                                                                                                                                                                                                                                                                                                                            let image_base64 = document.querySelector("#canvas").toDataURL('image/jpeg').replace(
+                                                                                                                                                                                                                                                                                                                                /^data:image\/jpeg;base64,/, "");
 
 
 
-                                                                                                                                                                                                                    console.log(image_base64);
-                                                                                                                                                                                                                });
-                                                                                                                                                                                                            </script> -->
+                                                                                                                                                                                                                                                                                                                            console.log(image_base64);
+                                                                                                                                                                                                                                                                                                                        });
+                                                                                                                                                                                                                                                                                                                    </script> -->
 @endsection
